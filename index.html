@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Domaine de la Rêverie | Suites Romantiques & Balnéo à Saint-Léger-les-Vignes</title>
-    <meta name="description" content="Domaine de la Rêverie à Saint-Léger-les-Vignes (44710) : 4 suites romantiques avec balnéo privative, lit queen size, cheminée électrique et terrasse. Réservation en direct.">
+    <meta name="description" content="Domaine de la Rêverie à Saint-Léger-les-Vignes (44710) : 4 suites romantiques avec balnéo privative, lit queen size, cheminée électrique et terrasse.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -34,17 +33,9 @@
             --header-h: 130px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            text-size-adjust: 100%;
-        }
+        html { -webkit-text-size-adjust: 100%; }
 
         body {
             font-family: var(--font-sans);
@@ -53,9 +44,6 @@
             line-height: 1.7;
             overflow-x: hidden;
             padding-top: var(--header-h);
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         h1, h2, h3, h4, .font-serif {
@@ -63,11 +51,7 @@
             letter-spacing: 0.02em;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: var(--transition);
-        }
+        a { color: inherit; text-decoration: none; transition: var(--transition); }
 
         .container {
             width: 100%;
@@ -77,40 +61,32 @@
         }
 
         #scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            width: 0%;
+            position: fixed; top: 0; left: 0;
+            height: 3px; width: 0%;
             background: var(--gold-gradient);
             z-index: 1000000;
-            box-shadow: 0 0 10px rgba(197, 160, 89, 0.9);
             transition: width 0.1s linear;
         }
 
-        /* ===== HEADER — STRUCTURE FLEXBOX ROBUSTE ===== */
+        /* ============================================
+           HEADER — STRUCTURE SIMPLE, 1 SEULE LIGNE
+           ============================================ */
         header {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
+            top: 0; left: 0; right: 0;
             height: var(--header-h);
-            z-index: 999999;
             background: #F0E9DE;
             box-shadow: 0 4px 25px rgba(26, 22, 19, 0.08);
-            transition: box-shadow 0.3s ease;
+            z-index: 999999;
+            overflow: hidden; /* empêche tout débordement */
         }
 
         header::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             height: 4px;
             background: var(--gold-gradient);
-            box-shadow: 0 2px 10px rgba(197, 160, 89, 0.5);
             z-index: 1;
         }
 
@@ -118,38 +94,38 @@
             box-shadow: 0 8px 30px rgba(26, 22, 19, 0.12);
         }
 
-        /* Structure : ligne 1 = logo + titre + burger | ligne 2 = nav */
         .header-content {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
-            width: 100%;
-            padding: 0 24px;
-            position: relative;
-        }
-
-        /* Ligne du haut : logo à gauche, titre au centre, burger à droite */
-        .header-top-row {
-            display: flex;
+            flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            height: 100%;
             width: 100%;
+            max-width: 1260px;
+            margin: 0 auto;
+            padding: 0 24px;
+            gap: 20px;
             position: relative;
         }
 
-        /* Logo - ne déborde plus en bas */
+        /* ===== BLOC GAUCHE : LOGO + TITRE ===== */
+        .brand-cluster {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+            min-width: 0;
+        }
+
         .logo-box {
             display: flex;
             align-items: center;
             flex-shrink: 0;
-            z-index: 10;
         }
 
         .logo-img-wrapper {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             padding: 4px;
             background: var(--gold-gradient);
@@ -158,98 +134,61 @@
             transition: transform 0.3s ease;
         }
 
-        .logo-box:hover .logo-img-wrapper {
-            transform: scale(1.05);
-        }
+        .logo-box:hover .logo-img-wrapper { transform: scale(1.05); }
 
         .logo-img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border-radius: 50%;
             object-fit: contain;
-            display: block;
             background: #FFFFFF;
+            display: block;
         }
 
-        /* Titre + ville - centrés dans l'espace restant */
         .logo-text {
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            text-align: center;
             line-height: 1.15;
-            flex: 1;
             min-width: 0;
-            padding: 0 8px;
         }
 
         .logo-title {
             font-family: var(--font-serif);
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
             color: var(--dark);
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
         }
 
         .logo-city {
-            font-size: 0.85rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 0.18em;
             color: var(--primary);
             font-weight: 800;
             margin-top: 2px;
             white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
         }
 
-        /* Burger - caché sur PC, visible sur tablette/mobile */
-        .burger-btn {
-            display: none;
-            background: rgba(156, 88, 56, 0.12);
-            border: none;
-            font-size: 1.4rem;
-            color: var(--primary);
-            cursor: pointer;
-            padding: 10px 14px;
-            border-radius: 10px;
-            flex-shrink: 0;
-            z-index: 20;
-            transition: background 0.2s ease;
-        }
-
-        .burger-btn:active {
-            background: rgba(156, 88, 56, 0.3);
-        }
-
-        /* Ligne du bas : nav + bouton réserver (PC uniquement) */
-        .header-bottom {
+        /* ===== BLOC DROITE : NAV + BOUTON + BURGER ===== */
+        .header-right {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 18px;
-            width: 100%;
-            padding-top: 4px;
-            flex-wrap: nowrap;
+            gap: 20px;
+            flex-shrink: 0;
         }
 
         .nav-links {
             display: flex;
-            gap: 22px;
+            gap: 18px;
             align-items: center;
             list-style: none;
-            flex-wrap: nowrap;
         }
 
         .nav-links a {
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             font-weight: 600;
             letter-spacing: 0.05em;
             text-transform: uppercase;
@@ -258,44 +197,35 @@
             padding: 6px 0;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             white-space: nowrap;
         }
 
         .nav-links a i {
             color: var(--gold);
-            font-size: 0.85rem;
+            font-size: 0.78rem;
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0%;
-            height: 2px;
+            bottom: 0; left: 50%;
+            width: 0%; height: 2px;
             background: var(--gold-gradient);
-            border-radius: 2px;
-            transition: all 0.35s ease;
+            transition: all 0.3s ease;
             transform: translateX(-50%);
         }
 
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
 
         .btn {
-            position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 12px 24px;
-            font-size: 0.82rem;
+            gap: 8px;
+            padding: 12px 22px;
+            font-size: 0.78rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.08em;
@@ -315,20 +245,15 @@
         .btn-primary:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(156, 88, 56, 0.45);
         }
 
         .btn-gold {
             background: var(--gold-gradient);
             color: var(--dark);
             font-weight: 800;
-            box-shadow: 0 4px 18px rgba(197, 160, 89, 0.35);
         }
 
-        .btn-gold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(197, 160, 89, 0.5);
-        }
+        .btn-gold:hover { transform: translateY(-2px); }
 
         .btn-outline {
             border-color: rgba(255, 255, 255, 0.85);
@@ -340,18 +265,31 @@
         .btn-outline:hover {
             background-color: #FFFFFF;
             color: var(--dark);
-            border-color: #FFFFFF;
-            transform: translateY(-2px);
+        }
+
+        .burger-btn {
+            display: none;
+            background: rgba(156, 88, 56, 0.12);
+            border: none;
+            font-size: 1.4rem;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 10px 14px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            transition: background 0.2s ease;
+        }
+
+        .burger-btn:active {
+            background: rgba(156, 88, 56, 0.3);
         }
 
         /* ===== DRAWER MOBILE ===== */
         .mobile-drawer {
             position: fixed;
-            top: 0;
-            right: -100%;
+            top: 0; right: -100%;
             width: min(85vw, 320px);
             height: 100vh;
-            height: 100dvh;
             background: #FFFFFF;
             z-index: 1000001;
             padding: 30px 24px;
@@ -363,25 +301,19 @@
             overflow-y: auto;
         }
 
-        .mobile-drawer.open {
-            right: 0;
-        }
+        .mobile-drawer.open { right: 0; }
 
         .drawer-overlay {
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.55);
-            backdrop-filter: blur(4px);
             z-index: 1000000;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
         }
 
-        .drawer-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
+        .drawer-overlay.open { opacity: 1; visibility: visible; }
 
         .drawer-links {
             list-style: none;
@@ -392,20 +324,16 @@
         }
 
         .drawer-links a {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
             color: var(--dark);
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .drawer-links a i {
-            color: var(--primary);
-            width: 24px;
-        }
+        .drawer-links a i { color: var(--primary); width: 24px; }
 
         /* ===== HERO ===== */
         .hero {
@@ -419,9 +347,7 @@
             color: #FFFFFF;
         }
 
-        .hero-content {
-            max-width: 860px;
-        }
+        .hero-content { max-width: 860px; }
 
         .hero-tag {
             display: inline-flex;
@@ -448,11 +374,7 @@
             text-shadow: 0 3px 12px rgba(0,0,0,0.5);
         }
 
-        .hero h1 em {
-            font-style: italic;
-            font-weight: 400;
-            color: var(--gold-light);
-        }
+        .hero h1 em { font-style: italic; font-weight: 400; color: var(--gold-light); }
 
         .hero-subtitle-quote {
             font-family: var(--font-serif);
@@ -484,20 +406,12 @@
             align-items: center;
             gap: 10px;
             font-size: 0.92rem;
-            font-weight: 500;
             color: #FAF7F2;
         }
 
-        .badge-item i {
-            color: var(--gold);
-            font-size: 1.15rem;
-        }
+        .badge-item i { color: var(--gold); font-size: 1.15rem; }
 
-        .booking-strip {
-            position: relative;
-            margin-top: -55px;
-            z-index: 50;
-        }
+        .booking-strip { position: relative; margin-top: -55px; z-index: 50; }
 
         .strip-card {
             background: var(--cream-card);
@@ -528,26 +442,14 @@
             border-radius: 10px;
             font-family: var(--font-sans);
             font-size: 0.92rem;
-            color: var(--dark);
-            outline: none;
             background: var(--cream);
-            transition: var(--transition);
+            outline: none;
         }
 
         .strip-col input:focus, .strip-col select:focus {
             border-color: var(--gold);
             background: #FFFFFF;
             box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
-        }
-
-        select:invalid {
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        select option {
-            color: var(--text-main);
-            font-style: normal;
         }
 
         .amenities-bar {
@@ -572,8 +474,7 @@
         }
 
         .amenity-icon {
-            width: 58px;
-            height: 58px;
+            width: 58px; height: 58px;
             border-radius: 50%;
             background: var(--primary-light);
             color: var(--primary);
@@ -588,7 +489,6 @@
             font-size: 0.82rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
             color: var(--dark);
         }
 
@@ -597,10 +497,7 @@
             color: var(--text-muted);
         }
 
-        section {
-            padding: 95px 0;
-            position: relative;
-        }
+        section { padding: 95px 0; position: relative; }
 
         .section-header {
             text-align: center;
@@ -623,8 +520,7 @@
 
         .section-subtitle::before, .section-subtitle::after {
             content: '';
-            width: 28px;
-            height: 1px;
+            width: 28px; height: 1px;
             background: var(--gold);
         }
 
@@ -673,23 +569,15 @@
         }
 
         .suite-img-container img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             object-position: top center;
-            transition: transform 0.6s ease;
-        }
-
-        .suite-card:hover .suite-img-container img {
-            transform: scale(1.05);
         }
 
         .suite-badge-tag {
             position: absolute;
-            top: 16px;
-            left: 16px;
+            top: 16px; left: 16px;
             background: rgba(26, 22, 19, 0.88);
-            backdrop-filter: blur(8px);
             color: var(--gold-light);
             border: 1px solid rgba(197, 160, 89, 0.5);
             padding: 7px 18px;
@@ -718,14 +606,12 @@
             color: var(--primary);
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
             margin-bottom: 16px;
         }
 
         .suite-features-list {
             list-style: none;
             display: grid;
-            grid-template-columns: 1fr;
             gap: 8px;
             margin-bottom: 22px;
             font-size: 0.9rem;
@@ -738,11 +624,7 @@
             gap: 10px;
         }
 
-        .suite-features-list li i {
-            color: var(--primary);
-            font-size: 0.85rem;
-            width: 16px;
-        }
+        .suite-features-list li i { color: var(--primary); font-size: 0.85rem; width: 16px; }
 
         .suite-price-bar {
             display: flex;
@@ -785,22 +667,13 @@
         .plan-img-card {
             border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 16px 40px rgba(26, 22, 19, 0.1);
             border: 2px solid var(--border);
             cursor: pointer;
         }
 
-        .plan-img-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .plan-img-card img { width: 100%; height: auto; display: block; }
 
-        .plan-legend {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+        .plan-legend { display: flex; flex-direction: column; gap: 16px; }
 
         .legend-card {
             background: var(--cream);
@@ -813,7 +686,6 @@
         .legend-card:hover {
             transform: translateX(6px);
             background: #FFFFFF;
-            box-shadow: 0 8px 24px rgba(26, 22, 19, 0.08);
             border-left-color: var(--gold);
         }
 
@@ -833,9 +705,7 @@
             line-height: 1.55;
         }
 
-        .extras-section {
-            background-color: #F5EFEB;
-        }
+        .extras-section { background-color: #F5EFEB; }
 
         .extras-showcase-grid {
             display: grid;
@@ -848,7 +718,6 @@
             border-radius: var(--radius);
             overflow: hidden;
             border: 2px solid var(--border);
-            box-shadow: 0 4px 20px rgba(26, 22, 19, 0.05);
             display: flex;
             flex-direction: column;
             transition: var(--transition);
@@ -858,14 +727,13 @@
 
         .extra-poster-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 45px rgba(26, 22, 19, 0.12);
             border-color: var(--gold);
         }
 
         .extra-poster-card.selected {
             border-color: var(--primary) !important;
             background: #FFFAF7;
-            box-shadow: 0 0 0 3px rgba(156, 88, 56, 0.3), 0 16px 40px rgba(26, 22, 19, 0.12);
+            box-shadow: 0 0 0 3px rgba(156, 88, 56, 0.3);
         }
 
         .extra-img-wrap {
@@ -876,18 +744,15 @@
         }
 
         .extra-img-wrap img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             object-fit: cover;
             object-position: top center;
         }
 
         .extra-check-badge {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 62px;
-            height: 62px;
+            top: 16px; right: 16px;
+            width: 62px; height: 62px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.95);
             border: 3px solid #C5A059;
@@ -896,8 +761,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.8rem;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.3s ease;
             z-index: 10;
         }
 
@@ -905,7 +769,7 @@
             background: var(--primary);
             border-color: #FFFFFF;
             color: #FFFFFF;
-            transform: scale(1.15) rotate(360deg);
+            transform: scale(1.15);
         }
 
         .extra-desc-body {
@@ -927,9 +791,6 @@
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 12px;
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
         }
 
         .extra-detail-p {
@@ -943,7 +804,6 @@
         .extra-points {
             list-style: none;
             font-size: 0.84rem;
-            color: var(--text-main);
             display: flex;
             flex-direction: column;
             gap: 7px;
@@ -951,16 +811,8 @@
             border-top: 1px solid var(--border);
         }
 
-        .extra-points li {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .extra-points li i {
-            color: var(--primary);
-            font-size: 0.8rem;
-        }
+        .extra-points li { display: flex; align-items: center; gap: 8px; }
+        .extra-points li i { color: var(--primary); font-size: 0.8rem; }
 
         .booking-section {
             background: #FFFFFF;
@@ -989,16 +841,13 @@
             margin-bottom: 18px;
         }
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+        .form-group { margin-bottom: 18px; }
 
         .form-group label {
             display: block;
             font-size: 0.78rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.07em;
             margin-bottom: 7px;
             color: var(--dark);
         }
@@ -1012,7 +861,6 @@
             font-size: 0.95rem;
             background: #FFFFFF;
             outline: none;
-            transition: var(--transition);
         }
 
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
@@ -1028,7 +876,6 @@
             position: sticky;
             top: calc(var(--header-h) + 20px);
             border: 1px solid rgba(197, 160, 89, 0.3);
-            box-shadow: 0 20px 50px rgba(26, 22, 19, 0.2);
         }
 
         .summary-row {
@@ -1087,8 +934,7 @@
         }
 
         .location-icon-box {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             border-radius: 50%;
             background: var(--primary-light);
             color: var(--primary);
@@ -1104,7 +950,6 @@
             overflow: hidden;
             height: 340px;
             border: 1px solid var(--border);
-            box-shadow: 0 10px 30px rgba(26, 22, 19, 0.08);
         }
 
         footer {
@@ -1134,9 +979,7 @@
             gap: 10px;
         }
 
-        .footer-col a:hover {
-            color: var(--gold-light);
-        }
+        .footer-col a:hover { color: var(--gold-light); }
 
         .footer-bottom {
             padding-top: 30px;
@@ -1146,10 +989,8 @@
         }
 
         #lightbox {
-            position: fixed;
-            inset: 0;
+            position: fixed; inset: 0;
             background: rgba(15, 12, 10, 0.94);
-            backdrop-filter: blur(12px);
             z-index: 10000000;
             display: none;
             align-items: center;
@@ -1157,43 +998,34 @@
             padding: 24px;
         }
 
-        #lightbox.active {
-            display: flex;
-        }
+        #lightbox.active { display: flex; }
 
         #lightbox img {
             max-width: 90vw;
             max-height: 88vh;
             border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-            border: 2px solid rgba(197, 160, 89, 0.4);
             object-fit: contain;
         }
 
         .lightbox-close {
             position: absolute;
-            top: 25px;
-            right: 30px;
+            top: 25px; right: 30px;
             color: #fff;
             font-size: 2.2rem;
             cursor: pointer;
             background: none;
             border: none;
-            padding: 8px;
-            z-index: 10;
         }
 
         #toast {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 30px; right: 30px;
             background: var(--dark);
             color: #FFFFFF;
             border: 1px solid var(--gold);
             padding: 14px 26px;
             border-radius: 50px;
             font-size: 0.92rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             z-index: 9999999;
             display: flex;
             align-items: center;
@@ -1204,27 +1036,37 @@
             max-width: calc(100vw - 48px);
         }
 
-        #toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        #toast.show { transform: translateY(0); opacity: 1; }
 
-        /* ==============================================================
+        /* ============================================
            RESPONSIVE
-        ============================================================== */
+           ============================================ */
 
-        /* Tablette large */
-        @media (max-width: 1200px) {
-            .logo-title { font-size: 1.25rem; }
-            .logo-city { font-size: 0.75rem; letter-spacing: 0.14em; }
-            .nav-links { gap: 14px; }
-            .nav-links a { font-size: 0.7rem; }
+        /* Tablette paysage / petit laptop (<= 1100px) */
+        @media (max-width: 1100px) {
+            .nav-links a {
+                font-size: 0.65rem;
+            }
+            .nav-links {
+                gap: 12px;
+            }
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.72rem;
+            }
+            .logo-title { font-size: 1.15rem; }
+            .logo-city { font-size: 0.65rem; }
+            .logo-img-wrapper { width: 70px; height: 70px; }
         }
 
-        /* Tablette : on cache la nav, on montre le burger */
+        /* Tablette (<= 992px) : on cache la nav + bouton, on montre le burger */
         @media (max-width: 992px) {
-            :root { --header-h: 95px; }
-            body { padding-top: var(--header-h); }
+            :root { --header-h: 100px; }
+
+            .header-content {
+                padding: 0 16px;
+                gap: 12px;
+            }
 
             .logo-img-wrapper {
                 width: 70px;
@@ -1232,26 +1074,22 @@
             }
 
             .logo-title { font-size: 1.1rem; }
-            .logo-city { font-size: 0.68rem; }
+            .logo-city { font-size: 0.65rem; letter-spacing: 0.14em; }
 
-            /* Burger visible */
+            /* Cacher la nav et le bouton Réserver */
+            .nav-links,
+            .header-right .btn {
+                display: none;
+            }
+
+            /* Afficher le burger */
             .burger-btn {
                 display: flex;
             }
 
-            /* La nav du bas disparaît */
-            .header-bottom {
-                display: none;
-            }
-
-            /* La ligne du haut prend toute la hauteur */
-            .header-content {
-                padding: 0 16px;
-                justify-content: center;
-            }
-
-            .header-top-row {
-                gap: 10px;
+            /* Le header-right ne contient plus que le burger */
+            .header-right {
+                gap: 0;
             }
 
             .hero {
@@ -1260,12 +1098,10 @@
             }
             .hero h1 { font-size: clamp(2rem, 6vw, 3rem); }
             .hero-subtitle-quote { font-size: 1.3rem; }
-            .hero-description { font-size: 1rem; }
 
             .strip-card {
                 grid-template-columns: 1fr;
                 padding: 22px;
-                gap: 14px;
             }
 
             .plan-grid,
@@ -1280,13 +1116,19 @@
             section { padding: 70px 0; }
         }
 
-        /* Mobile */
+        /* Mobile (<= 640px) */
         @media (max-width: 640px) {
-            :root { --header-h: 80px; }
-            body { padding-top: var(--header-h); }
+            :root { --header-h: 85px; }
 
             .header-content {
                 padding: 0 12px;
+                gap: 8px;
+            }
+
+            .brand-cluster {
+                gap: 10px;
+                min-width: 0;
+                flex: 1 1 auto;
             }
 
             .logo-img-wrapper {
@@ -1295,18 +1137,28 @@
                 padding: 2px;
             }
 
-            .logo-title {
-                font-size: 0.85rem;
-                letter-spacing: 0.02em;
+            .logo-text {
+                min-width: 0;
+                overflow: hidden;
             }
+
+            .logo-title {
+                font-size: 0.82rem;
+                letter-spacing: 0.02em;
+                white-space: normal;
+                line-height: 1.15;
+                word-break: break-word;
+            }
+
             .logo-city {
                 font-size: 0.55rem;
                 letter-spacing: 0.08em;
+                white-space: normal;
             }
 
             .burger-btn {
-                font-size: 1.25rem;
-                padding: 8px 11px;
+                font-size: 1.2rem;
+                padding: 9px 12px;
             }
 
             .hero { padding: 40px 0 60px; }
@@ -1327,8 +1179,7 @@
             .suite-price-bar .btn { width: 100%; justify-content: center; }
 
             .extra-check-badge {
-                width: 48px;
-                height: 48px;
+                width: 48px; height: 48px;
                 font-size: 1.3rem;
             }
 
@@ -1341,9 +1192,7 @@
             .container { padding: 0 16px; }
 
             #toast {
-                right: 16px;
-                left: 16px;
-                bottom: 16px;
+                right: 16px; left: 16px; bottom: 16px;
                 justify-content: center;
                 max-width: none;
             }
@@ -1351,7 +1200,7 @@
             .amenities-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* Très petit écran */
+        /* Très petit écran (<= 400px) */
         @media (max-width: 400px) {
             .logo-img-wrapper {
                 width: 45px;
@@ -1359,25 +1208,18 @@
                 padding: 2px;
             }
             .logo-title {
-                font-size: 0.7rem;
+                font-size: 0.72rem;
             }
             .logo-city {
                 font-size: 0.48rem;
                 letter-spacing: 0.05em;
             }
             .burger-btn {
-                font-size: 1.1rem;
+                font-size: 1.05rem;
                 padding: 7px 9px;
             }
             .hero h1 { font-size: 1.5rem; }
             .amenities-grid { grid-template-columns: 1fr; }
-        }
-
-        @media (hover: none) {
-            .suite-card:hover,
-            .extra-poster-card:hover {
-                transform: none;
-            }
         }
 
         @media print {
@@ -1396,38 +1238,38 @@
     <header id="main-header">
         <div class="header-content">
 
-            <!-- LIGNE 1 : LOGO | TITRE CENTRÉ | BURGER -->
-            <div class="header-top-row">
+            <!-- GAUCHE : Logo + Titre + Ville -->
+            <div class="brand-cluster">
                 <a href="#" class="logo-box" aria-label="Domaine de la Rêverie">
                     <div class="logo-img-wrapper">
-                        <img src="logo.jpg" alt="Logo Domaine de la Rêverie" class="logo-img">
+                        <img src="logo.jpg" alt="Logo" class="logo-img">
                     </div>
                 </a>
-
                 <div class="logo-text">
                     <span class="logo-title">Domaine de la Rêverie</span>
                     <span class="logo-city">Saint-Léger-des-Vignes</span>
                 </div>
+            </div>
 
-                <button class="burger-btn" onclick="toggleDrawer()" aria-label="Menu Mobile">
+            <!-- DROITE : Nav + Bouton Réserver + Burger -->
+            <div class="header-right">
+                <ul class="nav-links">
+                    <li><a href="#suites"><i class="fa-solid fa-bed"></i> Nos 4 Suites</a></li>
+                    <li><a href="#prestations"><i class="fa-solid fa-gem"></i> Équipements</a></li>
+                    <li><a href="#plan"><i class="fa-solid fa-map-location-dot"></i> Plan</a></li>
+                    <li><a href="#extras"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras</a></li>
+                    <li><a href="#acces"><i class="fa-solid fa-compass"></i> Accès</a></li>
+                </ul>
+
+                <a href="#reservation" class="btn btn-primary">
+                    <i class="fa-solid fa-calendar-check"></i> Réserver
+                </a>
+
+                <button class="burger-btn" onclick="toggleDrawer()" aria-label="Menu">
                     <i class="fa-solid fa-bars-staggered"></i>
                 </button>
             </div>
 
-            <!-- LIGNE 2 : NAVIGATION (PC UNIQUEMENT) -->
-            <div class="header-bottom">
-                <ul class="nav-links">
-                    <li><a href="#suites"><i class="fa-solid fa-bed"></i> Nos 4 Suites</a></li>
-                    <li><a href="#prestations"><i class="fa-solid fa-gem"></i> Équipements</a></li>
-                    <li><a href="#plan"><i class="fa-solid fa-map-location-dot"></i> Plan du Domaine</a></li>
-                    <li><a href="#extras"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Soins</a></li>
-                    <li><a href="#acces"><i class="fa-solid fa-compass"></i> Accès &amp; Contact</a></li>
-                </ul>
-
-                <a href="#reservation" class="btn btn-primary">
-                    <i class="fa-solid fa-calendar-check"></i> Réserver en Direct
-                </a>
-            </div>
         </div>
     </header>
 
@@ -1463,14 +1305,9 @@
                     À <strong>Saint-Léger-les-Vignes (44710)</strong>, à 15 minutes de Nantes, offrez-vous une nuit d'exception en duo. Balnéothérapie privative illimitée, lit Queen size, cheminée électrique, linge et ménage inclus.
                 </p>
                 <div style="display: flex; gap: 18px; flex-wrap: wrap;">
-                    <a href="#suites" class="btn btn-gold">
-                        <i class="fa-solid fa-compass"></i> Découvrir les 4 Suites
-                    </a>
-                    <a href="#extras" class="btn btn-outline">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Formules
-                    </a>
+                    <a href="#suites" class="btn btn-gold"><i class="fa-solid fa-compass"></i> Découvrir les 4 Suites</a>
+                    <a href="#extras" class="btn btn-outline"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Formules</a>
                 </div>
-
                 <div class="hero-badges">
                     <div class="badge-item"><i class="fa-solid fa-hot-tub-person"></i><span>Balnéothérapie privative</span></div>
                     <div class="badge-item"><i class="fa-solid fa-bed"></i><span>Lit Queen Size</span></div>
@@ -1494,17 +1331,15 @@
                 </select>
             </div>
             <div class="strip-col">
-                <label><i class="fa-regular fa-calendar"></i> Arrivée (Dès 17:00)</label>
+                <label><i class="fa-regular fa-calendar"></i> Arrivée</label>
                 <input type="date" id="strip-checkin" required>
             </div>
             <div class="strip-col">
-                <label><i class="fa-regular fa-calendar-check"></i> Départ (Jusqu'à 11:00)</label>
+                <label><i class="fa-regular fa-calendar-check"></i> Départ</label>
                 <input type="date" id="strip-checkout" required>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary" style="height: 48px; width: 100%;">
-                    Voir disponibilités
-                </button>
+                <button type="submit" class="btn btn-primary" style="height: 48px; width: 100%;">Voir disponibilités</button>
             </div>
         </form>
     </div>
@@ -1512,36 +1347,12 @@
     <div id="prestations" class="amenities-bar">
         <div class="container">
             <div class="amenities-grid">
-                <div class="amenity-item">
-                    <div class="amenity-icon"><i class="fa-solid fa-hot-tub-person"></i></div>
-                    <span class="amenity-label">Balnéo Privative</span>
-                    <span class="amenity-sub">Duo &amp; hydro-massages</span>
-                </div>
-                <div class="amenity-item">
-                    <div class="amenity-icon"><i class="fa-solid fa-shower"></i></div>
-                    <span class="amenity-label">Douche</span>
-                    <span class="amenity-sub">Élégante &amp; spacieuse</span>
-                </div>
-                <div class="amenity-item">
-                    <div class="amenity-icon"><i class="fa-solid fa-utensils"></i></div>
-                    <span class="amenity-label">Cuisine Équipée</span>
-                    <span class="amenity-sub">Frigo, plaques, vaisselle</span>
-                </div>
-                <div class="amenity-item">
-                    <div class="amenity-icon"><i class="fa-solid fa-fire"></i></div>
-                    <span class="amenity-label">Cheminée Électrique</span>
-                    <span class="amenity-sub">Ambiance chaleureuse</span>
-                </div>
-                <div class="amenity-item">
-                    <div class="amenity-icon"><i class="fa-solid fa-bed"></i></div>
-                    <span class="amenity-label">Lit Queen Size</span>
-                    <span class="amenity-sub">Literie grand confort</span>
-                </div>
-                <div class="amenity-item">
-                    <div class="amenity-icon"><i class="fa-solid fa-tree"></i></div>
-                    <span class="amenity-label">Terrasse / Jardin</span>
-                    <span class="amenity-sub">Selon la suite</span>
-                </div>
+                <div class="amenity-item"><div class="amenity-icon"><i class="fa-solid fa-hot-tub-person"></i></div><span class="amenity-label">Balnéo Privative</span><span class="amenity-sub">Duo &amp; hydro-massages</span></div>
+                <div class="amenity-item"><div class="amenity-icon"><i class="fa-solid fa-shower"></i></div><span class="amenity-label">Douche</span><span class="amenity-sub">Élégante &amp; spacieuse</span></div>
+                <div class="amenity-item"><div class="amenity-icon"><i class="fa-solid fa-utensils"></i></div><span class="amenity-label">Cuisine Équipée</span><span class="amenity-sub">Frigo, plaques, vaisselle</span></div>
+                <div class="amenity-item"><div class="amenity-icon"><i class="fa-solid fa-fire"></i></div><span class="amenity-label">Cheminée Électrique</span><span class="amenity-sub">Ambiance chaleureuse</span></div>
+                <div class="amenity-item"><div class="amenity-icon"><i class="fa-solid fa-bed"></i></div><span class="amenity-label">Lit Queen Size</span><span class="amenity-sub">Literie grand confort</span></div>
+                <div class="amenity-item"><div class="amenity-icon"><i class="fa-solid fa-tree"></i></div><span class="amenity-label">Terrasse / Jardin</span><span class="amenity-sub">Selon la suite</span></div>
             </div>
         </div>
     </div>
@@ -1566,8 +1377,8 @@
                         <ul class="suite-features-list">
                             <li><i class="fa-solid fa-check"></i> Balnéo duo hydro-massante</li>
                             <li><i class="fa-solid fa-check"></i> Lit Queen Size grand confort</li>
-                            <li><i class="fa-solid fa-check"></i> Salon cosy avec cheminée électrique</li>
-                            <li><i class="fa-solid fa-check"></i> Cuisine équipée &amp; douche spacieuse</li>
+                            <li><i class="fa-solid fa-check"></i> Salon cosy avec cheminée</li>
+                            <li><i class="fa-solid fa-check"></i> Cuisine équipée</li>
                         </ul>
                         <div class="suite-price-bar">
                             <div class="price-val">210 € <small>/ nuit</small></div>
@@ -1586,9 +1397,9 @@
                         <div class="suite-tagline">Douceur &amp; Sensualité</div>
                         <ul class="suite-features-list">
                             <li><i class="fa-solid fa-check"></i> Jacuzzi balnéo privatif duo</li>
-                            <li><i class="fa-solid fa-check"></i> Lit Queen Size literie haut de gamme</li>
+                            <li><i class="fa-solid fa-check"></i> Lit Queen Size haut de gamme</li>
                             <li><i class="fa-solid fa-check"></i> Ambiance tamisée &amp; cocooning</li>
-                            <li><i class="fa-solid fa-check"></i> Salon cheminée &amp; cuisine équipée</li>
+                            <li><i class="fa-solid fa-check"></i> Salon cheminée &amp; cuisine</li>
                         </ul>
                         <div class="suite-price-bar">
                             <div class="price-val">210 € <small>/ nuit</small></div>
@@ -1608,8 +1419,8 @@
                         <ul class="suite-features-list">
                             <li><i class="fa-solid fa-check"></i> Balnéo 2 places relaxante</li>
                             <li><i class="fa-solid fa-check"></i> Décoration bohème chic</li>
-                            <li><i class="fa-solid fa-check"></i> Lit Queen Size &amp; salon cheminée</li>
-                            <li><i class="fa-solid fa-check"></i> Cuisine complète &amp; espace détente</li>
+                            <li><i class="fa-solid fa-check"></i> Lit Queen Size &amp; salon</li>
+                            <li><i class="fa-solid fa-check"></i> Cuisine complète</li>
                         </ul>
                         <div class="suite-price-bar">
                             <div class="price-val">170 € <small>/ nuit</small></div>
@@ -1627,10 +1438,10 @@
                         <h3>Suite Parisienne</h3>
                         <div class="suite-tagline">Romantisme &amp; Raffinement</div>
                         <ul class="suite-features-list">
-                            <li><i class="fa-solid fa-check"></i> Baignoire balnéo duo relaxante</li>
-                            <li><i class="fa-solid fa-check"></i> Ambiance intime noir &amp; or</li>
-                            <li><i class="fa-solid fa-check"></i> Lit Queen Size &amp; terrasse / jardin</li>
-                            <li><i class="fa-solid fa-check"></i> Kitchenette équipée moderne</li>
+                            <li><i class="fa-solid fa-check"></i> Baignoire balnéo duo</li>
+                            <li><i class="fa-solid fa-check"></i> Ambiance noir &amp; or</li>
+                            <li><i class="fa-solid fa-check"></i> Lit Queen Size &amp; terrasse</li>
+                            <li><i class="fa-solid fa-check"></i> Kitchenette équipée</li>
                         </ul>
                         <div class="suite-price-bar">
                             <div class="price-val">140 € <small>/ nuit</small></div>
@@ -1648,28 +1459,15 @@
                 <span class="section-subtitle">Organisation des Lieux</span>
                 <h2 class="section-title">L'Emplacement de vos Suites</h2>
             </div>
-
             <div class="plan-grid">
                 <div class="plan-img-card" onclick="openLightbox('plan-domaine1.jpg')">
-                    <img src="plan-domaine1.jpg" alt="Plan du Domaine">
+                    <img src="plan-domaine1.jpg" alt="Plan">
                 </div>
                 <div class="plan-legend">
-                    <div class="legend-card">
-                        <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Signature (Porte 3)</h4>
-                        <p>Aile gauche, façade bois contemporaine et escalier vers la mezzanine balnéo.</p>
-                    </div>
-                    <div class="legend-card">
-                        <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Volupté (Porte 2)</h4>
-                        <p>Au centre, accès de plain-pied, ambiance tamisée.</p>
-                    </div>
-                    <div class="legend-card">
-                        <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Bohème (Porte 1)</h4>
-                        <p>Bâtisse en pierres apparentes, authenticité rustique.</p>
-                    </div>
-                    <div class="legend-card">
-                        <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Parisienne</h4>
-                        <p>À droite, jardinet clos pour une intimité totale.</p>
-                    </div>
+                    <div class="legend-card"><h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Signature (Porte 3)</h4><p>Aile gauche, façade bois contemporaine.</p></div>
+                    <div class="legend-card"><h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Volupté (Porte 2)</h4><p>Centre, accès de plain-pied.</p></div>
+                    <div class="legend-card"><h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Bohème (Porte 1)</h4><p>Bâtisse en pierres apparentes.</p></div>
+                    <div class="legend-card"><h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Parisienne</h4><p>À droite, jardinet clos.</p></div>
                 </div>
             </div>
         </div>
@@ -1679,76 +1477,32 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-subtitle">Prestations Sur-Mesure</span>
-                <h2 class="section-title">Sublimez Votre Séjour en Duo</h2>
+                <h2 class="section-title">Sublimez Votre Séjour</h2>
                 <p class="section-desc">Cliquez sur une formule pour l'ajouter à votre réservation.</p>
             </div>
-
             <div class="extras-showcase-grid">
                 <div class="extra-poster-card" id="card-deco" onclick="toggleExtraNew('deco', 50, 'Déco Romantique')">
-                    <div class="extra-img-wrap">
-                        <img src="extra-deco-romantique.jpg" alt="Déco Romantique">
-                        <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
-                    </div>
-                    <div class="extra-desc-body">
-                        <h3>Déco Romantique</h3>
-                        <div class="extra-price-tag">50 €</div>
-                        <p class="extra-detail-p">Ambiance féerique et chaleureuse préparée avant votre arrivée.</p>
-                        <ul class="extra-points">
-                            <li><i class="fa-solid fa-heart"></i> Ballons cœur rouges</li>
-                            <li><i class="fa-solid fa-fire"></i> Bougies LED chaleureuses</li>
-                            <li><i class="fa-solid fa-spa"></i> Pétales de roses</li>
-                        </ul>
+                    <div class="extra-img-wrap"><img src="extra-deco-romantique.jpg" alt="Déco"><div class="extra-check-badge"><i class="fa-solid fa-check"></i></div></div>
+                    <div class="extra-desc-body"><h3>Déco Romantique</h3><div class="extra-price-tag">50 €</div><p class="extra-detail-p">Ambiance féerique préparée avant votre arrivée.</p>
+                        <ul class="extra-points"><li><i class="fa-solid fa-heart"></i> Ballons cœur rouges</li><li><i class="fa-solid fa-fire"></i> Bougies LED</li><li><i class="fa-solid fa-spa"></i> Pétales de roses</li></ul>
                     </div>
                 </div>
-
-                <div class="extra-poster-card" id="card-brunch" onclick="toggleExtraNew('brunch', 54, 'Brunch pour Deux')">
-                    <div class="extra-img-wrap">
-                        <img src="extra-brunch.jpg" alt="Brunch">
-                        <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
-                    </div>
-                    <div class="extra-desc-body">
-                        <h3>Brunch pour Deux</h3>
-                        <div class="extra-price-tag">54 €</div>
-                        <p class="extra-detail-p">Moment gourmand livré discrètement en chambre.</p>
-                        <ul class="extra-points">
-                            <li><i class="fa-solid fa-bread-slice"></i> Viennoiseries &amp; pains</li>
-                            <li><i class="fa-solid fa-apple-whole"></i> Fruits frais &amp; jus</li>
-                            <li><i class="fa-solid fa-mug-hot"></i> Cafés &amp; douceurs</li>
-                        </ul>
+                <div class="extra-poster-card" id="card-brunch" onclick="toggleExtraNew('brunch', 54, 'Brunch')">
+                    <div class="extra-img-wrap"><img src="extra-brunch.jpg" alt="Brunch"><div class="extra-check-badge"><i class="fa-solid fa-check"></i></div></div>
+                    <div class="extra-desc-body"><h3>Brunch pour Deux</h3><div class="extra-price-tag">54 €</div><p class="extra-detail-p">Moment gourmand livré en chambre.</p>
+                        <ul class="extra-points"><li><i class="fa-solid fa-bread-slice"></i> Viennoiseries</li><li><i class="fa-solid fa-apple-whole"></i> Fruits &amp; jus</li><li><i class="fa-solid fa-mug-hot"></i> Cafés &amp; douceurs</li></ul>
                     </div>
                 </div>
-
                 <div class="extra-poster-card" id="card-planche" onclick="toggleExtraNew('planche', 64, 'Planche Apéro')">
-                    <div class="extra-img-wrap">
-                        <img src="extra-planche.jpg" alt="Planche Apéro">
-                        <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
-                    </div>
-                    <div class="extra-desc-body">
-                        <h3>Planche Apéro Gourmande</h3>
-                        <div class="extra-price-tag">64 €</div>
-                        <p class="extra-detail-p">Charcuteries, fromages et vin pour dîner en amoureux.</p>
-                        <ul class="extra-points">
-                            <li><i class="fa-solid fa-wine-glass"></i> 1 bouteille de vin</li>
-                            <li><i class="fa-solid fa-cheese"></i> Charcuteries &amp; fromages</li>
-                            <li><i class="fa-solid fa-bowl-food"></i> Antipasti &amp; crackers</li>
-                        </ul>
+                    <div class="extra-img-wrap"><img src="extra-planche.jpg" alt="Planche"><div class="extra-check-badge"><i class="fa-solid fa-check"></i></div></div>
+                    <div class="extra-desc-body"><h3>Planche Apéro</h3><div class="extra-price-tag">64 €</div><p class="extra-detail-p">Charcuteries, fromages et vin.</p>
+                        <ul class="extra-points"><li><i class="fa-solid fa-wine-glass"></i> 1 bouteille de vin</li><li><i class="fa-solid fa-cheese"></i> Fromages affinés</li><li><i class="fa-solid fa-bowl-food"></i> Antipasti</li></ul>
                     </div>
                 </div>
-
-                <div class="extra-poster-card" id="card-massage" onclick="toggleExtraNew('massage', 180, 'Massage en Duo')">
-                    <div class="extra-img-wrap">
-                        <img src="extra-massage.jpg" alt="Massage Duo">
-                        <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
-                    </div>
-                    <div class="extra-desc-body">
-                        <h3>Massage en Duo (1h)</h3>
-                        <div class="extra-price-tag">180 €</div>
-                        <p class="extra-detail-p">Une heure de lâcher-prise avec nos praticiennes expertes.</p>
-                        <ul class="extra-points">
-                            <li><i class="fa-solid fa-hands"></i> 1h de massage simultané</li>
-                            <li><i class="fa-solid fa-spa"></i> Huiles chaudes</li>
-                            <li><i class="fa-solid fa-feather"></i> Détente profonde</li>
-                        </ul>
+                <div class="extra-poster-card" id="card-massage" onclick="toggleExtraNew('massage', 180, 'Massage Duo')">
+                    <div class="extra-img-wrap"><img src="extra-massage.jpg" alt="Massage"><div class="extra-check-badge"><i class="fa-solid fa-check"></i></div></div>
+                    <div class="extra-desc-body"><h3>Massage en Duo (1h)</h3><div class="extra-price-tag">180 €</div><p class="extra-detail-p">Lâcher-prise absolu avec nos expertes.</p>
+                        <ul class="extra-points"><li><i class="fa-solid fa-hands"></i> 1h massage simultané</li><li><i class="fa-solid fa-spa"></i> Huiles chaudes</li><li><i class="fa-solid fa-feather"></i> Détente profonde</li></ul>
                     </div>
                 </div>
             </div>
@@ -1760,78 +1514,41 @@
             <div class="section-header">
                 <span class="section-subtitle">Réservation en Direct</span>
                 <h2 class="section-title">Planifiez Votre Escapade</h2>
-                <p class="section-desc">Meilleur tarif garanti en direct propriétaire.</p>
             </div>
-
             <div class="booking-layout">
                 <form class="booking-form" onsubmit="handleBooking(event)">
                     <div class="form-group">
-                        <label><i class="fa-solid fa-bed"></i> Choisir votre Suite</label>
+                        <label><i class="fa-solid fa-bed"></i> Suite</label>
                         <select id="booking-suite" onchange="calculatePrice()" required>
                             <option value="" data-name="" disabled selected>— Choisissez une suite —</option>
-                            <option value="210" data-name="Suite Signature">Suite Signature (210 € / nuit)</option>
-                            <option value="210" data-name="Suite Volupté">Suite Volupté (210 € / nuit)</option>
-                            <option value="170" data-name="Suite Bohème">Suite Bohème (170 € / nuit)</option>
-                            <option value="140" data-name="Suite Parisienne">Suite Parisienne (140 € / nuit)</option>
+                            <option value="210" data-name="Suite Signature">Suite Signature (210 €)</option>
+                            <option value="210" data-name="Suite Volupté">Suite Volupté (210 €)</option>
+                            <option value="170" data-name="Suite Bohème">Suite Bohème (170 €)</option>
+                            <option value="140" data-name="Suite Parisienne">Suite Parisienne (140 €)</option>
                         </select>
                     </div>
-
                     <div class="form-row">
-                        <div class="form-group">
-                            <label><i class="fa-regular fa-calendar"></i> Arrivée (Dès 17:00)</label>
-                            <input type="date" id="booking-in" required onchange="calculatePrice()">
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fa-regular fa-calendar-check"></i> Départ (Jusqu'à 11:00)</label>
-                            <input type="date" id="booking-out" required onchange="calculatePrice()">
-                        </div>
+                        <div class="form-group"><label>Arrivée</label><input type="date" id="booking-in" required onchange="calculatePrice()"></div>
+                        <div class="form-group"><label>Départ</label><input type="date" id="booking-out" required onchange="calculatePrice()"></div>
                     </div>
-
                     <div class="form-row">
-                        <div class="form-group">
-                            <label>Nom complet</label>
-                            <input type="text" placeholder="ex. Jean Dupont" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Téléphone</label>
-                            <input type="tel" placeholder="ex. 06 12 34 56 78" required>
-                        </div>
+                        <div class="form-group"><label>Nom</label><input type="text" placeholder="Nom complet" required></div>
+                        <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06..." required></div>
                     </div>
-
-                    <div class="form-group">
-                        <label>Adresse e-mail</label>
-                        <input type="email" placeholder="ex. jean.dupont@email.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Demandes particulières</label>
-                        <textarea rows="3" placeholder="Précisez vos souhaits..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1rem;">
-                        <i class="fa-solid fa-lock"></i> Valider ma demande
-                    </button>
+                    <div class="form-group"><label>Email</label><input type="email" placeholder="email@..." required></div>
+                    <div class="form-group"><label>Demandes</label><textarea rows="3" placeholder="Vos souhaits..."></textarea></div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;"><i class="fa-solid fa-lock"></i> Valider</button>
                 </form>
 
                 <div class="booking-summary">
-                    <div class="saving-alert">
-                        <i class="fa-solid fa-piggy-bank" style="font-size: 1.2rem;"></i>
-                        <span><strong>Direct Propriétaire :</strong> sans commission.</span>
-                    </div>
-
+                    <div class="saving-alert"><i class="fa-solid fa-piggy-bank" style="font-size: 1.2rem;"></i><span><strong>Direct :</strong> sans commission.</span></div>
                     <h3 style="font-size: 1.6rem; margin-bottom: 22px; color: #fff;">Votre Séjour</h3>
-                    
                     <div class="summary-row"><span>Hébergement :</span><strong id="summary-suite-name" style="color: #fff;">—</strong></div>
                     <div class="summary-row"><span>Durée :</span><span id="summary-nights">1 nuit</span></div>
-                    <div class="summary-row"><span>Tarif suite :</span><span id="summary-room-price">0 €</span></div>
+                    <div class="summary-row"><span>Tarif :</span><span id="summary-room-price">0 €</span></div>
                     <div class="summary-row"><span>Linge &amp; Ménage :</span><span style="color: #A3E635; font-weight: 600;">Inclus</span></div>
-                    <div class="summary-row"><span>Balnéo :</span><span>Illimitée</span></div>
                     <div class="summary-row"><span>Extras :</span><span id="summary-extras">0 €</span></div>
-
-                    <div class="summary-total">
-                        <span>Total :</span>
-                        <span id="summary-total-price">0 €</span>
-                    </div>
+                    <div class="summary-total"><span>Total :</span><span id="summary-total-price">0 €</span></div>
                 </div>
             </div>
         </div>
@@ -1840,51 +1557,18 @@
     <section id="acces" style="background: #FFFFFF;">
         <div class="container">
             <div class="section-header">
-                <span class="section-subtitle">Localisation Idéale</span>
+                <span class="section-subtitle">Localisation</span>
                 <h2 class="section-title">Venir au Domaine</h2>
             </div>
-
             <div class="location-grid">
                 <ul class="location-items">
-                    <li>
-                        <div class="location-icon-box"><i class="fa-solid fa-location-dot"></i></div>
-                        <div>
-                            <strong>Adresse :</strong>
-                            <p style="color: var(--text-muted); margin: 0;">39 Rue de la Crémaillère, 44710 Saint-Léger-les-Vignes</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="location-icon-box"><i class="fa-solid fa-envelope"></i></div>
-                        <div>
-                            <strong>Email :</strong>
-                            <p style="color: var(--text-muted); margin: 0;">
-                                <a href="mailto:contact@domaine-reverie.fr" style="color: var(--primary); font-weight: 600;">contact@domaine-reverie.fr</a>
-                            </p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="location-icon-box"><i class="fa-solid fa-plane-departure"></i></div>
-                        <div>
-                            <strong>Aéroport Nantes :</strong>
-                            <p style="color: var(--text-muted); margin: 0;">À 9 km (10-12 min en voiture)</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="location-icon-box"><i class="fa-solid fa-umbrella-beach"></i></div>
-                        <div>
-                            <strong>Pornic &amp; plages :</strong>
-                            <p style="color: var(--text-muted); margin: 0;">À 25-30 min de route</p>
-                        </div>
-                    </li>
+                    <li><div class="location-icon-box"><i class="fa-solid fa-location-dot"></i></div><div><strong>Adresse :</strong><p style="color: var(--text-muted); margin: 0;">39 Rue de la Crémaillère, 44710 Saint-Léger-les-Vignes</p></div></li>
+                    <li><div class="location-icon-box"><i class="fa-solid fa-envelope"></i></div><div><strong>Email :</strong><p style="color: var(--text-muted); margin: 0;"><a href="mailto:contact@domaine-reverie.fr" style="color: var(--primary); font-weight: 600;">contact@domaine-reverie.fr</a></p></div></li>
+                    <li><div class="location-icon-box"><i class="fa-solid fa-plane-departure"></i></div><div><strong>Aéroport :</strong><p style="color: var(--text-muted); margin: 0;">9 km (10 min)</p></div></li>
+                    <li><div class="location-icon-box"><i class="fa-solid fa-umbrella-beach"></i></div><div><strong>Plages :</strong><p style="color: var(--text-muted); margin: 0;">Pornic à 25-30 min</p></div></li>
                 </ul>
-
                 <div class="map-wrapper">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2714.288921868357!2d-1.7291881!3d47.1352467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ec6843477f1f%3A0x1d5fcfc4bb416e8!2s39%20Rue%20de%20la%20Cr%C3%A9maill%C3%A8re%2C%2044710%20Saint-L%C3%A9ger-les-Vignes!5e0!3m2!1sfr!2sfr!4v1710000000000!5m2!1sfr!2sfr" 
-                        style="width: 100%; height: 100%; border: 0;"
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2714.288921868357!2d-1.7291881!3d47.1352467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ec6843477f1f%3A0x1d5fcfc4bb416e8!2s39%20Rue%20de%20la%20Cr%C3%A9maill%C3%A8re%2C%2044710%20Saint-L%C3%A9ger-les-Vignes!5e0!3m2!1sfr!2sfr!4v1710000000000!5m2!1sfr!2sfr" style="width: 100%; height: 100%; border: 0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -1895,42 +1579,33 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4 style="font-family: var(--font-serif); font-size: 1.7rem;">Domaine de la Rêverie</h4>
-                    <p style="margin-bottom: 16px; line-height: 1.7;">
-                        L'adresse romantique par excellence à Saint-Léger-les-Vignes. Quatre suites avec balnéothérapie privative.
-                    </p>
-                    <p style="font-size: 0.85rem; color: var(--gold-light);">
-                        <i class="fa-solid fa-check"></i> Non-fumeur • Couples adultes
-                    </p>
+                    <p style="margin-bottom: 16px; line-height: 1.7;">L'adresse romantique à Saint-Léger-les-Vignes. Quatre suites avec balnéothérapie privative.</p>
+                    <p style="font-size: 0.85rem; color: var(--gold-light);"><i class="fa-solid fa-check"></i> Non-fumeur • Couples</p>
                     <div style="margin-top: 18px; display: flex; gap: 14px; font-size: 1.3rem;">
                         <a href="https://instagram.com" target="_blank" style="color: var(--gold-light);"><i class="fa-brands fa-instagram"></i></a>
                         <a href="https://facebook.com" target="_blank" style="color: var(--gold-light);"><i class="fa-brands fa-facebook"></i></a>
                     </div>
                 </div>
-
                 <div class="footer-col">
                     <h4>Nos 4 Suites</h4>
                     <ul>
-                        <li><a href="#suites">Suite Signature (210 €)</a></li>
-                        <li><a href="#suites">Suite Volupté (210 €)</a></li>
-                        <li><a href="#suites">Suite Bohème (170 €)</a></li>
-                        <li><a href="#suites">Suite Parisienne (140 €)</a></li>
+                        <li><a href="#suites">Signature (210 €)</a></li>
+                        <li><a href="#suites">Volupté (210 €)</a></li>
+                        <li><a href="#suites">Bohème (170 €)</a></li>
+                        <li><a href="#suites">Parisienne (140 €)</a></li>
                     </ul>
                 </div>
-
                 <div class="footer-col">
                     <h4>Informations</h4>
                     <ul>
-                        <li><strong>Arrivée :</strong> 17:00 – 23:00</li>
-                        <li><strong>Départ :</strong> Jusqu'à 11:00</li>
+                        <li><strong>Arrivée :</strong> 17h – 23h</li>
+                        <li><strong>Départ :</strong> Jusqu'à 11h</li>
                         <li><strong>Email :</strong> contact@domaine-reverie.fr</li>
-                        <li><strong>Lieu :</strong> 44710 Saint-Léger-les-Vignes</li>
+                        <li><strong>Lieu :</strong> 44710</li>
                     </ul>
                 </div>
             </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2026 Domaine de la Rêverie • Tous droits réservés</p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2026 Domaine de la Rêverie</p></div>
         </div>
     </footer>
 
@@ -1949,82 +1624,59 @@
             var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             if (height > 0) {
-                var scrolled = (winScroll / height) * 100;
                 var progressEl = document.getElementById('scroll-progress');
-                if (progressEl) progressEl.style.width = scrolled + "%";
+                if (progressEl) progressEl.style.width = ((winScroll / height) * 100) + "%";
             }
             var header = document.getElementById('main-header');
             if (header) {
-                if (winScroll > 40) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
+                if (winScroll > 40) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
             }
         });
 
-        function openLightbox(imgSrc) {
+        function openLightbox(src) {
             var lb = document.getElementById('lightbox');
             var img = document.getElementById('lightbox-img');
-            if (lb && img) {
-                img.src = imgSrc;
-                lb.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            if (lb && img) { img.src = src; lb.classList.add('active'); document.body.style.overflow = 'hidden'; }
         }
 
         function closeLightbox() {
             var lb = document.getElementById('lightbox');
-            if (lb) {
-                lb.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
+            if (lb) { lb.classList.remove('active'); document.body.style.overflow = 'auto'; }
         }
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeLightbox();
-        });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
 
         function toggleDrawer() {
-            var drawer = document.getElementById('mobile-drawer');
-            var overlay = document.getElementById('drawer-overlay');
-            if (drawer && overlay) {
-                drawer.classList.toggle('open');
-                overlay.classList.toggle('open');
-                document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+            var d = document.getElementById('mobile-drawer');
+            var o = document.getElementById('drawer-overlay');
+            if (d && o) {
+                d.classList.toggle('open');
+                o.classList.toggle('open');
+                document.body.style.overflow = d.classList.contains('open') ? 'hidden' : '';
             }
         }
 
         function showToast(msg) {
-            var toast = document.getElementById('toast');
-            var toastText = document.getElementById('toast-text');
-            if (toast && toastText) {
-                toastText.textContent = msg;
-                toast.classList.add('show');
-                setTimeout(function() {
-                    toast.classList.remove('show');
-                }, 2800);
-            }
+            var t = document.getElementById('toast');
+            var tt = document.getElementById('toast-text');
+            if (t && tt) { tt.textContent = msg; t.classList.add('show'); setTimeout(function(){ t.classList.remove('show'); }, 2800); }
         }
 
         var today = new Date();
-        var tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
+        var tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate() + 1);
 
         function formatDate(d) {
-            var month = '' + (d.getMonth() + 1);
-            var day = '' + d.getDate();
-            var year = d.getFullYear();
-            if (month.length < 2) month = '0' + month;
+            var m = '' + (d.getMonth() + 1), day = '' + d.getDate(), y = d.getFullYear();
+            if (m.length < 2) m = '0' + m;
             if (day.length < 2) day = '0' + day;
-            return [year, month, day].join('-');
+            return [y, m, day].join('-');
         }
 
         var inEl = document.getElementById('booking-in');
         var outEl = document.getElementById('booking-out');
         var sInEl = document.getElementById('strip-checkin');
         var sOutEl = document.getElementById('strip-checkout');
-
         if (inEl) inEl.value = formatDate(today);
         if (outEl) outEl.value = formatDate(tomorrow);
         if (sInEl) sInEl.value = formatDate(today);
@@ -2040,17 +1692,9 @@
         function toggleExtraNew(key, price, title) {
             var card = document.getElementById('card-' + key);
             if (!card) return;
-            
             extrasState[key].selected = !extrasState[key].selected;
-            
-            if (extrasState[key].selected) {
-                card.classList.add('selected');
-                showToast(title + " ajoutée (" + price + " €)");
-            } else {
-                card.classList.remove('selected');
-                showToast(title + " retirée");
-            }
-
+            if (extrasState[key].selected) { card.classList.add('selected'); showToast(title + " ajoutée (" + price + " €)"); }
+            else { card.classList.remove('selected'); showToast(title + " retirée"); }
             calculatePrice();
         }
 
@@ -2058,15 +1702,12 @@
             var select = document.getElementById('booking-suite');
             if (select) {
                 for (var i = 0; i < select.options.length; i++) {
-                    if (select.options[i].getAttribute('data-name') === nom) {
-                        select.value = select.options[i].value;
-                        break;
-                    }
+                    if (select.options[i].getAttribute('data-name') === nom) { select.value = select.options[i].value; break; }
                 }
             }
             calculatePrice();
-            var resSection = document.getElementById('reservation');
-            if (resSection) resSection.scrollIntoView({ behavior: 'smooth' });
+            var r = document.getElementById('reservation');
+            if (r) r.scrollIntoView({ behavior: 'smooth' });
             showToast("Suite choisie : " + nom);
         }
 
@@ -2080,55 +1721,35 @@
         function calculatePrice() {
             var select = document.getElementById('booking-suite');
             if (!select) return;
+            var opt = select.options[select.selectedIndex];
+            var price = parseFloat(select.value) || 0;
+            var name = opt.getAttribute('data-name') || '—';
 
-            var selectedOption = select.options[select.selectedIndex];
-            var pricePerNight = parseFloat(select.value) || 0;
-            var suiteName = selectedOption.getAttribute('data-name') || '—';
+            var ci = new Date(document.getElementById('booking-in').value);
+            var co = new Date(document.getElementById('booking-out').value);
+            if (co <= ci) { co = new Date(ci); co.setDate(co.getDate() + 1); document.getElementById('booking-out').value = formatDate(co); }
+            var days = Math.ceil(Math.abs(co - ci) / (1000 * 60 * 60 * 24)) || 1;
 
-            var checkInVal = new Date(document.getElementById('booking-in').value);
-            var checkOutVal = new Date(document.getElementById('booking-out').value);
+            var exTotal = 0;
+            for (var k in extrasState) if (extrasState[k].selected) exTotal += extrasState[k].price;
 
-            if (checkOutVal <= checkInVal) {
-                checkOutVal = new Date(checkInVal);
-                checkOutVal.setDate(checkOutVal.getDate() + 1);
-                document.getElementById('booking-out').value = formatDate(checkOutVal);
-            }
+            var roomPrice = days * price;
+            var total = roomPrice + exTotal;
 
-            var diffTime = Math.abs(checkOutVal - checkInVal);
-            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) || 1;
-
-            var extrasTotal = 0;
-            for (var k in extrasState) {
-                if (extrasState[k].selected) {
-                    extrasTotal += extrasState[k].price;
-                }
-            }
-
-            var roomPrice = diffDays * pricePerNight;
-            var finalTotal = roomPrice + extrasTotal;
-
-            var sName = document.getElementById('summary-suite-name');
-            var sNights = document.getElementById('summary-nights');
-            var sRoom = document.getElementById('summary-room-price');
-            var sExtras = document.getElementById('summary-extras');
-            var sTotal = document.getElementById('summary-total-price');
-
-            if (sName) sName.textContent = suiteName;
-            if (sNights) sNights.textContent = diffDays + (diffDays > 1 ? " nuits" : " nuit");
-            if (sRoom) sRoom.textContent = roomPrice + " €";
-            if (sExtras) sExtras.textContent = extrasTotal + " €";
-            if (sTotal) sTotal.textContent = finalTotal + " €";
+            var el;
+            if ((el = document.getElementById('summary-suite-name'))) el.textContent = name;
+            if ((el = document.getElementById('summary-nights'))) el.textContent = days + (days > 1 ? " nuits" : " nuit");
+            if ((el = document.getElementById('summary-room-price'))) el.textContent = roomPrice + " €";
+            if ((el = document.getElementById('summary-extras'))) el.textContent = exTotal + " €";
+            if ((el = document.getElementById('summary-total-price'))) el.textContent = total + " €";
         }
 
         function handleBooking(e) {
             e.preventDefault();
             var total = document.getElementById('summary-total-price').textContent;
             var suite = document.getElementById('summary-suite-name').textContent;
-            if (suite === '—' || total === '0 €') {
-                alert("Veuillez sélectionner une suite avant de valider votre réservation.");
-                return;
-            }
-            alert("Félicitations !\nVotre demande pour la " + suite + " (" + total + ") a bien été prise en compte.");
+            if (suite === '—' || total === '0 €') { alert("Veuillez sélectionner une suite."); return; }
+            alert("Félicitations !\n" + suite + " — " + total);
         }
 
         calculatePrice();
