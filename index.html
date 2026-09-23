@@ -54,7 +54,6 @@
             overflow-x: hidden;
             padding-top: var(--header-h);
             min-height: 100vh;
-            min-height: -webkit-fill-available;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -89,20 +88,17 @@
             transition: width 0.1s linear;
         }
 
-        /* ===== BANDEAU FIXE ===== */
+        /* ===== HEADER — STRUCTURE FLEXBOX ROBUSTE ===== */
         header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
+            width: 100%;
             height: var(--header-h);
-            overflow: visible;
             z-index: 999999;
-            background: #F0E9DE !important;
-            border-bottom: none;
+            background: #F0E9DE;
             box-shadow: 0 4px 25px rgba(26, 22, 19, 0.08);
-            display: flex;
-            align-items: center;
             transition: box-shadow 0.3s ease;
         }
 
@@ -122,39 +118,44 @@
             box-shadow: 0 8px 30px rgba(26, 22, 19, 0.12);
         }
 
+        /* Structure : ligne 1 = logo + titre + burger | ligne 2 = nav */
         .header-content {
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            width: 100%;
             height: 100%;
-            position: relative;
+            width: 100%;
             padding: 0 24px;
+            position: relative;
         }
 
-        .logo-box {
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
+        /* Ligne du haut : logo à gauche, titre au centre, burger à droite */
+        .header-top-row {
             display: flex;
             align-items: center;
-            cursor: pointer;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Logo - ne déborde plus en bas */
+        .logo-box {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
             z-index: 10;
         }
 
         .logo-img-wrapper {
-            position: relative;
-            width: 200px;
-            height: 200px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            padding: 6px;
+            padding: 4px;
             background: var(--gold-gradient);
-            box-shadow: 0 6px 22px rgba(197, 160, 89, 0.45);
+            box-shadow: 0 4px 16px rgba(197, 160, 89, 0.4);
             flex-shrink: 0;
             transition: transform 0.3s ease;
-            margin-bottom: -70px;
         }
 
         .logo-box:hover .logo-img-wrapper {
@@ -170,14 +171,17 @@
             background: #FFFFFF;
         }
 
+        /* Titre + ville - centrés dans l'espace restant */
         .logo-text {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-align: center;
             line-height: 1.15;
-            padding-top: 4px;
-            padding-left: 200px;
+            flex: 1;
+            min-width: 0;
+            padding: 0 8px;
         }
 
         .logo-title {
@@ -188,40 +192,52 @@
             text-transform: uppercase;
             color: var(--dark);
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
         }
 
         .logo-city {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.18em;
             color: var(--primary);
             font-weight: 800;
             margin-top: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
             white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
         }
 
-        .logo-city::after {
-            content: '';
-            display: inline-block;
-            width: 24px;
-            height: 2px;
-            background: var(--gold);
-            border-radius: 2px;
+        /* Burger - caché sur PC, visible sur tablette/mobile */
+        .burger-btn {
+            display: none;
+            background: rgba(156, 88, 56, 0.12);
+            border: none;
+            font-size: 1.4rem;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 10px 14px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            z-index: 20;
+            transition: background 0.2s ease;
         }
 
+        .burger-btn:active {
+            background: rgba(156, 88, 56, 0.3);
+        }
+
+        /* Ligne du bas : nav + bouton réserver (PC uniquement) */
         .header-bottom {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
+            gap: 18px;
             width: 100%;
-            padding: 6px 20px 0 200px;
+            padding-top: 4px;
             flex-wrap: nowrap;
-            white-space: nowrap;
         }
 
         .nav-links {
@@ -230,7 +246,6 @@
             align-items: center;
             list-style: none;
             flex-wrap: nowrap;
-            white-space: nowrap;
         }
 
         .nav-links a {
@@ -245,25 +260,11 @@
             align-items: center;
             gap: 6px;
             white-space: nowrap;
-            flex-shrink: 0;
-            line-height: 1.2;
-            height: 22px;
         }
 
         .nav-links a i {
             color: var(--gold);
             font-size: 0.85rem;
-            width: 16px;
-            height: 16px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s;
-            flex-shrink: 0;
-        }
-
-        .nav-links a:hover i {
-            transform: translateY(-2px);
         }
 
         .nav-links a::after {
@@ -293,16 +294,15 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 14px 28px;
-            font-size: 0.86rem;
+            padding: 12px 24px;
+            font-size: 0.82rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.09em;
+            letter-spacing: 0.08em;
             border-radius: 50px;
             cursor: pointer;
             border: 1px solid transparent;
             transition: var(--transition);
-            overflow: hidden;
             white-space: nowrap;
         }
 
@@ -344,21 +344,12 @@
             transform: translateY(-2px);
         }
 
-        .burger-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.7rem;
-            color: var(--dark);
-            cursor: pointer;
-            padding: 8px;
-        }
-
+        /* ===== DRAWER MOBILE ===== */
         .mobile-drawer {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 320px;
+            width: min(85vw, 320px);
             height: 100vh;
             height: 100dvh;
             background: #FFFFFF;
@@ -416,10 +407,10 @@
             width: 24px;
         }
 
+        /* ===== HERO ===== */
         .hero {
             position: relative;
             min-height: calc(100vh - var(--header-h));
-            min-height: calc(100dvh - var(--header-h));
             display: flex;
             align-items: center;
             padding: 70px 0 90px;
@@ -518,12 +509,6 @@
             gap: 18px;
             align-items: end;
             border: 1px solid rgba(197, 160, 89, 0.35);
-            transition: var(--transition);
-        }
-
-        .strip-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 25px 60px rgba(26, 22, 19, 0.16);
         }
 
         .strip-col label {
@@ -547,15 +532,6 @@
             outline: none;
             background: var(--cream);
             transition: var(--transition);
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        .strip-col select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236E665F' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            padding-right: 32px;
         }
 
         .strip-col input:focus, .strip-col select:focus {
@@ -680,7 +656,6 @@
             transition: var(--transition);
             display: flex;
             flex-direction: column;
-            position: relative;
         }
 
         .suite-card:hover {
@@ -819,11 +794,6 @@
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .plan-img-card:hover img {
-            transform: scale(1.02);
         }
 
         .plan-legend {
@@ -883,8 +853,6 @@
             flex-direction: column;
             transition: var(--transition);
             cursor: pointer;
-            position: relative;
-            user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -912,11 +880,6 @@
             height: 100%;
             object-fit: cover;
             object-position: top center;
-            transition: transform 0.5s ease;
-        }
-
-        .extra-poster-card:hover .extra-img-wrap img {
-            transform: scale(1.04);
         }
 
         .extra-check-badge {
@@ -939,11 +902,10 @@
         }
 
         .extra-poster-card.selected .extra-check-badge {
-            background: var(--primary) !important;
-            border-color: #FFFFFF !important;
-            color: #FFFFFF !important;
+            background: var(--primary);
+            border-color: #FFFFFF;
+            color: #FFFFFF;
             transform: scale(1.15) rotate(360deg);
-            box-shadow: 0 8px 25px rgba(156, 88, 56, 0.5);
         }
 
         .extra-desc-body {
@@ -1018,7 +980,6 @@
             padding: 38px;
             border-radius: var(--radius);
             border: 1px solid var(--border);
-            box-shadow: 0 4px 20px rgba(26, 22, 19, 0.05);
         }
 
         .form-row {
@@ -1052,15 +1013,6 @@
             background: #FFFFFF;
             outline: none;
             transition: var(--transition);
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        .form-group select {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236E665F' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 12px center;
-            padding-right: 32px;
         }
 
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
@@ -1184,7 +1136,6 @@
 
         .footer-col a:hover {
             color: var(--gold-light);
-            padding-left: 5px;
         }
 
         .footer-bottom {
@@ -1213,7 +1164,6 @@
         #lightbox img {
             max-width: 90vw;
             max-height: 88vh;
-            max-height: 88dvh;
             border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.7);
             border: 2px solid rgba(197, 160, 89, 0.4);
@@ -1231,7 +1181,6 @@
             border: none;
             padding: 8px;
             z-index: 10;
-            line-height: 1;
         }
 
         #toast {
@@ -1261,60 +1210,48 @@
         }
 
         /* ==============================================================
-           RESPONSIVE — ADAPTATION AUTOMATIQUE
+           RESPONSIVE
         ============================================================== */
 
-        /* Tablette large / petit laptop */
+        /* Tablette large */
         @media (max-width: 1200px) {
-            .logo-img-wrapper {
-                width: 170px;
-                height: 170px;
-                margin-bottom: -60px;
-            }
-            .logo-text { padding-left: 170px; }
-            .header-bottom { padding-left: 170px; }
             .logo-title { font-size: 1.25rem; }
-            .logo-city { font-size: 0.78rem; letter-spacing: 0.14em; }
+            .logo-city { font-size: 0.75rem; letter-spacing: 0.14em; }
             .nav-links { gap: 14px; }
             .nav-links a { font-size: 0.7rem; }
-            .header-cta { padding: 12px 18px; font-size: 0.75rem; }
         }
 
-        /* Tablette (iPad, etc.) */
+        /* Tablette : on cache la nav, on montre le burger */
         @media (max-width: 992px) {
-            :root { --header-h: 110px; }
+            :root { --header-h: 95px; }
             body { padding-top: var(--header-h); }
 
-            header { height: var(--header-h); padding: 0; }
-
-            .header-content {
-                height: 100%;
-                padding: 0 16px;
-            }
-
             .logo-img-wrapper {
-                width: 120px;
-                height: 120px;
-                padding: 4px;
-                margin-bottom: -40px;
+                width: 70px;
+                height: 70px;
             }
 
-            .logo-box { left: 10px; }
+            .logo-title { font-size: 1.1rem; }
+            .logo-city { font-size: 0.68rem; }
 
-            .logo-text { padding-left: 120px; }
-            .header-bottom { padding-left: 120px; }
-
-            .logo-title { font-size: 1.05rem; letter-spacing: 0.03em; }
-            .logo-city { font-size: 0.68rem; letter-spacing: 0.12em; }
-            .logo-city::after { width: 16px; }
-
-            .nav-links, .header-cta { display: none; }
+            /* Burger visible */
             .burger-btn {
-                display: block;
-                position: absolute;
-                top: 50%;
-                right: 16px;
-                transform: translateY(-50%);
+                display: flex;
+            }
+
+            /* La nav du bas disparaît */
+            .header-bottom {
+                display: none;
+            }
+
+            /* La ligne du haut prend toute la hauteur */
+            .header-content {
+                padding: 0 16px;
+                justify-content: center;
+            }
+
+            .header-top-row {
+                gap: 10px;
             }
 
             .hero {
@@ -1339,48 +1276,48 @@
             }
 
             .booking-summary { position: static; }
-
             .form-row { grid-template-columns: 1fr; }
-
             section { padding: 70px 0; }
-
-            .suites-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
         }
 
         /* Mobile */
         @media (max-width: 640px) {
-            :root { --header-h: 100px; }
+            :root { --header-h: 80px; }
             body { padding-top: var(--header-h); }
 
-            header { height: var(--header-h); }
-
-            .logo-img-wrapper {
-                width: 85px;
-                height: 85px;
-                padding: 3px;
-                margin-bottom: -30px;
+            .header-content {
+                padding: 0 12px;
             }
 
-            .logo-box { left: 8px; }
+            .logo-img-wrapper {
+                width: 55px;
+                height: 55px;
+                padding: 2px;
+            }
 
-            .logo-text { padding-left: 85px; padding-right: 8px; }
-            .header-bottom { padding-left: 85px; padding-right: 8px; }
+            .logo-title {
+                font-size: 0.85rem;
+                letter-spacing: 0.02em;
+            }
+            .logo-city {
+                font-size: 0.55rem;
+                letter-spacing: 0.08em;
+            }
 
-            .logo-title { font-size: 0.82rem; letter-spacing: 0.02em; white-space: normal; }
-            .logo-city { font-size: 0.55rem; letter-spacing: 0.08em; gap: 4px; white-space: normal; }
-            .logo-city::after { width: 12px; height: 1.5px; }
+            .burger-btn {
+                font-size: 1.25rem;
+                padding: 8px 11px;
+            }
 
             .hero { padding: 40px 0 60px; }
-            .hero-tag { font-size: 0.7rem; padding: 6px 14px; letter-spacing: 0.1em; }
+            .hero-tag { font-size: 0.7rem; padding: 6px 14px; }
             .hero h1 { font-size: 1.8rem; }
             .hero-subtitle-quote { font-size: 1rem; }
             .hero-description { font-size: 0.92rem; }
             .hero-badges { gap: 12px; }
             .badge-item { font-size: 0.78rem; }
-            .badge-item i { font-size: 0.95rem; }
 
             .section-title { font-size: 1.7rem; }
-            .section-desc { font-size: 0.92rem; }
             section { padding: 55px 0; }
 
             .suite-img-container { height: 280px; }
@@ -1393,7 +1330,6 @@
                 width: 48px;
                 height: 48px;
                 font-size: 1.3rem;
-                border-width: 2px;
             }
 
             .booking-form,
@@ -1402,10 +1338,7 @@
             }
 
             .summary-total { font-size: 1.3rem; }
-
             .container { padding: 0 16px; }
-
-            .mobile-drawer { width: 280px; }
 
             #toast {
                 right: 16px;
@@ -1415,67 +1348,44 @@
                 max-width: none;
             }
 
-            .amenities-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-            .amenity-icon { width: 48px; height: 48px; font-size: 1.15rem; }
-            .amenity-label { font-size: 0.72rem; }
-            .amenity-sub { font-size: 0.68rem; }
+            .amenities-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* Très petits écrans */
-        @media (max-width: 380px) {
-            .logo-title { font-size: 0.72rem; }
-            .logo-city { font-size: 0.48rem; letter-spacing: 0.06em; }
+        /* Très petit écran */
+        @media (max-width: 400px) {
             .logo-img-wrapper {
-                width: 70px;
-                height: 70px;
-                margin-bottom: -25px;
+                width: 45px;
+                height: 45px;
+                padding: 2px;
             }
-            .logo-text { padding-left: 70px; }
-            .header-bottom { padding-left: 70px; }
+            .logo-title {
+                font-size: 0.7rem;
+            }
+            .logo-city {
+                font-size: 0.48rem;
+                letter-spacing: 0.05em;
+            }
+            .burger-btn {
+                font-size: 1.1rem;
+                padding: 7px 9px;
+            }
             .hero h1 { font-size: 1.5rem; }
-            .btn { padding: 12px 20px; font-size: 0.78rem; }
             .amenities-grid { grid-template-columns: 1fr; }
         }
 
-        /* Orientation paysage mobile */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .hero {
-                min-height: auto;
-                padding: 110px 0 50px;
-            }
-            .hero-badges { display: none; }
-        }
-
-        /* Amélioration tactile */
         @media (hover: none) {
             .suite-card:hover,
-            .extra-poster-card:hover,
-            .legend-card:hover,
-            .plan-img-card:hover img {
+            .extra-poster-card:hover {
                 transform: none;
             }
-            .suite-card:active,
-            .extra-poster-card:active {
-                transform: scale(0.98);
-            }
         }
 
-        /* Réduction animations */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Impression */
         @media print {
             header, #scroll-progress, .mobile-drawer, .drawer-overlay,
             #toast, #lightbox, .burger-btn {
                 display: none !important;
             }
-            body { padding-top: 0; background: #fff; color: #000; }
+            body { padding-top: 0; background: #fff; }
         }
     </style>
 </head>
@@ -1485,17 +1395,26 @@
 
     <header id="main-header">
         <div class="header-content">
-            <a href="#" class="logo-box" aria-label="Domaine de la Rêverie">
-                <div class="logo-img-wrapper">
-                    <img src="logo.jpg" alt="Logo Domaine de la Rêverie" class="logo-img">
-                </div>
-            </a>
 
-            <div class="logo-text">
-                <span class="logo-title">Domaine de la Rêverie</span>
-                <span class="logo-city">Saint-Léger-des-Vignes</span>
+            <!-- LIGNE 1 : LOGO | TITRE CENTRÉ | BURGER -->
+            <div class="header-top-row">
+                <a href="#" class="logo-box" aria-label="Domaine de la Rêverie">
+                    <div class="logo-img-wrapper">
+                        <img src="logo.jpg" alt="Logo Domaine de la Rêverie" class="logo-img">
+                    </div>
+                </a>
+
+                <div class="logo-text">
+                    <span class="logo-title">Domaine de la Rêverie</span>
+                    <span class="logo-city">Saint-Léger-des-Vignes</span>
+                </div>
+
+                <button class="burger-btn" onclick="toggleDrawer()" aria-label="Menu Mobile">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
             </div>
 
+            <!-- LIGNE 2 : NAVIGATION (PC UNIQUEMENT) -->
             <div class="header-bottom">
                 <ul class="nav-links">
                     <li><a href="#suites"><i class="fa-solid fa-bed"></i> Nos 4 Suites</a></li>
@@ -1505,14 +1424,10 @@
                     <li><a href="#acces"><i class="fa-solid fa-compass"></i> Accès &amp; Contact</a></li>
                 </ul>
 
-                <a href="#reservation" class="btn btn-primary header-cta">
+                <a href="#reservation" class="btn btn-primary">
                     <i class="fa-solid fa-calendar-check"></i> Réserver en Direct
                 </a>
             </div>
-
-            <button class="burger-btn" onclick="toggleDrawer()" aria-label="Menu Mobile">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </button>
         </div>
     </header>
 
@@ -1521,7 +1436,7 @@
         <div>
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
                 <span style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700;">Domaine de la Rêverie</span>
-                <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; padding: 8px;" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; padding: 8px;"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <ul class="drawer-links">
                 <li><a href="#suites" onclick="toggleDrawer()"><i class="fa-solid fa-bed"></i> Nos 4 Suites</a></li>
@@ -1540,7 +1455,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-tag">
-                    <i class="fa-solid fa-crown" style="color: var(--gold);"></i> 4 Suites • 4 Univers • Une Seule Promesse : Le Bien-Être
+                    <i class="fa-solid fa-crown" style="color: var(--gold);"></i> 4 Suites • 4 Univers • Le Bien-Être
                 </div>
                 <h1>Une parenthèse <em>hors du temps</em></h1>
                 <p class="hero-subtitle-quote">« Détente • Romantisme • Évasion • Sérénité »</p>
@@ -1552,27 +1467,15 @@
                         <i class="fa-solid fa-compass"></i> Découvrir les 4 Suites
                     </a>
                     <a href="#extras" class="btn btn-outline">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Formules Romantiques
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Formules
                     </a>
                 </div>
 
                 <div class="hero-badges">
-                    <div class="badge-item">
-                        <i class="fa-solid fa-hot-tub-person"></i>
-                        <span>Balnéothérapie privative</span>
-                    </div>
-                    <div class="badge-item">
-                        <i class="fa-solid fa-bed"></i>
-                        <span>Lit Queen Size</span>
-                    </div>
-                    <div class="badge-item">
-                        <i class="fa-solid fa-fire"></i>
-                        <span>Salon avec cheminée électrique</span>
-                    </div>
-                    <div class="badge-item">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <span>Linge et ménage inclus</span>
-                    </div>
+                    <div class="badge-item"><i class="fa-solid fa-hot-tub-person"></i><span>Balnéothérapie privative</span></div>
+                    <div class="badge-item"><i class="fa-solid fa-bed"></i><span>Lit Queen Size</span></div>
+                    <div class="badge-item"><i class="fa-solid fa-fire"></i><span>Cheminée électrique</span></div>
+                    <div class="badge-item"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Linge et ménage inclus</span></div>
                 </div>
             </div>
         </div>
@@ -1648,13 +1551,13 @@
             <div class="section-header">
                 <span class="section-subtitle">Votre Cocon Romantique</span>
                 <h2 class="section-title">Découvrez nos 4 Suites</h2>
-                <p class="section-desc">Chaque suite offre un univers soigné, un spa balnéo duo privatif, un lit Queen size et une intimité totale. Tarifs valables toute l'année (hors périodes spéciales, jours fériés, vacances scolaires &amp; événements).</p>
+                <p class="section-desc">Chaque suite offre un univers soigné, un spa balnéo duo privatif, un lit Queen size et une intimité totale.</p>
             </div>
 
             <div class="suites-grid">
                 <div class="suite-card">
                     <div class="suite-img-container" onclick="openLightbox('suite-signature.jpg')">
-                        <img src="suite-signature.jpg" alt="Suite Signature - Domaine de la Rêverie">
+                        <img src="suite-signature.jpg" alt="Suite Signature">
                         <span class="suite-badge-tag">Suite Signature</span>
                     </div>
                     <div class="suite-body">
@@ -1675,7 +1578,7 @@
 
                 <div class="suite-card">
                     <div class="suite-img-container" onclick="openLightbox('suite-volupte.jpg')">
-                        <img src="suite-volupte.jpg" alt="Suite Volupté - Domaine de la Rêverie">
+                        <img src="suite-volupte.jpg" alt="Suite Volupté">
                         <span class="suite-badge-tag">Suite Volupté</span>
                     </div>
                     <div class="suite-body">
@@ -1696,7 +1599,7 @@
 
                 <div class="suite-card">
                     <div class="suite-img-container" onclick="openLightbox('suite-boheme.jpg')">
-                        <img src="suite-boheme.jpg" alt="Suite Bohème - Domaine de la Rêverie">
+                        <img src="suite-boheme.jpg" alt="Suite Bohème">
                         <span class="suite-badge-tag">Suite Bohème</span>
                     </div>
                     <div class="suite-body">
@@ -1704,7 +1607,7 @@
                         <div class="suite-tagline">Nature &amp; Sérénité</div>
                         <ul class="suite-features-list">
                             <li><i class="fa-solid fa-check"></i> Balnéo 2 places relaxante</li>
-                            <li><i class="fa-solid fa-check"></i> Décoration bohème chic, bois &amp; pierres</li>
+                            <li><i class="fa-solid fa-check"></i> Décoration bohème chic</li>
                             <li><i class="fa-solid fa-check"></i> Lit Queen Size &amp; salon cheminée</li>
                             <li><i class="fa-solid fa-check"></i> Cuisine complète &amp; espace détente</li>
                         </ul>
@@ -1717,7 +1620,7 @@
 
                 <div class="suite-card">
                     <div class="suite-img-container" onclick="openLightbox('suite-parisienne.jpg')">
-                        <img src="suite-parisienne.jpg" alt="Suite Parisienne - Domaine de la Rêverie">
+                        <img src="suite-parisienne.jpg" alt="Suite Parisienne">
                         <span class="suite-badge-tag">Suite Parisienne</span>
                     </div>
                     <div class="suite-body">
@@ -1725,8 +1628,8 @@
                         <div class="suite-tagline">Romantisme &amp; Raffinement</div>
                         <ul class="suite-features-list">
                             <li><i class="fa-solid fa-check"></i> Baignoire balnéo duo relaxante</li>
-                            <li><i class="fa-solid fa-check"></i> Ambiance parisienne intime noir &amp; or</li>
-                            <li><i class="fa-solid fa-check"></i> Lit Queen Size &amp; terrasse / jardin clos</li>
+                            <li><i class="fa-solid fa-check"></i> Ambiance intime noir &amp; or</li>
+                            <li><i class="fa-solid fa-check"></i> Lit Queen Size &amp; terrasse / jardin</li>
                             <li><i class="fa-solid fa-check"></i> Kitchenette équipée moderne</li>
                         </ul>
                         <div class="suite-price-bar">
@@ -1734,21 +1637,6 @@
                             <button onclick="choisirSuite('Suite Parisienne', 140)" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.78rem;">Réserver</button>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 45px; background: #FFFFFF; border: 2px solid var(--gold); border-radius: var(--radius); padding: 25px 35px; display: flex; align-items: center; justify-content: space-between; gap: 25px; flex-wrap: wrap; box-shadow: 0 10px 30px rgba(197, 160, 89, 0.15);">
-                <div style="display: flex; align-items: center; gap: 20px;">
-                    <div style="width: 55px; height: 55px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    </div>
-                    <div>
-                        <h4 style="font-size: 1.3rem; margin-bottom: 2px; color: var(--dark);">Linge et Ménage Inclus</h4>
-                        <p style="font-family: var(--font-serif); font-size: 1.15rem; font-style: italic; color: var(--primary); margin: 0;">« Profitez, on s'occupe de tout ! »</p>
-                    </div>
-                </div>
-                <div style="font-size: 0.88rem; color: var(--text-muted); max-width: 480px;">
-                    <i class="fa-regular fa-calendar-check" style="color: var(--gold);"></i> <strong>Tarifs hors dates spéciales :</strong> valables toute l'année hors périodes spéciales (jours fériés, vacances scolaires, événements).
                 </div>
             </div>
         </div>
@@ -1759,29 +1647,28 @@
             <div class="section-header">
                 <span class="section-subtitle">Organisation des Lieux</span>
                 <h2 class="section-title">L'Emplacement de vos Suites</h2>
-                <p class="section-desc">Chaque suite bénéficie de son entrée privative indépendante donnant sur la cour arborée et le parking clos sécurisé du domaine.</p>
             </div>
 
             <div class="plan-grid">
                 <div class="plan-img-card" onclick="openLightbox('plan-domaine1.jpg')">
-                    <img src="plan-domaine1.jpg" alt="Plan et entrées des suites du Domaine de la Rêverie">
+                    <img src="plan-domaine1.jpg" alt="Plan du Domaine">
                 </div>
                 <div class="plan-legend">
                     <div class="legend-card">
                         <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Signature (Porte 3)</h4>
-                        <p>Sur l'aile gauche du domaine avec sa façade bois contemporaine et son escalier vers la mezzanine balnéo.</p>
+                        <p>Aile gauche, façade bois contemporaine et escalier vers la mezzanine balnéo.</p>
                     </div>
                     <div class="legend-card">
                         <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Volupté (Porte 2)</h4>
-                        <p>Au centre du domaine, un accès direct de plain-pied baigné d'une ambiance tamisée propice au bien-être.</p>
+                        <p>Au centre, accès de plain-pied, ambiance tamisée.</p>
                     </div>
                     <div class="legend-card">
                         <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Bohème (Porte 1)</h4>
-                        <p>Dans la bâtisse en pierres de taille apparentes, alliant authenticité rustique et équipements modernes.</p>
+                        <p>Bâtisse en pierres apparentes, authenticité rustique.</p>
                     </div>
                     <div class="legend-card">
                         <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Parisienne</h4>
-                        <p>L'entrée sur la droite à l'écart avec son jardinet clos pour préserver une intimité totale en amoureux.</p>
+                        <p>À droite, jardinet clos pour une intimité totale.</p>
                     </div>
                 </div>
             </div>
@@ -1793,86 +1680,74 @@
             <div class="section-header">
                 <span class="section-subtitle">Prestations Sur-Mesure</span>
                 <h2 class="section-title">Sublimez Votre Séjour en Duo</h2>
-                <p class="section-desc">Cliquez sur une ou plusieurs formules pour l'ajouter instantanément à votre réservation.</p>
+                <p class="section-desc">Cliquez sur une formule pour l'ajouter à votre réservation.</p>
             </div>
 
             <div class="extras-showcase-grid">
                 <div class="extra-poster-card" id="card-deco" onclick="toggleExtraNew('deco', 50, 'Déco Romantique')">
                     <div class="extra-img-wrap">
-                        <img src="extra-deco-romantique.jpg" alt="Option Déco Romantique">
+                        <img src="extra-deco-romantique.jpg" alt="Déco Romantique">
                         <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
                     </div>
                     <div class="extra-desc-body">
                         <h3>Déco Romantique</h3>
                         <div class="extra-price-tag">50 €</div>
-                        <p class="extra-detail-p">
-                            Créez des souvenirs inoubliables dès l'ouverture de la porte. Une ambiance féerique et chaleureuse préparée avec soin avant votre arrivée.
-                        </p>
+                        <p class="extra-detail-p">Ambiance féerique et chaleureuse préparée avant votre arrivée.</p>
                         <ul class="extra-points">
-                            <li><i class="fa-solid fa-heart"></i> Ballons cœur rouges métallisés</li>
-                            <li><i class="fa-solid fa-fire"></i> Bougies LED ambiance douce &amp; chaleureuse</li>
-                            <li><i class="fa-solid fa-spa"></i> Mise en scène avec pétales de roses</li>
-                            <li><i class="fa-solid fa-wand-magic-sparkles"></i> Installation réalisée avant votre arrivée</li>
+                            <li><i class="fa-solid fa-heart"></i> Ballons cœur rouges</li>
+                            <li><i class="fa-solid fa-fire"></i> Bougies LED chaleureuses</li>
+                            <li><i class="fa-solid fa-spa"></i> Pétales de roses</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="extra-poster-card" id="card-brunch" onclick="toggleExtraNew('brunch', 54, 'Brunch pour Deux')">
                     <div class="extra-img-wrap">
-                        <img src="extra-brunch.jpg" alt="Brunch pour deux">
+                        <img src="extra-brunch.jpg" alt="Brunch">
                         <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
                     </div>
                     <div class="extra-desc-body">
                         <h3>Brunch pour Deux</h3>
-                        <div class="extra-price-tag">54 € <small style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">pour 2 pers.</small></div>
-                        <p class="extra-detail-p">
-                            Un moment gourmand à partager dans votre suite. Produits frais &amp; locaux avec présentation soignée et livraison discrète en chambre.
-                        </p>
+                        <div class="extra-price-tag">54 €</div>
+                        <p class="extra-detail-p">Moment gourmand livré discrètement en chambre.</p>
                         <ul class="extra-points">
-                            <li><i class="fa-solid fa-bread-slice"></i> Brioche moelleuse, pain grillé &amp; buns salés</li>
-                            <li><i class="fa-solid fa-apple-whole"></i> Yaourts aux fruits, fruits frais &amp; jus d'orange (x2)</li>
-                            <li><i class="fa-solid fa-mug-hot"></i> Cafés, thés, Nutella, confitures &amp; viennoiseries</li>
-                            <li><i class="fa-solid fa-bell-concierge"></i> Livraison discrète dans votre chambre</li>
+                            <li><i class="fa-solid fa-bread-slice"></i> Viennoiseries &amp; pains</li>
+                            <li><i class="fa-solid fa-apple-whole"></i> Fruits frais &amp; jus</li>
+                            <li><i class="fa-solid fa-mug-hot"></i> Cafés &amp; douceurs</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="extra-poster-card" id="card-planche" onclick="toggleExtraNew('planche', 64, 'Planche Apéro Gourmande')">
+                <div class="extra-poster-card" id="card-planche" onclick="toggleExtraNew('planche', 64, 'Planche Apéro')">
                     <div class="extra-img-wrap">
-                        <img src="extra-planche.jpg" alt="Planche Apéro Gourmande">
+                        <img src="extra-planche.jpg" alt="Planche Apéro">
                         <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
                     </div>
                     <div class="extra-desc-body">
                         <h3>Planche Apéro Gourmande</h3>
-                        <div class="extra-price-tag">64 € <small style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">(avec vin)</small></div>
-                        <p class="extra-detail-p">
-                            Un moment de détente en toute intimité. Charcuteries fines, fromages affinés, antipasti, fruits frais &amp; secs, tomates cerises et crackers.
-                        </p>
+                        <div class="extra-price-tag">64 €</div>
+                        <p class="extra-detail-p">Charcuteries, fromages et vin pour dîner en amoureux.</p>
                         <ul class="extra-points">
-                            <li><i class="fa-solid fa-wine-glass"></i> Formule avec 1 bouteille de vin sélectionnée</li>
-                            <li><i class="fa-solid fa-cheese"></i> Charcuteries fines et fromages affinés</li>
-                            <li><i class="fa-solid fa-bowl-food"></i> Olives, crackers croustillants &amp; confiture</li>
-                            <li><i class="fa-solid fa-moon"></i> Idéal pour dîner en amoureux sans sortir</li>
+                            <li><i class="fa-solid fa-wine-glass"></i> 1 bouteille de vin</li>
+                            <li><i class="fa-solid fa-cheese"></i> Charcuteries &amp; fromages</li>
+                            <li><i class="fa-solid fa-bowl-food"></i> Antipasti &amp; crackers</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="extra-poster-card" id="card-massage" onclick="toggleExtraNew('massage', 180, 'Massage en Duo (1h)')">
+                <div class="extra-poster-card" id="card-massage" onclick="toggleExtraNew('massage', 180, 'Massage en Duo')">
                     <div class="extra-img-wrap">
-                        <img src="extra-massage.jpg" alt="Massage en Duo 1h">
+                        <img src="extra-massage.jpg" alt="Massage Duo">
                         <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
                     </div>
                     <div class="extra-desc-body">
                         <h3>Massage en Duo (1h)</h3>
-                        <div class="extra-price-tag">180 € <small style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">pour 2 pers.</small></div>
-                        <p class="extra-detail-p">
-                            Une heure entière de massage en duo pour vous ressourcer. Un moment privilégié rien que pour vous deux sous les mains expertes de nos praticiennes.
-                        </p>
+                        <div class="extra-price-tag">180 €</div>
+                        <p class="extra-detail-p">Une heure de lâcher-prise avec nos praticiennes expertes.</p>
                         <ul class="extra-points">
-                            <li><i class="fa-solid fa-hands"></i> 1 heure de massage simultané en duo</li>
-                            <li><i class="fa-solid fa-spa"></i> Ambiance relaxante aux huiles chaudes</li>
-                            <li><i class="fa-solid fa-feather"></i> Détente profonde et lâcher-prise absolu</li>
-                            <li><i class="fa-solid fa-heart"></i> Prenez soin de vous à deux</li>
+                            <li><i class="fa-solid fa-hands"></i> 1h de massage simultané</li>
+                            <li><i class="fa-solid fa-spa"></i> Huiles chaudes</li>
+                            <li><i class="fa-solid fa-feather"></i> Détente profonde</li>
                         </ul>
                     </div>
                 </div>
@@ -1885,7 +1760,7 @@
             <div class="section-header">
                 <span class="section-subtitle">Réservation en Direct</span>
                 <h2 class="section-title">Planifiez Votre Escapade</h2>
-                <p class="section-desc">Meilleur tarif garanti en direct propriétaire, sans frais de commission.</p>
+                <p class="section-desc">Meilleur tarif garanti en direct propriétaire.</p>
             </div>
 
             <div class="booking-layout">
@@ -1903,11 +1778,11 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label><i class="fa-regular fa-calendar"></i> Date d'arrivée (Dès 17:00)</label>
+                            <label><i class="fa-regular fa-calendar"></i> Arrivée (Dès 17:00)</label>
                             <input type="date" id="booking-in" required onchange="calculatePrice()">
                         </div>
                         <div class="form-group">
-                            <label><i class="fa-regular fa-calendar-check"></i> Date de départ (Jusqu'à 11:00)</label>
+                            <label><i class="fa-regular fa-calendar-check"></i> Départ (Jusqu'à 11:00)</label>
                             <input type="date" id="booking-out" required onchange="calculatePrice()">
                         </div>
                     </div>
@@ -1918,64 +1793,43 @@
                             <input type="text" placeholder="ex. Jean Dupont" required>
                         </div>
                         <div class="form-group">
-                            <label>Numéro de téléphone</label>
+                            <label>Téléphone</label>
                             <input type="tel" placeholder="ex. 06 12 34 56 78" required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Adresse e-mail de confirmation</label>
+                        <label>Adresse e-mail</label>
                         <input type="email" placeholder="ex. jean.dupont@email.com" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Demandes particulières (heure d'arrivée, attentions...)</label>
-                        <textarea rows="3" placeholder="Précisez-nous vos souhaits pour préparer votre séjour..."></textarea>
+                        <label>Demandes particulières</label>
+                        <textarea rows="3" placeholder="Précisez vos souhaits..."></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1rem;">
-                        <i class="fa-solid fa-lock"></i> Valider ma demande de réservation
+                        <i class="fa-solid fa-lock"></i> Valider ma demande
                     </button>
-                    <p style="font-size: 0.82rem; text-align: center; color: var(--text-muted); margin-top: 12px;">
-                        Réponse rapide et confirmation garantie sous 2h par le Domaine.
-                    </p>
                 </form>
 
                 <div class="booking-summary">
                     <div class="saving-alert">
                         <i class="fa-solid fa-piggy-bank" style="font-size: 1.2rem;"></i>
-                        <span><strong>Avantage Direct :</strong> Économisez les frais de commissions Booking !</span>
+                        <span><strong>Direct Propriétaire :</strong> sans commission.</span>
                     </div>
 
                     <h3 style="font-size: 1.6rem; margin-bottom: 22px; color: #fff;">Votre Séjour</h3>
                     
-                    <div class="summary-row">
-                        <span>Hébergement :</span>
-                        <strong id="summary-suite-name" style="color: #fff;">—</strong>
-                    </div>
-                    <div class="summary-row">
-                        <span>Nombre de nuit(s) :</span>
-                        <span id="summary-nights">1 nuit</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Tarif hébergement :</span>
-                        <span id="summary-room-price">0 €</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Linge &amp; Ménage :</span>
-                        <span style="color: #A3E635; font-weight: 600;">Inclus &amp; Offert</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Balnéo privative :</span>
-                        <span style="color: #fff;">Inclus</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Extras &amp; Formules :</span>
-                        <span id="summary-extras">0 €</span>
-                    </div>
+                    <div class="summary-row"><span>Hébergement :</span><strong id="summary-suite-name" style="color: #fff;">—</strong></div>
+                    <div class="summary-row"><span>Durée :</span><span id="summary-nights">1 nuit</span></div>
+                    <div class="summary-row"><span>Tarif suite :</span><span id="summary-room-price">0 €</span></div>
+                    <div class="summary-row"><span>Linge &amp; Ménage :</span><span style="color: #A3E635; font-weight: 600;">Inclus</span></div>
+                    <div class="summary-row"><span>Balnéo :</span><span>Illimitée</span></div>
+                    <div class="summary-row"><span>Extras :</span><span id="summary-extras">0 €</span></div>
 
                     <div class="summary-total">
-                        <span>Total estimé :</span>
+                        <span>Total :</span>
                         <span id="summary-total-price">0 €</span>
                     </div>
                 </div>
@@ -1987,8 +1841,7 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-subtitle">Localisation Idéale</span>
-                <h2 class="section-title">Venir au Domaine de la Rêverie</h2>
-                <p class="section-desc">À Saint-Léger-les-Vignes (44710), à 15 min de Nantes et aux portes de la Côte de Jade.</p>
+                <h2 class="section-title">Venir au Domaine</h2>
             </div>
 
             <div class="location-grid">
@@ -1996,31 +1849,31 @@
                     <li>
                         <div class="location-icon-box"><i class="fa-solid fa-location-dot"></i></div>
                         <div>
-                            <strong>Adresse postale :</strong>
+                            <strong>Adresse :</strong>
                             <p style="color: var(--text-muted); margin: 0;">39 Rue de la Crémaillère, 44710 Saint-Léger-les-Vignes</p>
                         </div>
                     </li>
-                   <li>
-    <div class="location-icon-box"><i class="fa-solid fa-envelope"></i></div>
-    <div>
-        <strong>Email direct :</strong>
-        <p style="color: var(--text-muted); margin: 0;">
-            <a href="mailto:contact@domaine-reverie.fr" style="color: var(--primary); font-weight: 600;">contact@domaine-reverie.fr</a>
-        </p>
-    </div>
-</li>
+                    <li>
+                        <div class="location-icon-box"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <strong>Email :</strong>
+                            <p style="color: var(--text-muted); margin: 0;">
+                                <a href="mailto:contact@domaine-reverie.fr" style="color: var(--primary); font-weight: 600;">contact@domaine-reverie.fr</a>
+                            </p>
+                        </div>
+                    </li>
                     <li>
                         <div class="location-icon-box"><i class="fa-solid fa-plane-departure"></i></div>
                         <div>
-                            <strong>Aéroport de Nantes Atlantique :</strong>
-                            <p style="color: var(--text-muted); margin: 0;">À 9 km seulement (10-12 min en voiture)</p>
+                            <strong>Aéroport Nantes :</strong>
+                            <p style="color: var(--text-muted); margin: 0;">À 9 km (10-12 min en voiture)</p>
                         </div>
                     </li>
                     <li>
                         <div class="location-icon-box"><i class="fa-solid fa-umbrella-beach"></i></div>
                         <div>
-                            <strong>Pornic et les plages de l'Océan :</strong>
-                            <p style="color: var(--text-muted); margin: 0;">À seulement 25-30 min de route</p>
+                            <strong>Pornic &amp; plages :</strong>
+                            <p style="color: var(--text-muted); margin: 0;">À 25-30 min de route</p>
                         </div>
                     </li>
                 </ul>
@@ -2043,10 +1896,10 @@
                 <div class="footer-col">
                     <h4 style="font-family: var(--font-serif); font-size: 1.7rem;">Domaine de la Rêverie</h4>
                     <p style="margin-bottom: 16px; line-height: 1.7;">
-                        L'adresse romantique par excellence à Saint-Léger-les-Vignes (44710). Quatre suites avec balnéothérapie privative pour se retrouver et déconnecter en duo.
+                        L'adresse romantique par excellence à Saint-Léger-les-Vignes. Quatre suites avec balnéothérapie privative.
                     </p>
                     <p style="font-size: 0.85rem; color: var(--gold-light);">
-                        <i class="fa-solid fa-check"></i> Havre de paix non-fumeur • Réservé aux couples adultes
+                        <i class="fa-solid fa-check"></i> Non-fumeur • Couples adultes
                     </p>
                     <div style="margin-top: 18px; display: flex; gap: 14px; font-size: 1.3rem;">
                         <a href="https://instagram.com" target="_blank" style="color: var(--gold-light);"><i class="fa-brands fa-instagram"></i></a>
@@ -2057,38 +1910,38 @@
                 <div class="footer-col">
                     <h4>Nos 4 Suites</h4>
                     <ul>
-                        <li><a href="#suites">Suite Signature (dès 210 €)</a></li>
-                        <li><a href="#suites">Suite Volupté (dès 210 €)</a></li>
-                        <li><a href="#suites">Suite Bohème (dès 170 €)</a></li>
-                        <li><a href="#suites">Suite Parisienne (dès 140 €)</a></li>
+                        <li><a href="#suites">Suite Signature (210 €)</a></li>
+                        <li><a href="#suites">Suite Volupté (210 €)</a></li>
+                        <li><a href="#suites">Suite Bohème (170 €)</a></li>
+                        <li><a href="#suites">Suite Parisienne (140 €)</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
-                    <h4>Informations &amp; Contact</h4>
+                    <h4>Informations</h4>
                     <ul>
                         <li><strong>Arrivée :</strong> 17:00 – 23:00</li>
                         <li><strong>Départ :</strong> Jusqu'à 11:00</li>
-                        <li><strong>Email :</strong> <a href="mailto:contact@domaine-reverie.fr">contact@domaine-reverie.fr</a></li>
+                        <li><strong>Email :</strong> contact@domaine-reverie.fr</li>
                         <li><strong>Lieu :</strong> 44710 Saint-Léger-les-Vignes</li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2026 Domaine de la Rêverie • Tous droits réservés • Site officiel indépendant</p>
+                <p>&copy; 2026 Domaine de la Rêverie • Tous droits réservés</p>
             </div>
         </div>
     </footer>
 
     <div id="lightbox" onclick="closeLightbox()">
         <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-        <img id="lightbox-img" src="" alt="Aperçu grand format" onclick="event.stopPropagation()">
+        <img id="lightbox-img" src="" alt="Aperçu" onclick="event.stopPropagation()">
     </div>
 
     <div id="toast">
         <i class="fa-solid fa-circle-check" style="color: var(--gold); font-size: 1.2rem;"></i>
-        <span id="toast-text">Option mise à jour</span>
+        <span id="toast-text">Mise à jour</span>
     </div>
 
     <script>
@@ -2100,7 +1953,6 @@
                 var progressEl = document.getElementById('scroll-progress');
                 if (progressEl) progressEl.style.width = scrolled + "%";
             }
-
             var header = document.getElementById('main-header');
             if (header) {
                 if (winScroll > 40) {
@@ -2276,7 +2128,7 @@
                 alert("Veuillez sélectionner une suite avant de valider votre réservation.");
                 return;
             }
-            alert("Félicitations !\nVotre demande pour la " + suite + " d'un montant total de " + total + " a bien été prise en compte.\nUn récapitulatif détaillé vous a été adressé.");
+            alert("Félicitations !\nVotre demande pour la " + suite + " (" + total + ") a bien été prise en compte.");
         }
 
         calculatePrice();
