@@ -44,6 +44,8 @@
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
             text-size-adjust: 100%;
+            /* Fix iOS : empêche le scroll élastique de perturber le header */
+            overscroll-behavior-y: none;
         }
 
         body {
@@ -57,6 +59,8 @@
             min-height: -webkit-fill-available;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            /* Fix iOS : évite le rebond qui casse le fixed */
+            position: relative;
         }
 
         h1, h2, h3, h4, .font-serif {
@@ -89,7 +93,7 @@
             transition: width 0.1s linear;
         }
 
-        /* ===== BANDEAU FIXE ===== */
+        /* ===== BANDEAU FIXE — RENFORCÉ POUR MOBILE ===== */
         header {
             position: fixed;
             top: 0;
@@ -104,6 +108,14 @@
             display: flex;
             align-items: center;
             transition: box-shadow 0.3s ease;
+            /* FIX ANDROID CHROME + IOS SAFARI */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            -webkit-perspective: 1000;
+            perspective: 1000;
         }
 
         header::after {
@@ -131,13 +143,18 @@
             height: 100%;
             position: relative;
             padding: 0 24px;
+            /* FIX ANDROID CHROME + IOS SAFARI */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .logo-box {
             position: absolute;
             left: 0;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-50%) translateZ(0);
             display: flex;
             align-items: center;
             cursor: pointer;
@@ -1405,6 +1422,14 @@
             section { padding: 70px 0; }
 
             .suites-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+            /* FIX CHROME ANDROID + IOS SAFARI */
+            header, .header-content {
+                transform: translateZ(0) !important;
+                -webkit-transform: translateZ(0) !important;
+                backface-visibility: hidden !important;
+                -webkit-backface-visibility: hidden !important;
+            }
         }
 
         /* Mobile — centrage parfait du titre */
@@ -1548,6 +1573,14 @@
             .amenity-icon { width: 48px; height: 48px; font-size: 1.15rem; }
             .amenity-label { font-size: 0.72rem; }
             .amenity-sub { font-size: 0.68rem; }
+
+            /* FIX CHROME ANDROID + IOS SAFARI */
+            header, .header-content {
+                transform: translateZ(0) !important;
+                -webkit-transform: translateZ(0) !important;
+                backface-visibility: hidden !important;
+                -webkit-backface-visibility: hidden !important;
+            }
         }
 
         /* Très petits écrans */
@@ -2227,6 +2260,89 @@
     </div>
 
     <script>
+        /* ==============================================================
+           FIX IOS SAFARI / CHROME IOS — RECALCUL DYNAMIQUE DU HEADER
+           ============================================================== */
+        (function() {
+            var header = document.getElementById('main-header');
+            if (!header) return;
+
+            function isIOS() {
+                return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            }
+
+            function getHeaderHeight() {
+                // Sur mobile/tablette, la hauteur est définie par CSS
+                var styles = window.getComputedStyle(header);
+                return parseInt(styles.height, 10) || 100;
+            }
+
+            function updateHeaderPosition() {
+                // Force le header à rester à top: 0 même quand la barre d'adresse bouge
+                header.style.top = '0px';
+                header.style.transform = 'translateZ(0)';
+
+                // Recalcule le padding-top du body pour qu'il colle toujours au header
+                var h = getHeaderHeight();
+                document.body.style.paddingTop = h + 'px';
+            }
+
+            // Recalcule à chaque changement de viewport (rotation, barre d'adresse)
+            if (isIOS()) {
+                // Événements iOS spécifiques
+                window.addEventListener('orientationchange', function() {
+                    setTimeout(updateHeaderPosition, 150);
+                });
+
+                // Écoute les changements de hauteur (barre d'adresse qui bouge)
+                var lastHeight = window.innerHeight;
+                window.addEventListener('resize', function() {
+                    if (window.innerHeight !== lastHeight) {
+                        lastHeight = window.innerHeight;
+                        updateHeaderPosition();
+                    }
+                });
+
+                // Scroll : reforce le top: 0 régulièrement (au cas où iOS le décale)
+                var ticking = false;
+                window.addEventListener('scroll', function() {
+                    if (!ticking) {
+                        window.requestAnimationFrame(function() {
+                            header.style.top = '0px';
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }, { passive: true });
+
+                // VisualViewport API (le plus fiable sur iOS moderne)
+                if (window.visualViewport) {
+                    window.visualViewport.addEventListener('resize', updateHeaderPosition);
+                    window.visualViewport.addEventListener('scroll', function() {
+                        header.style.top = '0px';
+                    });
+                }
+
+                // Appel initial
+                updateHeaderPosition();
+            }
+
+            // Sur Android Chrome : force aussi la stabilité
+            var isAndroid = /Android/.test(navigator.userAgent);
+            if (isAndroid) {
+                window.addEventListener('orientationchange', function() {
+                    setTimeout(function() {
+                        header.style.top = '0px';
+                    }, 150);
+                });
+            }
+        })();
+
+        /* ==============================================================
+           FONCTIONS EXISTANTES DU SITE
+           ============================================================== */
+
         window.addEventListener('scroll', function() {
             var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
