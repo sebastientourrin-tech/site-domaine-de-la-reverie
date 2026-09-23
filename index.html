@@ -44,8 +44,6 @@
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
             text-size-adjust: 100%;
-            /* Fix iOS : empêche le scroll élastique de perturber le header */
-            overscroll-behavior-y: none;
         }
 
         body {
@@ -59,8 +57,6 @@
             min-height: -webkit-fill-available;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            /* Fix iOS : évite le rebond qui casse le fixed */
-            position: relative;
         }
 
         h1, h2, h3, h4, .font-serif {
@@ -93,7 +89,7 @@
             transition: width 0.1s linear;
         }
 
-        /* ===== BANDEAU FIXE — RENFORCÉ POUR MOBILE ===== */
+        /* ===== BANDEAU FIXE ===== */
         header {
             position: fixed;
             top: 0;
@@ -108,14 +104,6 @@
             display: flex;
             align-items: center;
             transition: box-shadow 0.3s ease;
-            /* FIX ANDROID CHROME + IOS SAFARI */
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-            will-change: transform;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-            -webkit-perspective: 1000;
-            perspective: 1000;
         }
 
         header::after {
@@ -143,18 +131,13 @@
             height: 100%;
             position: relative;
             padding: 0 24px;
-            /* FIX ANDROID CHROME + IOS SAFARI */
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
         }
 
         .logo-box {
             position: absolute;
             left: 0;
             top: 50%;
-            transform: translateY(-50%) translateZ(0);
+            transform: translateY(-50%);
             display: flex;
             align-items: center;
             cursor: pointer;
@@ -1278,7 +1261,7 @@
         }
 
         /* ==============================================================
-           RESPONSIVE
+           RESPONSIVE — ADAPTATION AUTOMATIQUE
         ============================================================== */
 
         /* Tablette large / petit laptop */
@@ -1297,9 +1280,9 @@
             .header-cta { padding: 12px 18px; font-size: 0.75rem; }
         }
 
-        /* Tablette (iPad, etc.) — centrage parfait du titre */
+        /* Tablette (iPad, etc.) */
         @media (max-width: 992px) {
-            :root { --header-h: 100px; }
+            :root { --header-h: 110px; }
             body { padding-top: var(--header-h); }
 
             header { height: var(--header-h); padding: 0; }
@@ -1307,91 +1290,31 @@
             .header-content {
                 height: 100%;
                 padding: 0 16px;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-                position: relative;
-            }
-
-            /* Logo collé à gauche */
-            .logo-box {
-                position: static;
-                left: auto;
-                top: auto;
-                transform: none;
-                flex-shrink: 0;
-                z-index: 10;
             }
 
             .logo-img-wrapper {
-                width: 80px;
-                height: 80px;
-                padding: 3px;
-                margin-bottom: 0;
-                margin-top: 0;
+                width: 120px;
+                height: 120px;
+                padding: 4px;
+                margin-bottom: -40px;
             }
 
-            /* Titre centré entre logo et burger */
-            .logo-text {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                padding: 0;
-                max-width: calc(100% - 180px);
-                text-align: center;
-                pointer-events: none;
-                z-index: 5;
-            }
+            .logo-box { left: 10px; }
 
-            .logo-title { 
-                font-size: 1rem; 
-                letter-spacing: 0.03em; 
-                white-space: normal;
-                line-height: 1.2;
-                display: block;
-            }
-            .logo-city { 
-                font-size: 0.62rem; 
-                letter-spacing: 0.1em; 
-                gap: 5px; 
-                white-space: normal;
-                justify-content: center;
-                display: flex;
-                margin-top: 2px;
-            }
-            .logo-city::after { width: 14px; height: 1.5px; }
+            .logo-text { padding-left: 120px; }
+            .header-bottom { padding-left: 120px; }
 
-            .header-bottom {
-                display: none !important;
-            }
+            .logo-title { font-size: 1.05rem; letter-spacing: 0.03em; }
+            .logo-city { font-size: 0.68rem; letter-spacing: 0.12em; }
+            .logo-city::after { width: 16px; }
 
             .nav-links, .header-cta { display: none; }
-
-            /* Burger collé à droite */
             .burger-btn {
-                display: flex !important;
-                align-items: center;
-                justify-content: center;
-                position: static !important;
-                transform: none !important;
-                top: auto !important;
-                right: auto !important;
-                margin-left: auto;
-                flex-shrink: 0;
-                z-index: 20;
-                font-size: 1.5rem;
-                padding: 10px 14px;
-                background: rgba(156, 88, 56, 0.12);
-                border-radius: 10px;
-                color: var(--primary);
-                transition: background 0.2s ease, transform 0.2s ease;
-            }
-
-            .burger-btn:active {
-                background: rgba(156, 88, 56, 0.3);
-                transform: scale(0.95) !important;
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                transform: translateY(-50%);
             }
 
             .hero {
@@ -1422,107 +1345,30 @@
             section { padding: 70px 0; }
 
             .suites-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-
-            /* FIX CHROME ANDROID + IOS SAFARI */
-            header, .header-content {
-                transform: translateZ(0) !important;
-                -webkit-transform: translateZ(0) !important;
-                backface-visibility: hidden !important;
-                -webkit-backface-visibility: hidden !important;
-            }
         }
 
-        /* Mobile — centrage parfait du titre */
+        /* Mobile */
         @media (max-width: 640px) {
-            :root { --header-h: 85px; }
+            :root { --header-h: 100px; }
             body { padding-top: var(--header-h); }
 
             header { height: var(--header-h); }
 
-            .header-content {
-                padding: 0 12px;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-                position: relative;
-            }
-
-            /* Logo à gauche */
-            .logo-box {
-                position: static;
-                left: auto;
-                top: auto;
-                transform: none;
-                flex-shrink: 0;
-                z-index: 10;
-            }
-
             .logo-img-wrapper {
-                width: 60px;
-                height: 60px;
-                padding: 2px;
-                margin-bottom: 0;
-                margin-top: 0;
+                width: 85px;
+                height: 85px;
+                padding: 3px;
+                margin-bottom: -30px;
             }
 
-            /* Titre centré entre logo et burger */
-            .logo-text {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                padding: 0;
-                max-width: calc(100% - 150px);
-                text-align: center;
-                pointer-events: none;
-                z-index: 5;
-            }
+            .logo-box { left: 8px; }
 
-            .logo-title { 
-                font-size: 0.78rem; 
-                letter-spacing: 0.02em; 
-                white-space: normal;
-                line-height: 1.15;
-                display: block;
-            }
-            .logo-city { 
-                font-size: 0.52rem; 
-                letter-spacing: 0.08em; 
-                gap: 4px; 
-                white-space: normal;
-                justify-content: center;
-                display: flex;
-                margin-top: 1px;
-            }
-            .logo-city::after { width: 10px; height: 1.5px; }
+            .logo-text { padding-left: 85px; padding-right: 8px; }
+            .header-bottom { padding-left: 85px; padding-right: 8px; }
 
-            .header-bottom { display: none !important; }
-
-            /* Burger à droite */
-            .burger-btn {
-                display: flex !important;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.4rem;
-                padding: 9px 12px;
-                background: rgba(156, 88, 56, 0.12);
-                border-radius: 10px;
-                color: var(--primary);
-                position: static !important;
-                transform: none !important;
-                top: auto !important;
-                right: auto !important;
-                margin-left: auto;
-                flex-shrink: 0;
-                z-index: 20;
-                transition: background 0.2s ease, transform 0.2s ease;
-            }
-
-            .burger-btn:active {
-                background: rgba(156, 88, 56, 0.3);
-                transform: scale(0.95) !important;
-            }
+            .logo-title { font-size: 0.82rem; letter-spacing: 0.02em; white-space: normal; }
+            .logo-city { font-size: 0.55rem; letter-spacing: 0.08em; gap: 4px; white-space: normal; }
+            .logo-city::after { width: 12px; height: 1.5px; }
 
             .hero { padding: 40px 0 60px; }
             .hero-tag { font-size: 0.7rem; padding: 6px 14px; letter-spacing: 0.1em; }
@@ -1573,33 +1419,19 @@
             .amenity-icon { width: 48px; height: 48px; font-size: 1.15rem; }
             .amenity-label { font-size: 0.72rem; }
             .amenity-sub { font-size: 0.68rem; }
-
-            /* FIX CHROME ANDROID + IOS SAFARI */
-            header, .header-content {
-                transform: translateZ(0) !important;
-                -webkit-transform: translateZ(0) !important;
-                backface-visibility: hidden !important;
-                -webkit-backface-visibility: hidden !important;
-            }
         }
 
         /* Très petits écrans */
         @media (max-width: 380px) {
-            .logo-title { font-size: 0.68rem; }
-            .logo-city { font-size: 0.46rem; letter-spacing: 0.06em; }
-            .logo-city::after { display: none; }
+            .logo-title { font-size: 0.72rem; }
+            .logo-city { font-size: 0.48rem; letter-spacing: 0.06em; }
             .logo-img-wrapper {
-                width: 52px;
-                height: 52px;
-                padding: 2px;
+                width: 70px;
+                height: 70px;
+                margin-bottom: -25px;
             }
-            .logo-text {
-                max-width: calc(100% - 130px);
-            }
-            .burger-btn {
-                font-size: 1.25rem;
-                padding: 8px 10px;
-            }
+            .logo-text { padding-left: 70px; }
+            .header-bottom { padding-left: 70px; }
             .hero h1 { font-size: 1.5rem; }
             .btn { padding: 12px 20px; font-size: 0.78rem; }
             .amenities-grid { grid-template-columns: 1fr; }
@@ -2260,89 +2092,6 @@
     </div>
 
     <script>
-        /* ==============================================================
-           FIX IOS SAFARI / CHROME IOS — RECALCUL DYNAMIQUE DU HEADER
-           ============================================================== */
-        (function() {
-            var header = document.getElementById('main-header');
-            if (!header) return;
-
-            function isIOS() {
-                return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-                       (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-            }
-
-            function getHeaderHeight() {
-                // Sur mobile/tablette, la hauteur est définie par CSS
-                var styles = window.getComputedStyle(header);
-                return parseInt(styles.height, 10) || 100;
-            }
-
-            function updateHeaderPosition() {
-                // Force le header à rester à top: 0 même quand la barre d'adresse bouge
-                header.style.top = '0px';
-                header.style.transform = 'translateZ(0)';
-
-                // Recalcule le padding-top du body pour qu'il colle toujours au header
-                var h = getHeaderHeight();
-                document.body.style.paddingTop = h + 'px';
-            }
-
-            // Recalcule à chaque changement de viewport (rotation, barre d'adresse)
-            if (isIOS()) {
-                // Événements iOS spécifiques
-                window.addEventListener('orientationchange', function() {
-                    setTimeout(updateHeaderPosition, 150);
-                });
-
-                // Écoute les changements de hauteur (barre d'adresse qui bouge)
-                var lastHeight = window.innerHeight;
-                window.addEventListener('resize', function() {
-                    if (window.innerHeight !== lastHeight) {
-                        lastHeight = window.innerHeight;
-                        updateHeaderPosition();
-                    }
-                });
-
-                // Scroll : reforce le top: 0 régulièrement (au cas où iOS le décale)
-                var ticking = false;
-                window.addEventListener('scroll', function() {
-                    if (!ticking) {
-                        window.requestAnimationFrame(function() {
-                            header.style.top = '0px';
-                            ticking = false;
-                        });
-                        ticking = true;
-                    }
-                }, { passive: true });
-
-                // VisualViewport API (le plus fiable sur iOS moderne)
-                if (window.visualViewport) {
-                    window.visualViewport.addEventListener('resize', updateHeaderPosition);
-                    window.visualViewport.addEventListener('scroll', function() {
-                        header.style.top = '0px';
-                    });
-                }
-
-                // Appel initial
-                updateHeaderPosition();
-            }
-
-            // Sur Android Chrome : force aussi la stabilité
-            var isAndroid = /Android/.test(navigator.userAgent);
-            if (isAndroid) {
-                window.addEventListener('orientationchange', function() {
-                    setTimeout(function() {
-                        header.style.top = '0px';
-                    }, 150);
-                });
-            }
-        })();
-
-        /* ==============================================================
-           FONCTIONS EXISTANTES DU SITE
-           ============================================================== */
-
         window.addEventListener('scroll', function() {
             var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
