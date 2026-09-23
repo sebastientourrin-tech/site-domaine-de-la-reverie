@@ -285,7 +285,7 @@
         }
 
         /* ===== DRAWER MOBILE ===== */
-        .mobile-drawer {
+         .mobile-drawer {
             position: fixed;
             top: 0; right: -100%;
             width: min(85vw, 320px);
@@ -296,7 +296,6 @@
             box-shadow: -10px 0 35px rgba(0,0,0,0.25);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             transition: right 0.35s ease;
             overflow-y: auto;
         }
@@ -1274,20 +1273,25 @@
     </header>
 
     <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
-    <div class="mobile-drawer" id="mobile-drawer">
-        <div>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
-                <span style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700;">Domaine de la Rêverie</span>
-                <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; padding: 8px;"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <ul class="drawer-links">
-                <li><a href="#suites" onclick="toggleDrawer()"><i class="fa-solid fa-bed"></i> Nos 4 Suites</a></li>
-                <li><a href="#prestations" onclick="toggleDrawer()"><i class="fa-solid fa-gem"></i> Équipements</a></li>
-                <li><a href="#plan" onclick="toggleDrawer()"><i class="fa-solid fa-map-location-dot"></i> Plan du Domaine</a></li>
-                <li><a href="#extras" onclick="toggleDrawer()"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Soins</a></li>
-                <li><a href="#acces" onclick="toggleDrawer()"><i class="fa-solid fa-compass"></i> Accès &amp; Contact</a></li>
-            </ul>
+        <div class="mobile-drawer" id="mobile-drawer">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+            <span style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700;">Domaine de la Rêverie</span>
+            <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; padding: 8px;"><i class="fa-solid fa-xmark"></i></button>
         </div>
+
+        <ul class="drawer-links">
+            <li><a href="#suites" onclick="toggleDrawer()"><i class="fa-solid fa-bed"></i> Nos 4 Suites</a></li>
+            <li><a href="#prestations" onclick="toggleDrawer()"><i class="fa-solid fa-gem"></i> Équipements</a></li>
+            <li><a href="#plan" onclick="toggleDrawer()"><i class="fa-solid fa-map-location-dot"></i> Plan du Domaine</a></li>
+            <li><a href="#extras" onclick="toggleDrawer()"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Soins</a></li>
+            <li><a href="#acces" onclick="toggleDrawer()"><i class="fa-solid fa-compass"></i> Accès &amp; Contact</a></li>
+            <li style="margin-top: 10px;">
+                <a href="#reservation" onclick="toggleDrawer()" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-calendar-check"></i> Réserver en Direct
+                </a>
+            </li>
+        </ul>
+    </div>
         <a href="#reservation" onclick="toggleDrawer()" class="btn btn-primary" style="width: 100%;">
             <i class="fa-solid fa-calendar-check"></i> Réserver en Direct
         </a>
