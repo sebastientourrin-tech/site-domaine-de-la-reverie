@@ -78,7 +78,7 @@
             background: #F0E9DE;
             box-shadow: 0 4px 25px rgba(26, 22, 19, 0.08);
             z-index: 999999;
-            overflow: hidden; /* empêche tout débordement */
+            overflow: hidden;
         }
 
         header::after {
@@ -108,7 +108,6 @@
             position: relative;
         }
 
-        /* ===== BLOC GAUCHE : LOGO + TITRE ===== */
         .brand-cluster {
             display: flex;
             align-items: center;
@@ -172,7 +171,6 @@
             white-space: nowrap;
         }
 
-        /* ===== BLOC DROITE : NAV + BOUTON + BURGER ===== */
         .header-right {
             display: flex;
             align-items: center;
@@ -234,6 +232,7 @@
             border: 1px solid transparent;
             transition: var(--transition);
             white-space: nowrap;
+            text-align: center;
         }
 
         .btn-primary {
@@ -285,7 +284,7 @@
         }
 
         /* ===== DRAWER MOBILE ===== */
-         .mobile-drawer {
+        .mobile-drawer {
             position: fixed;
             top: 0; right: -100%;
             width: min(85vw, 320px);
@@ -333,6 +332,14 @@
         }
 
         .drawer-links a i { color: var(--primary); width: 24px; }
+
+        /* Bouton dans le drawer */
+        .drawer-links .btn {
+            font-size: 0.85rem;
+            padding: 14px 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
 
         /* ===== HERO ===== */
         .hero {
@@ -1072,21 +1079,18 @@
                 height: 70px;
             }
 
-            .logo-title { font-size: 1.1rem; }
-            .logo-city { font-size: 0.65rem; letter-spacing: 0.14em; }
+            .logo-title { font-size: 1.2rem; }
+            .logo-city { font-size: 0.68rem; letter-spacing: 0.14em; }
 
-            /* Cacher la nav et le bouton Réserver */
             .nav-links,
             .header-right .btn {
                 display: none;
             }
 
-            /* Afficher le burger */
             .burger-btn {
                 display: flex;
             }
 
-            /* Le header-right ne contient plus que le burger */
             .header-right {
                 gap: 0;
             }
@@ -1117,7 +1121,7 @@
 
         /* Mobile (<= 640px) */
         @media (max-width: 640px) {
-            :root { --header-h: 85px; }
+            :root { --header-h: 90px; }
 
             .header-content {
                 padding: 0 12px;
@@ -1131,8 +1135,8 @@
             }
 
             .logo-img-wrapper {
-                width: 55px;
-                height: 55px;
+                width: 60px;
+                height: 60px;
                 padding: 2px;
             }
 
@@ -1141,18 +1145,21 @@
                 overflow: hidden;
             }
 
+            /* ✅ TITRE PLUS GRAND SUR MOBILE */
             .logo-title {
-                font-size: 0.82rem;
+                font-size: 1.15rem;
+                font-weight: 700;
                 letter-spacing: 0.02em;
                 white-space: normal;
-                line-height: 1.15;
+                line-height: 1.1;
                 word-break: break-word;
             }
 
             .logo-city {
-                font-size: 0.55rem;
+                font-size: 0.62rem;
                 letter-spacing: 0.08em;
                 white-space: normal;
+                margin-top: 3px;
             }
 
             .burger-btn {
@@ -1202,15 +1209,16 @@
         /* Très petit écran (<= 400px) */
         @media (max-width: 400px) {
             .logo-img-wrapper {
-                width: 45px;
-                height: 45px;
+                width: 50px;
+                height: 50px;
                 padding: 2px;
             }
+            /* ✅ Titre encore bien visible sur petit mobile */
             .logo-title {
-                font-size: 0.72rem;
+                font-size: 1rem;
             }
             .logo-city {
-                font-size: 0.48rem;
+                font-size: 0.55rem;
                 letter-spacing: 0.05em;
             }
             .burger-btn {
@@ -1272,8 +1280,9 @@
         </div>
     </header>
 
+    <!-- ================= DRAWER MOBILE ================= -->
     <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
-        <div class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer" id="mobile-drawer">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
             <span style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700;">Domaine de la Rêverie</span>
             <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; padding: 8px;"><i class="fa-solid fa-xmark"></i></button>
@@ -1285,16 +1294,12 @@
             <li><a href="#plan" onclick="toggleDrawer()"><i class="fa-solid fa-map-location-dot"></i> Plan du Domaine</a></li>
             <li><a href="#extras" onclick="toggleDrawer()"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Soins</a></li>
             <li><a href="#acces" onclick="toggleDrawer()"><i class="fa-solid fa-compass"></i> Accès &amp; Contact</a></li>
-            <li style="margin-top: 10px;">
-                <a href="#reservation" onclick="toggleDrawer()" class="btn btn-primary" style="width: 100%; justify-content: center;">
+            <li style="margin-top: 14px; list-style: none;">
+                <a href="#reservation" onclick="toggleDrawer()" class="btn btn-primary" style="width: 100%; justify-content: center; color: #FFFFFF;">
                     <i class="fa-solid fa-calendar-check"></i> Réserver en Direct
                 </a>
             </li>
         </ul>
-    </div>
-        <a href="#reservation" onclick="toggleDrawer()" class="btn btn-primary" style="width: 100%;">
-            <i class="fa-solid fa-calendar-check"></i> Réserver en Direct
-        </a>
     </div>
 
     <section class="hero">
