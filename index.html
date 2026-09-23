@@ -18,7 +18,9 @@
             --primary-light: #F6EFEA;
             --gold: #C5A059;
             --gold-light: #EFE4CE;
+            --gold-dark: #B88E44;
             --gold-gradient: linear-gradient(135deg, #C5A059 0%, #E3C588 50%, #B88E44 100%);
+            --gold-gradient-hover: linear-gradient(135deg, #B88E44 0%, #C5A059 50%, #9C7830 100%);
             --dark: #1A1613;
             --dark-card: #25201B;
             --cream: #FAF7F2;
@@ -69,7 +71,7 @@
         }
 
         /* ============================================
-           HEADER — FOND D'ORIGINE (BEIGE CLAIR)
+           HEADER
            ============================================ */
         header {
             position: fixed;
@@ -151,7 +153,6 @@
             min-width: 0;
         }
 
-        /* Titre dans le header : couleur d'origine foncée */
         .logo-title {
             font-family: var(--font-serif);
             font-size: 1.35rem;
@@ -162,7 +163,6 @@
             white-space: nowrap;
         }
 
-        /* Ville dans le header : couleur primaire d'origine */
         .logo-city {
             font-size: 0.72rem;
             text-transform: uppercase;
@@ -187,7 +187,6 @@
             list-style: none;
         }
 
-        /* Liens de nav : couleur foncée d'origine */
         .nav-links a {
             font-size: 0.72rem;
             font-weight: 600;
@@ -220,6 +219,9 @@
         .nav-links a:hover { color: var(--primary); }
         .nav-links a:hover::after { width: 100%; }
 
+        /* ============================================
+           TOUS LES BOUTONS EN GOLD
+           ============================================ */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -227,48 +229,55 @@
             gap: 8px;
             padding: 12px 22px;
             font-size: 0.78rem;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             border-radius: 50px;
             cursor: pointer;
-            border: 1px solid transparent;
+            border: none;
             transition: var(--transition);
             white-space: nowrap;
             text-align: center;
+            background: var(--gold-gradient);
+            color: var(--dark);
+            box-shadow: 0 4px 18px rgba(197, 160, 89, 0.35);
         }
 
-        /* Bouton principal : marron (couleur d'origine) */
-        .btn-primary {
-            background-color: var(--primary);
-            color: #FFFFFF;
-            box-shadow: 0 4px 18px rgba(156, 88, 56, 0.3);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
+        .btn:hover {
+            background: var(--gold-gradient-hover);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(197, 160, 89, 0.5);
         }
 
-        /* Bouton doré : conservé */
+        /* Toutes les variantes de bouton pointent vers le même style gold */
+        .btn-primary,
         .btn-gold {
             background: var(--gold-gradient);
             color: var(--dark);
             font-weight: 800;
+            box-shadow: 0 4px 18px rgba(197, 160, 89, 0.35);
         }
 
-        .btn-gold:hover { transform: translateY(-2px); }
+        .btn-primary:hover,
+        .btn-gold:hover {
+            background: var(--gold-gradient-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(197, 160, 89, 0.5);
+        }
 
+        /* Le bouton outline garde son contour blanc (utilisé sur fond sombre hero) */
         .btn-outline {
-            border-color: rgba(255, 255, 255, 0.85);
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.85);
             color: #FFFFFF;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
+            box-shadow: none;
         }
 
         .btn-outline:hover {
             background-color: #FFFFFF;
             color: var(--dark);
+            border-color: #FFFFFF;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
         }
 
         .burger-btn {
@@ -326,7 +335,6 @@
             margin-top: 40px;
         }
 
-        /* Liens du burger : texte blanc sur fond marron */
         .drawer-links a {
             font-size: 1.1rem;
             font-weight: 600;
@@ -338,17 +346,14 @@
             transition: color 0.2s ease;
         }
 
-        .drawer-links a:hover {
-            color: var(--gold-light);
-        }
+        .drawer-links a:hover { color: var(--gold-light); }
 
-        /* Icônes du burger : dorées */
         .drawer-links a i {
             color: var(--gold);
             width: 24px;
         }
 
-        /* Bouton "Réserver en Direct" dans le burger : BIEN CENTRÉ + DORÉ */
+        /* Bouton "Réserver en Direct" dans le burger : BIEN CENTRÉ + GOLD */
         .drawer-links .btn {
             font-size: 0.85rem;
             padding: 14px 20px;
@@ -365,6 +370,11 @@
             font-weight: 800 !important;
             border-radius: 50px !important;
             border: none;
+            box-shadow: 0 4px 18px rgba(197, 160, 89, 0.4);
+        }
+
+        .drawer-links .btn:hover {
+            background: var(--gold-gradient-hover) !important;
         }
 
         .drawer-links .btn i {
