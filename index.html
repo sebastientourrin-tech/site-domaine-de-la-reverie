@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domaine de la Rêverie | Suites Romantiques & Balnéo à Saint-Léger-les-Vignes</title>
+    <meta name="description" content="Domaine de la Rêverie à Saint-Léger-les-Vignes (44710) : 4 suites romantiques avec balnéo privative, lit queen size, cheminée électrique et terrasse. Réservation en direct.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #9C5838;
+            --primary-dark: #7A3F23;
+            --primary-light: #F6EFEA;
+            --gold: #C5A059;
+            --gold-light: #EFE4CE;
+            --gold-gradient: linear-gradient(135deg, #C5A059 0%, #E3C588 50%, #B88E44 100%);
+            --dark: #1A1613;
+            --dark-card: #25201B;
+            --cream: #FAF7F2;
+            --cream-card: #FFFFFF;
+            --border: #E5DDD2;
+            --text-main: #2C2621;
+            --text-muted: #6E665F;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--cream);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            padding-top: 130px;
+        }
+
+        h1, h2, h3, h4, .font-serif {
+            font-family: var(--font-serif);
+            letter-spacing: 0.02em;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1260px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: var(--gold-gradient);
+            z-index: 1000000;
+            box-shadow: 0 0 10px rgba(197, 160, 89, 0.9);
+            transition: width 0.1s linear;
+        }
+
+        /* ===== BANDEAU FIXE 130PX ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 130px;
+            overflow: visible;
+            z-index: 999999;
+            background: #F0E9DE !important;
+            border-bottom: none;
+            box-shadow: 0 4px 25px rgba(26, 22, 19, 0.08);
+            display: flex;
+            align-items: center;
+            transition: box-shadow 0.3s ease;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gold-gradient);
+            box-shadow: 0 2px 10px rgba(197, 160, 89, 0.5);
+            z-index: 1;
+        }
+
+        header.scrolled {
+            box-shadow: 0 8px 30px rgba(26, 22, 19, 0.12);
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            padding: 0 24px;
+        }
+
+        .logo-box {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* === LOGO 200PX : à gauche, déborde légèrement en bas === */
+        .logo-img-wrapper {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            padding: 6px;
+            background: var(--gold-gradient);
+            box-shadow: 0 6px 22px rgba(197, 160, 89, 0.45);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+            margin-bottom: -70px;
+        }
+
+        .logo-box:hover .logo-img-wrapper {
+            transform: scale(1.05);
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: contain;
+            display: block;
+            background: #FFFFFF;
+        }
+
+        /* Titre + menu décalés à droite du logo pour ne pas être masqués */
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            line-height: 1.15;
+            padding-top: 4px;
+            padding-left: 200px; /* réserve la place du logo à gauche */
+        }
+
+        .logo-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--dark);
+            white-space: nowrap;
+        }
+
+        .logo-city {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--primary);
+            font-weight: 800;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .logo-city::after {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        .header-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            width: 100%;
+            padding: 6px 20px 0 200px; /* même décalage que le titre */
+            flex-wrap: nowrap;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+            list-style: none;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+        }
+
+        .nav-links a {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--dark);
+            position: relative;
+            padding: 6px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            line-height: 1.2;
+            height: 22px;
+        }
+
+        .nav-links a i {
+            color: var(--gold);
+            font-size: 0.85rem;
+            width: 16px;
+            height: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .nav-links a:hover i {
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0%;
+            height: 2px;
+            background: var(--gold-gradient);
+            border-radius: 2px;
+            transition: all 0.35s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            font-size: 0.86rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            border-radius: 50px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #FFFFFF;
+            box-shadow: 0 4px 18px rgba(156, 88, 56, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(156, 88, 56, 0.45);
+        }
+
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: var(--dark);
+            font-weight: 800;
+            box-shadow: 0 4px 18px rgba(197, 160, 89, 0.35);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(197, 160, 89, 0.5);
+        }
+
+        .btn-outline {
+            border-color: rgba(255, 255, 255, 0.85);
+            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-outline:hover {
+            background-color: #FFFFFF;
+            color: var(--dark);
+            border-color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .burger-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.7rem;
+            color: var(--dark);
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 320px;
+            height: 100vh;
+            background: #FFFFFF;
+            z-index: 1000001;
+            padding: 30px 24px;
+            box-shadow: -10px 0 35px rgba(0,0,0,0.25);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: right 0.35s ease;
+        }
+
+        .mobile-drawer.open {
+            right: 0;
+        }
+
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(4px);
+            z-index: 1000000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .drawer-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .drawer-links a {
+            font-size: 1.15rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .drawer-links a i {
+            color: var(--primary);
+            width: 24px;
+        }
+
+        .hero {
+            position: relative;
+            min-height: calc(100vh - 130px);
+            display: flex;
+            align-items: center;
+            padding: 70px 0 90px;
+            background: linear-gradient(135deg, rgba(26, 22, 19, 0.88) 0%, rgba(26, 22, 19, 0.6) 100%), 
+                        url('plan-domaine.jpg') center/cover no-repeat;
+            color: #FFFFFF;
+        }
+
+        .hero-content {
+            max-width: 860px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5.2vw, 4.3rem);
+            line-height: 1.12;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 3px 12px rgba(0,0,0,0.5);
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--gold-light);
+        }
+
+        .hero-subtitle-quote {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            font-size: 1.14rem;
+            color: rgba(255, 255, 255, 0.92);
+            line-height: 1.75;
+            margin-bottom: 35px;
+            max-width: 720px;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            margin-top: 35px;
+            padding-top: 26px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .badge-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #FAF7F2;
+        }
+
+        .badge-item i {
+            color: var(--gold);
+            font-size: 1.15rem;
+        }
+
+        .booking-strip {
+            position: relative;
+            margin-top: -55px;
+            z-index: 50;
+        }
+
+        .strip-card {
+            background: var(--cream-card);
+            border-radius: var(--radius);
+            box-shadow: 0 20px 50px rgba(26, 22, 19, 0.12);
+            padding: 26px 34px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr auto;
+            gap: 18px;
+            align-items: end;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+            transition: var(--transition);
+        }
+
+        .strip-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 25px 60px rgba(26, 22, 19, 0.16);
+        }
+
+        .strip-col label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 7px;
+        }
+
+        .strip-col input, .strip-col select {
+            width: 100%;
+            border: 1px solid var(--border);
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            color: var(--dark);
+            outline: none;
+            background: var(--cream);
+            transition: var(--transition);
+        }
+
+        .strip-col input:focus, .strip-col select:focus {
+            border-color: var(--gold);
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
+        }
+
+        select:invalid {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        select option {
+            color: var(--text-main);
+            font-style: normal;
+        }
+
+        .amenities-bar {
+            background: #FFFFFF;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 38px 0;
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .amenity-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .amenity-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+        }
+
+        .amenity-label {
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--dark);
+        }
+
+        .amenity-sub {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        section {
+            padding: 95px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 55px;
+        }
+
+        .section-subtitle {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .section-subtitle::before, .section-subtitle::after {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-title {
+            font-size: clamp(2.2rem, 3.8vw, 3rem);
+            color: var(--dark);
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.75;
+        }
+
+        .suites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .suite-card {
+            background: var(--cream-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(26, 22, 19, 0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .suite-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(26, 22, 19, 0.12);
+            border-color: rgba(197, 160, 89, 0.6);
+        }
+
+        .suite-img-container {
+            position: relative;
+            height: 390px;
+            overflow: hidden;
+            background: #151210;
+            cursor: pointer;
+        }
+
+        .suite-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.6s ease;
+        }
+
+        .suite-card:hover .suite-img-container img {
+            transform: scale(1.05);
+        }
+
+        .suite-badge-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(26, 22, 19, 0.88);
+            backdrop-filter: blur(8px);
+            color: var(--gold-light);
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            padding: 7px 18px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 700;
+        }
+
+        .suite-body {
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .suite-body h3 {
+            font-size: 1.7rem;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .suite-tagline {
+            font-size: 0.84rem;
+            color: var(--primary);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+        }
+
+        .suite-features-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-bottom: 22px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .suite-features-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .suite-features-list li i {
+            color: var(--primary);
+            font-size: 0.85rem;
+            width: 16px;
+        }
+
+        .suite-price-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        .price-val {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .price-val small {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-weight: normal;
+        }
+
+        .plan-section {
+            background: #FFFFFF;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .plan-img-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(26, 22, 19, 0.1);
+            border: 2px solid var(--border);
+            cursor: pointer;
+        }
+
+        .plan-img-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .plan-img-card:hover img {
+            transform: scale(1.02);
+        }
+
+        .plan-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .legend-card {
+            background: var(--cream);
+            padding: 18px 22px;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .legend-card:hover {
+            transform: translateX(6px);
+            background: #FFFFFF;
+            box-shadow: 0 8px 24px rgba(26, 22, 19, 0.08);
+            border-left-color: var(--gold);
+        }
+
+        .legend-card h4 {
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.55;
+        }
+
+        .extras-section {
+            background-color: #F5EFEB;
+        }
+
+        .extras-showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .extra-poster-card {
+            background: #FFFFFF;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 2px solid var(--border);
+            box-shadow: 0 4px 20px rgba(26, 22, 19, 0.05);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+        }
+
+        .extra-poster-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(26, 22, 19, 0.12);
+            border-color: var(--gold);
+        }
+
+        .extra-poster-card.selected {
+            border-color: var(--primary) !important;
+            background: #FFFAF7;
+            box-shadow: 0 0 0 3px rgba(156, 88, 56, 0.3), 0 16px 40px rgba(26, 22, 19, 0.12);
+        }
+
+        .extra-img-wrap {
+            position: relative;
+            height: 330px;
+            overflow: hidden;
+            background: #1F1B18;
+        }
+
+        .extra-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.5s ease;
+        }
+
+        .extra-poster-card:hover .extra-img-wrap img {
+            transform: scale(1.04);
+        }
+
+        .extra-check-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #C5A059;
+            color: #C5A059;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10;
+        }
+
+        .extra-poster-card.selected .extra-check-badge {
+            background: var(--primary) !important;
+            border-color: #FFFFFF !important;
+            color: #FFFFFF !important;
+            transform: scale(1.15) rotate(360deg);
+            box-shadow: 0 8px 25px rgba(156, 88, 56, 0.5);
+        }
+
+        .extra-desc-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .extra-desc-body h3 {
+            font-size: 1.45rem;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .extra-price-tag {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .extra-detail-p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+
+        .extra-points {
+            list-style: none;
+            font-size: 0.84rem;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .extra-points li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .extra-points li i {
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .booking-section {
+            background: #FFFFFF;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .booking-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 45px;
+            align-items: start;
+        }
+
+        .booking-form {
+            background: var(--cream);
+            padding: 38px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(26, 22, 19, 0.05);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 7px;
+            color: var(--dark);
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            border: 1px solid var(--border);
+            padding: 13px 16px;
+            border-radius: 10px;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            background: #FFFFFF;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(156, 88, 56, 0.15);
+        }
+
+        .booking-summary {
+            background: var(--dark-card);
+            color: #FFFFFF;
+            padding: 38px;
+            border-radius: var(--radius);
+            position: sticky;
+            top: 150px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            box-shadow: 0 20px 50px rgba(26, 22, 19, 0.2);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            font-size: 0.94rem;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            font-family: var(--font-serif);
+        }
+
+        .saving-alert {
+            background: rgba(197, 160, 89, 0.16);
+            border: 1px solid var(--gold);
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.84rem;
+            color: var(--gold-light);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .location-items {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .location-items li {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .location-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .map-wrapper {
+            border-radius: var(--radius);
+            overflow: hidden;
+            height: 340px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(26, 22, 19, 0.08);
+        }
+
+        footer {
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 80px 0 35px;
+            border-top: 1px solid rgba(197, 160, 89, 0.25);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 55px;
+            margin-bottom: 45px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.25rem;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col a:hover {
+            color: var(--gold-light);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 12, 10, 0.94);
+            backdrop-filter: blur(12px);
+            z-index: 10000000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        #lightbox.active {
+            display: flex;
+        }
+
+        #lightbox img {
+            max-width: 90vw;
+            max-height: 88vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+            border: 2px solid rgba(197, 160, 89, 0.4);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            color: #fff;
+            font-size: 2.2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--dark);
+            color: #FFFFFF;
+            border: 1px solid var(--gold);
+            padding: 14px 26px;
+            border-radius: 50px;
+            font-size: 0.92rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 9999999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.35s ease;
+        }
+
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        /* Tablette large / petit laptop */
+        @media (max-width: 1200px) {
+            .logo-img-wrapper {
+                width: 170px;
+                height: 170px;
+                margin-bottom: -60px;
+            }
+            .logo-text { padding-left: 170px; }
+            .header-bottom { padding-left: 170px; }
+            .logo-title { font-size: 1.25rem; }
+            .logo-city { font-size: 0.78rem; letter-spacing: 0.14em; }
+            .nav-links { gap: 14px; }
+            .nav-links a { font-size: 0.7rem; }
+            .header-cta { padding: 12px 18px; font-size: 0.75rem; }
+        }
+
+        /* Tablette */
+        @media (max-width: 992px) {
+            body { padding-top: 110px; }
+
+            header {
+                height: 110px;
+                padding: 0;
+            }
+
+            .header-content {
+                height: 100%;
+                padding: 0 16px;
+            }
+
+            .logo-img-wrapper {
+                width: 120px;
+                height: 120px;
+                padding: 4px;
+                margin-bottom: -40px;
+            }
+
+            .logo-box { left: 10px; }
+
+            .logo-text { padding-left: 120px; }
+            .header-bottom { padding-left: 120px; }
+
+            .logo-title { font-size: 1.05rem; letter-spacing: 0.03em; }
+            .logo-city { font-size: 0.68rem; letter-spacing: 0.12em; }
+            .logo-city::after { width: 16px; }
+
+            .nav-links, .header-cta { display: none; }
+            .burger-btn {
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                transform: translateY(-50%);
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 50px 0 70px;
+            }
+            .hero h1 { font-size: clamp(2rem, 6vw, 3rem); }
+            .hero-subtitle-quote { font-size: 1.3rem; }
+            .hero-description { font-size: 1rem; }
+
+            .strip-card {
+                grid-template-columns: 1fr;
+                padding: 22px;
+                gap: 14px;
+            }
+
+            .plan-grid,
+            .location-grid,
+            .booking-layout,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-summary { position: static; }
+
+            .form-row { grid-template-columns: 1fr; }
+
+            section { padding: 70px 0; }
+
+            .suites-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+        }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            body { padding-top: 100px; }
+
+            header { height: 100px; }
+
+            .logo-img-wrapper {
+                width: 85px;
+                height: 85px;
+                padding: 3px;
+                margin-bottom: -30px;
+            }
+
+            .logo-box { left: 8px; }
+
+            .logo-text { padding-left: 85px; padding-right: 8px; }
+            .header-bottom { padding-left: 85px; padding-right: 8px; }
+
+            .logo-title { font-size: 0.82rem; letter-spacing: 0.02em; }
+            .logo-city { font-size: 0.55rem; letter-spacing: 0.08em; gap: 4px; }
+            .logo-city::after { width: 12px; height: 1.5px; }
+
+            .hero { padding: 40px 0 60px; }
+            .hero-tag { font-size: 0.7rem; padding: 6px 14px; letter-spacing: 0.1em; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero-subtitle-quote { font-size: 1rem; }
+            .hero-description { font-size: 0.92rem; }
+            .hero-badges { gap: 12px; }
+            .badge-item { font-size: 0.78rem; }
+            .badge-item i { font-size: 0.95rem; }
+
+            .section-title { font-size: 1.7rem; }
+            .section-desc { font-size: 0.92rem; }
+            section { padding: 55px 0; }
+
+            .suite-img-container { height: 280px; }
+            .extra-img-wrap { height: 240px; }
+
+            .booking-form,
+            .booking-summary {
+                padding: 24px 20px;
+            }
+
+            .summary-total { font-size: 1.3rem; }
+
+            .container { padding: 0 16px; }
+
+            .mobile-drawer { width: 280px; }
+
+            #toast {
+                right: 16px;
+                left: 16px;
+                bottom: 16px;
+                justify-content: center;
+            }
+        }
+
+        /* Très petits écrans */
+        @media (max-width: 380px) {
+            .logo-title { font-size: 0.72rem; }
+            .logo-city { font-size: 0.48rem; letter-spacing: 0.06em; }
+            .logo-img-wrapper {
+                width: 70px;
+                height: 70px;
+                margin-bottom: -25px;
+            }
+            .logo-text { padding-left: 70px; }
+            .header-bottom { padding-left: 70px; }
+            .hero h1 { font-size: 1.5rem; }
+            .btn { padding: 12px 20px; font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="scroll-progress"></div>
+
+    <header id="main-header">
+        <div class="header-content">
+            <a href="#" class="logo-box" aria-label="Domaine de la Rêverie">
+                <div class="logo-img-wrapper">
+                    <img src="logo.jpg" alt="Logo Domaine de la Rêverie" class="logo-img">
+                </div>
+            </a>
+
+            <div class="logo-text">
+                <span class="logo-title">Domaine de la Rêverie</span>
+                <span class="logo-city">Saint-Léger-des-Vignes</span>
+            </div>
+
+            <div class="header-bottom">
+                <ul class="nav-links">
+                    <li><a href="#suites"><i class="fa-solid fa-bed"></i> Nos 4 Suites</a></li>
+                    <li><a href="#prestations"><i class="fa-solid fa-gem"></i> Équipements</a></li>
+                    <li><a href="#plan"><i class="fa-solid fa-map-location-dot"></i> Plan du Domaine</a></li>
+                    <li><a href="#extras"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Soins</a></li>
+                    <li><a href="#acces"><i class="fa-solid fa-compass"></i> Accès &amp; Contact</a></li>
+                </ul>
+
+                <a href="#reservation" class="btn btn-primary header-cta">
+                    <i class="fa-solid fa-calendar-check"></i> Réserver en Direct
+                </a>
+            </div>
+
+            <button class="burger-btn" onclick="toggleDrawer()" aria-label="Menu Mobile">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+                <span style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700;">Domaine de la Rêverie</span>
+                <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <ul class="drawer-links">
+                <li><a href="#suites" onclick="toggleDrawer()"><i class="fa-solid fa-bed"></i> Nos 4 Suites</a></li>
+                <li><a href="#prestations" onclick="toggleDrawer()"><i class="fa-solid fa-gem"></i> Équipements</a></li>
+                <li><a href="#plan" onclick="toggleDrawer()"><i class="fa-solid fa-map-location-dot"></i> Plan du Domaine</a></li>
+                <li><a href="#extras" onclick="toggleDrawer()"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Soins</a></li>
+                <li><a href="#acces" onclick="toggleDrawer()"><i class="fa-solid fa-compass"></i> Accès &amp; Contact</a></li>
+            </ul>
+        </div>
+        <a href="#reservation" onclick="toggleDrawer()" class="btn btn-primary" style="width: 100%;">
+            <i class="fa-solid fa-calendar-check"></i> Réserver en Direct
+        </a>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-tag">
+                    <i class="fa-solid fa-crown" style="color: var(--gold);"></i> 4 Suites • 4 Univers • Une Seule Promesse : Le Bien-Être
+                </div>
+                <h1>Une parenthèse <em>hors du temps</em></h1>
+                <p class="hero-subtitle-quote">« Détente • Romantisme • Évasion • Sérénité »</p>
+                <p class="hero-description">
+                    À <strong>Saint-Léger-les-Vignes (44710)</strong>, à 15 minutes de Nantes, offrez-vous une nuit d'exception en duo. Balnéothérapie privative illimitée, lit Queen size, cheminée électrique, linge et ménage inclus.
+                </p>
+                <div style="display: flex; gap: 18px; flex-wrap: wrap;">
+                    <a href="#suites" class="btn btn-gold">
+                        <i class="fa-solid fa-compass"></i> Découvrir les 4 Suites
+                    </a>
+                    <a href="#extras" class="btn btn-outline">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Formules Romantiques
+                    </a>
+                </div>
+
+                <div class="hero-badges">
+                    <div class="badge-item">
+                        <i class="fa-solid fa-hot-tub-person"></i>
+                        <span>Balnéothérapie privative</span>
+                    </div>
+                    <div class="badge-item">
+                        <i class="fa-solid fa-bed"></i>
+                        <span>Lit Queen Size</span>
+                    </div>
+                    <div class="badge-item">
+                        <i class="fa-solid fa-fire"></i>
+                        <span>Salon avec cheminée électrique</span>
+                    </div>
+                    <div class="badge-item">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>Linge et ménage inclus</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container booking-strip">
+        <form class="strip-card" action="#reservation" method="GET">
+            <div class="strip-col">
+                <label><i class="fa-solid fa-bed"></i> Choisir une Suite</label>
+                <select id="strip-suite" onchange="syncSuiteSelection(this.value)">
+                    <option value="" data-name="" disabled selected>— Choisissez une suite —</option>
+                    <option value="210" data-name="Suite Signature">Suite Signature (dès 210 € / nuit)</option>
+                    <option value="210" data-name="Suite Volupté">Suite Volupté (dès 210 € / nuit)</option>
+                    <option value="170" data-name="Suite Bohème">Suite Bohème (dès 170 € / nuit)</option>
+                    <option value="140" data-name="Suite Parisienne">Suite Parisienne (dès 140 € / nuit)</option>
+                </select>
+            </div>
+            <div class="strip-col">
+                <label><i class="fa-regular fa-calendar"></i> Arrivée (Dès 17:00)</label>
+                <input type="date" id="strip-checkin" required>
+            </div>
+            <div class="strip-col">
+                <label><i class="fa-regular fa-calendar-check"></i> Départ (Jusqu'à 11:00)</label>
+                <input type="date" id="strip-checkout" required>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary" style="height: 48px; width: 100%;">
+                    Voir disponibilités
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="prestations" class="amenities-bar">
+        <div class="container">
+            <div class="amenities-grid">
+                <div class="amenity-item">
+                    <div class="amenity-icon"><i class="fa-solid fa-hot-tub-person"></i></div>
+                    <span class="amenity-label">Balnéo Privative</span>
+                    <span class="amenity-sub">Duo &amp; hydro-massages</span>
+                </div>
+                <div class="amenity-item">
+                    <div class="amenity-icon"><i class="fa-solid fa-shower"></i></div>
+                    <span class="amenity-label">Douche</span>
+                    <span class="amenity-sub">Élégante &amp; spacieuse</span>
+                </div>
+                <div class="amenity-item">
+                    <div class="amenity-icon"><i class="fa-solid fa-utensils"></i></div>
+                    <span class="amenity-label">Cuisine Équipée</span>
+                    <span class="amenity-sub">Frigo, plaques, vaisselle</span>
+                </div>
+                <div class="amenity-item">
+                    <div class="amenity-icon"><i class="fa-solid fa-fire"></i></div>
+                    <span class="amenity-label">Cheminée Électrique</span>
+                    <span class="amenity-sub">Ambiance chaleureuse</span>
+                </div>
+                <div class="amenity-item">
+                    <div class="amenity-icon"><i class="fa-solid fa-bed"></i></div>
+                    <span class="amenity-label">Lit Queen Size</span>
+                    <span class="amenity-sub">Literie grand confort</span>
+                </div>
+                <div class="amenity-item">
+                    <div class="amenity-icon"><i class="fa-solid fa-tree"></i></div>
+                    <span class="amenity-label">Terrasse / Jardin</span>
+                    <span class="amenity-sub">Selon la suite</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="suites">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Votre Cocon Romantique</span>
+                <h2 class="section-title">Découvrez nos 4 Suites</h2>
+                <p class="section-desc">Chaque suite offre un univers soigné, un spa balnéo duo privatif, un lit Queen size et une intimité totale. Tarifs valables toute l'année (hors périodes spéciales, jours fériés, vacances scolaires &amp; événements).</p>
+            </div>
+
+            <div class="suites-grid">
+                <div class="suite-card">
+                    <div class="suite-img-container" onclick="openLightbox('suite-signature.jpg')">
+                        <img src="suite-signature.jpg" alt="Suite Signature - Domaine de la Rêverie">
+                        <span class="suite-badge-tag">Suite Signature</span>
+                    </div>
+                    <div class="suite-body">
+                        <h3>Suite Signature</h3>
+                        <div class="suite-tagline">Élégance &amp; Caractère</div>
+                        <ul class="suite-features-list">
+                            <li><i class="fa-solid fa-check"></i> Balnéo duo hydro-massante</li>
+                            <li><i class="fa-solid fa-check"></i> Lit Queen Size grand confort</li>
+                            <li><i class="fa-solid fa-check"></i> Salon cosy avec cheminée électrique</li>
+                            <li><i class="fa-solid fa-check"></i> Cuisine équipée &amp; douche spacieuse</li>
+                        </ul>
+                        <div class="suite-price-bar">
+                            <div class="price-val">210 € <small>/ nuit</small></div>
+                            <button onclick="choisirSuite('Suite Signature', 210)" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.78rem;">Réserver</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="suite-card">
+                    <div class="suite-img-container" onclick="openLightbox('suite-volupte.jpg')">
+                        <img src="suite-volupte.jpg" alt="Suite Volupté - Domaine de la Rêverie">
+                        <span class="suite-badge-tag">Suite Volupté</span>
+                    </div>
+                    <div class="suite-body">
+                        <h3>Suite Volupté</h3>
+                        <div class="suite-tagline">Douceur &amp; Sensualité</div>
+                        <ul class="suite-features-list">
+                            <li><i class="fa-solid fa-check"></i> Jacuzzi balnéo privatif duo</li>
+                            <li><i class="fa-solid fa-check"></i> Lit Queen Size literie haut de gamme</li>
+                            <li><i class="fa-solid fa-check"></i> Ambiance tamisée &amp; cocooning</li>
+                            <li><i class="fa-solid fa-check"></i> Salon cheminée &amp; cuisine équipée</li>
+                        </ul>
+                        <div class="suite-price-bar">
+                            <div class="price-val">210 € <small>/ nuit</small></div>
+                            <button onclick="choisirSuite('Suite Volupté', 210)" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.78rem;">Réserver</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="suite-card">
+                    <div class="suite-img-container" onclick="openLightbox('suite-boheme.jpg')">
+                        <img src="suite-boheme.jpg" alt="Suite Bohème - Domaine de la Rêverie">
+                        <span class="suite-badge-tag">Suite Bohème</span>
+                    </div>
+                    <div class="suite-body">
+                        <h3>Suite Bohème</h3>
+                        <div class="suite-tagline">Nature &amp; Sérénité</div>
+                        <ul class="suite-features-list">
+                            <li><i class="fa-solid fa-check"></i> Balnéo 2 places relaxante</li>
+                            <li><i class="fa-solid fa-check"></i> Décoration bohème chic, bois &amp; pierres</li>
+                            <li><i class="fa-solid fa-check"></i> Lit Queen Size &amp; salon cheminée</li>
+                            <li><i class="fa-solid fa-check"></i> Cuisine complète &amp; espace détente</li>
+                        </ul>
+                        <div class="suite-price-bar">
+                            <div class="price-val">170 € <small>/ nuit</small></div>
+                            <button onclick="choisirSuite('Suite Bohème', 170)" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.78rem;">Réserver</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="suite-card">
+                    <div class="suite-img-container" onclick="openLightbox('suite-parisienne.jpg')">
+                        <img src="suite-parisienne.jpg" alt="Suite Parisienne - Domaine de la Rêverie">
+                        <span class="suite-badge-tag">Suite Parisienne</span>
+                    </div>
+                    <div class="suite-body">
+                        <h3>Suite Parisienne</h3>
+                        <div class="suite-tagline">Romantisme &amp; Raffinement</div>
+                        <ul class="suite-features-list">
+                            <li><i class="fa-solid fa-check"></i> Baignoire balnéo duo relaxante</li>
+                            <li><i class="fa-solid fa-check"></i> Ambiance parisienne intime noir &amp; or</li>
+                            <li><i class="fa-solid fa-check"></i> Lit Queen Size &amp; terrasse / jardin clos</li>
+                            <li><i class="fa-solid fa-check"></i> Kitchenette équipée moderne</li>
+                        </ul>
+                        <div class="suite-price-bar">
+                            <div class="price-val">140 € <small>/ nuit</small></div>
+                            <button onclick="choisirSuite('Suite Parisienne', 140)" class="btn btn-primary" style="padding: 10px 18px; font-size: 0.78rem;">Réserver</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 45px; background: #FFFFFF; border: 2px solid var(--gold); border-radius: var(--radius); padding: 25px 35px; display: flex; align-items: center; justify-content: space-between; gap: 25px; flex-wrap: wrap; box-shadow: 0 10px 30px rgba(197, 160, 89, 0.15);">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <div style="width: 55px; height: 55px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1.3rem; margin-bottom: 2px; color: var(--dark);">Linge et Ménage Inclus</h4>
+                        <p style="font-family: var(--font-serif); font-size: 1.15rem; font-style: italic; color: var(--primary); margin: 0;">« Profitez, on s'occupe de tout ! »</p>
+                    </div>
+                </div>
+                <div style="font-size: 0.88rem; color: var(--text-muted); max-width: 480px;">
+                    <i class="fa-regular fa-calendar-check" style="color: var(--gold);"></i> <strong>Tarifs hors dates spéciales :</strong> valables toute l'année hors périodes spéciales (jours fériés, vacances scolaires, événements).
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="plan" class="plan-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Organisation des Lieux</span>
+                <h2 class="section-title">L'Emplacement de vos Suites</h2>
+                <p class="section-desc">Chaque suite bénéficie de son entrée privative indépendante donnant sur la cour arborée et le parking clos sécurisé du domaine.</p>
+            </div>
+
+            <div class="plan-grid">
+                <div class="plan-img-card" onclick="openLightbox('plan-domaine1.jpg')">
+                    <img src="plan-domaine1.jpg" alt="Plan et entrées des suites du Domaine de la Rêverie">
+                </div>
+                <div class="plan-legend">
+                    <div class="legend-card">
+                        <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Signature (Porte 3)</h4>
+                        <p>Sur l'aile gauche du domaine avec sa façade bois contemporaine et son escalier vers la mezzanine balnéo.</p>
+                    </div>
+                    <div class="legend-card">
+                        <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Volupté (Porte 2)</h4>
+                        <p>Au centre du domaine, un accès direct de plain-pied baigné d'une ambiance tamisée propice au bien-être.</p>
+                    </div>
+                    <div class="legend-card">
+                        <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Bohème (Porte 1)</h4>
+                        <p>Dans la bâtisse en pierres de taille apparentes, alliant authenticité rustique et équipements modernes.</p>
+                    </div>
+                    <div class="legend-card">
+                        <h4><i class="fa-solid fa-door-open" style="color: var(--primary);"></i> Suite Parisienne</h4>
+                        <p>L'entrée sur la droite à l'écart avec son jardinet clos pour préserver une intimité totale en amoureux.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="extras" class="extras-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Prestations Sur-Mesure</span>
+                <h2 class="section-title">Sublimez Votre Séjour en Duo</h2>
+                <p class="section-desc">Cliquez sur une ou plusieurs formules pour l'ajouter instantanément à votre réservation.</p>
+            </div>
+
+            <div class="extras-showcase-grid">
+                <div class="extra-poster-card" id="card-deco" onclick="toggleExtraNew('deco', 50, 'Déco Romantique')">
+                    <div class="extra-img-wrap">
+                        <img src="extra-deco-romantique.jpg" alt="Option Déco Romantique">
+                        <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                    <div class="extra-desc-body">
+                        <h3>Déco Romantique</h3>
+                        <div class="extra-price-tag">50 €</div>
+                        <p class="extra-detail-p">
+                            Créez des souvenirs inoubliables dès l'ouverture de la porte. Une ambiance féerique et chaleureuse préparée avec soin avant votre arrivée.
+                        </p>
+                        <ul class="extra-points">
+                            <li><i class="fa-solid fa-heart"></i> Ballons cœur rouges métallisés</li>
+                            <li><i class="fa-solid fa-fire"></i> Bougies LED ambiance douce &amp; chaleureuse</li>
+                            <li><i class="fa-solid fa-spa"></i> Mise en scène avec pétales de roses</li>
+                            <li><i class="fa-solid fa-wand-magic-sparkles"></i> Installation réalisée avant votre arrivée</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="extra-poster-card" id="card-brunch" onclick="toggleExtraNew('brunch', 54, 'Brunch pour Deux')">
+                    <div class="extra-img-wrap">
+                        <img src="extra-brunch.jpg" alt="Brunch pour deux">
+                        <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                    <div class="extra-desc-body">
+                        <h3>Brunch pour Deux</h3>
+                        <div class="extra-price-tag">54 € <small style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">pour 2 pers.</small></div>
+                        <p class="extra-detail-p">
+                            Un moment gourmand à partager dans votre suite. Produits frais &amp; locaux avec présentation soignée et livraison discrète en chambre.
+                        </p>
+                        <ul class="extra-points">
+                            <li><i class="fa-solid fa-bread-slice"></i> Brioche moelleuse, pain grillé &amp; buns salés</li>
+                            <li><i class="fa-solid fa-apple-whole"></i> Yaourts aux fruits, fruits frais &amp; jus d'orange (x2)</li>
+                            <li><i class="fa-solid fa-mug-hot"></i> Cafés, thés, Nutella, confitures &amp; viennoiseries</li>
+                            <li><i class="fa-solid fa-bell-concierge"></i> Livraison discrète dans votre chambre</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="extra-poster-card" id="card-planche" onclick="toggleExtraNew('planche', 64, 'Planche Apéro Gourmande')">
+                    <div class="extra-img-wrap">
+                        <img src="extra-planche.jpg" alt="Planche Apéro Gourmande">
+                        <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                    <div class="extra-desc-body">
+                        <h3>Planche Apéro Gourmande</h3>
+                        <div class="extra-price-tag">64 € <small style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">(avec vin)</small></div>
+                        <p class="extra-detail-p">
+                            Un moment de détente en toute intimité. Charcuteries fines, fromages affinés, antipasti, fruits frais &amp; secs, tomates cerises et crackers.
+                        </p>
+                        <ul class="extra-points">
+                            <li><i class="fa-solid fa-wine-glass"></i> Formule avec 1 bouteille de vin sélectionnée</li>
+                            <li><i class="fa-solid fa-cheese"></i> Charcuteries fines et fromages affinés</li>
+                            <li><i class="fa-solid fa-bowl-food"></i> Olives, crackers croustillants &amp; confiture</li>
+                            <li><i class="fa-solid fa-moon"></i> Idéal pour dîner en amoureux sans sortir</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="extra-poster-card" id="card-massage" onclick="toggleExtraNew('massage', 180, 'Massage en Duo (1h)')">
+                    <div class="extra-img-wrap">
+                        <img src="extra-massage.jpg" alt="Massage en Duo 1h">
+                        <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                    <div class="extra-desc-body">
+                        <h3>Massage en Duo (1h)</h3>
+                        <div class="extra-price-tag">180 € <small style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">pour 2 pers.</small></div>
+                        <p class="extra-detail-p">
+                            Une heure entière de massage en duo pour vous ressourcer. Un moment privilégié rien que pour vous deux sous les mains expertes de nos praticiennes.
+                        </p>
+                        <ul class="extra-points">
+                            <li><i class="fa-solid fa-hands"></i> 1 heure de massage simultané en duo</li>
+                            <li><i class="fa-solid fa-spa"></i> Ambiance relaxante aux huiles chaudes</li>
+                            <li><i class="fa-solid fa-feather"></i> Détente profonde et lâcher-prise absolu</li>
+                            <li><i class="fa-solid fa-heart"></i> Prenez soin de vous à deux</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reservation" class="booking-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Réservation en Direct</span>
+                <h2 class="section-title">Planifiez Votre Escapade</h2>
+                <p class="section-desc">Meilleur tarif garanti en direct propriétaire, sans frais de commission.</p>
+            </div>
+
+            <div class="booking-layout">
+                <form class="booking-form" onsubmit="handleBooking(event)">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-bed"></i> Choisir votre Suite</label>
+                        <select id="booking-suite" onchange="calculatePrice()" required>
+                            <option value="" data-name="" disabled selected>— Choisissez une suite —</option>
+                            <option value="210" data-name="Suite Signature">Suite Signature (210 € / nuit)</option>
+                            <option value="210" data-name="Suite Volupté">Suite Volupté (210 € / nuit)</option>
+                            <option value="170" data-name="Suite Bohème">Suite Bohème (170 € / nuit)</option>
+                            <option value="140" data-name="Suite Parisienne">Suite Parisienne (140 € / nuit)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label><i class="fa-regular fa-calendar"></i> Date d'arrivée (Dès 17:00)</label>
+                            <input type="date" id="booking-in" required onchange="calculatePrice()">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-regular fa-calendar-check"></i> Date de départ (Jusqu'à 11:00)</label>
+                            <input type="date" id="booking-out" required onchange="calculatePrice()">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nom complet</label>
+                            <input type="text" placeholder="ex. Jean Dupont" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Numéro de téléphone</label>
+                            <input type="tel" placeholder="ex. 06 12 34 56 78" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Adresse e-mail de confirmation</label>
+                        <input type="email" placeholder="ex. jean.dupont@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Demandes particulières (heure d'arrivée, attentions...)</label>
+                        <textarea rows="3" placeholder="Précisez-nous vos souhaits pour préparer votre séjour..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1rem;">
+                        <i class="fa-solid fa-lock"></i> Valider ma demande de réservation
+                    </button>
+                    <p style="font-size: 0.82rem; text-align: center; color: var(--text-muted); margin-top: 12px;">
+                        Réponse rapide et confirmation garantie sous 2h par le Domaine.
+                    </p>
+                </form>
+
+                <div class="booking-summary">
+                    <div class="saving-alert">
+                        <i class="fa-solid fa-piggy-bank" style="font-size: 1.2rem;"></i>
+                        <span><strong>Avantage Direct :</strong> Économisez les frais de commissions Booking !</span>
+                    </div>
+
+                    <h3 style="font-size: 1.6rem; margin-bottom: 22px; color: #fff;">Votre Séjour</h3>
+                    
+                    <div class="summary-row">
+                        <span>Hébergement :</span>
+                        <strong id="summary-suite-name" style="color: #fff;">—</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Nombre de nuit(s) :</span>
+                        <span id="summary-nights">1 nuit</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tarif hébergement :</span>
+                        <span id="summary-room-price">0 €</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Linge &amp; Ménage :</span>
+                        <span style="color: #A3E635; font-weight: 600;">Inclus &amp; Offert</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Balnéo privative :</span>
+                        <span style="color: #fff;">Inclus</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Extras &amp; Formules :</span>
+                        <span id="summary-extras">0 €</span>
+                    </div>
+
+                    <div class="summary-total">
+                        <span>Total estimé :</span>
+                        <span id="summary-total-price">0 €</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="acces" style="background: #FFFFFF;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Localisation Idéale</span>
+                <h2 class="section-title">Venir au Domaine de la Rêverie</h2>
+                <p class="section-desc">À Saint-Léger-les-Vignes (44710), à 15 min de Nantes et aux portes de la Côte de Jade.</p>
+            </div>
+
+            <div class="location-grid">
+                <ul class="location-items">
+                    <li>
+                        <div class="location-icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <strong>Adresse postale :</strong>
+                            <p style="color: var(--text-muted); margin: 0;">39 Rue de la Crémaillère, 44710 Saint-Léger-les-Vignes</p>
+                        </div>
+                    </li>
+                   <li>
+    <div class="location-icon-box"><i class="fa-solid fa-envelope"></i></div>
+    <div>
+        <strong>Email direct :</strong>
+        <p style="color: var(--text-muted); margin: 0;">
+            <a href="mailto:contact@domaine-reverie.fr" style="color: var(--primary); font-weight: 600;">contact@domaine-reverie.fr</a>
+        </p>
+    </div>
+</li>
+                    <li>
+                        <div class="location-icon-box"><i class="fa-solid fa-plane-departure"></i></div>
+                        <div>
+                            <strong>Aéroport de Nantes Atlantique :</strong>
+                            <p style="color: var(--text-muted); margin: 0;">À 9 km seulement (10-12 min en voiture)</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="location-icon-box"><i class="fa-solid fa-umbrella-beach"></i></div>
+                        <div>
+                            <strong>Pornic et les plages de l'Océan :</strong>
+                            <p style="color: var(--text-muted); margin: 0;">À seulement 25-30 min de route</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="map-wrapper">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2714.288921868357!2d-1.7291881!3d47.1352467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4805ec6843477f1f%3A0x1d5fcfc4bb416e8!2s39%20Rue%20de%20la%20Cr%C3%A9maill%C3%A8re%2C%2044710%20Saint-L%C3%A9ger-les-Vignes!5e0!3m2!1sfr!2sfr!4v1710000000000!5m2!1sfr!2sfr" 
+                        style="width: 100%; height: 100%; border: 0;"
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="font-family: var(--font-serif); font-size: 1.7rem;">Domaine de la Rêverie</h4>
+                    <p style="margin-bottom: 16px; line-height: 1.7;">
+                        L'adresse romantique par excellence à Saint-Léger-les-Vignes (44710). Quatre suites avec balnéothérapie privative pour se retrouver et déconnecter en duo.
+                    </p>
+                    <p style="font-size: 0.85rem; color: var(--gold-light);">
+                        <i class="fa-solid fa-check"></i> Havre de paix non-fumeur • Réservé aux couples adultes
+                    </p>
+                    <div style="margin-top: 18px; display: flex; gap: 14px; font-size: 1.3rem;">
+                        <a href="https://instagram.com" target="_blank" style="color: var(--gold-light);"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://facebook.com" target="_blank" style="color: var(--gold-light);"><i class="fa-brands fa-facebook"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Nos 4 Suites</h4>
+                    <ul>
+                        <li><a href="#suites">Suite Signature (dès 210 €)</a></li>
+                        <li><a href="#suites">Suite Volupté (dès 210 €)</a></li>
+                        <li><a href="#suites">Suite Bohème (dès 170 €)</a></li>
+                        <li><a href="#suites">Suite Parisienne (dès 140 €)</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Informations &amp; Contact</h4>
+                    <ul>
+                        <li><strong>Arrivée :</strong> 17:00 – 23:00</li>
+                        <li><strong>Départ :</strong> Jusqu'à 11:00</li>
+                        <li><strong>Email :</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e694839083948f83d2d2d1d7d6a68993928a89898dc885898b">[email&#160;protected]</a></li>
+                        <li><strong>Lieu :</strong> 44710 Saint-Léger-les-Vignes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Domaine de la Rêverie • Tous droits réservés • Site officiel indépendant</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="Aperçu grand format" onclick="event.stopPropagation()">
+    </div>
+
+    <div id="toast">
+        <i class="fa-solid fa-circle-check" style="color: var(--gold); font-size: 1.2rem;"></i>
+        <span id="toast-text">Option mise à jour</span>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        window.addEventListener('scroll', function() {
+            var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            if (height > 0) {
+                var scrolled = (winScroll / height) * 100;
+                var progressEl = document.getElementById('scroll-progress');
+                if (progressEl) progressEl.style.width = scrolled + "%";
+            }
+
+            var header = document.getElementById('main-header');
+            if (header) {
+                if (winScroll > 40) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+        });
+
+        function openLightbox(imgSrc) {
+            var lb = document.getElementById('lightbox');
+            var img = document.getElementById('lightbox-img');
+            if (lb && img) {
+                img.src = imgSrc;
+                lb.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeLightbox() {
+            var lb = document.getElementById('lightbox');
+            if (lb) {
+                lb.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        function toggleDrawer() {
+            var drawer = document.getElementById('mobile-drawer');
+            var overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('open');
+                overlay.classList.toggle('open');
+            }
+        }
+
+        function showToast(msg) {
+            var toast = document.getElementById('toast');
+            var toastText = document.getElementById('toast-text');
+            if (toast && toastText) {
+                toastText.textContent = msg;
+                toast.classList.add('show');
+                setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 2800);
+            }
+        }
+
+        var today = new Date();
+        var tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        function formatDate(d) {
+            var month = '' + (d.getMonth() + 1);
+            var day = '' + d.getDate();
+            var year = d.getFullYear();
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+            return [year, month, day].join('-');
+        }
+
+        var inEl = document.getElementById('booking-in');
+        var outEl = document.getElementById('booking-out');
+        var sInEl = document.getElementById('strip-checkin');
+        var sOutEl = document.getElementById('strip-checkout');
+
+        if (inEl) inEl.value = formatDate(today);
+        if (outEl) outEl.value = formatDate(tomorrow);
+        if (sInEl) sInEl.value = formatDate(today);
+        if (sOutEl) sOutEl.value = formatDate(tomorrow);
+
+        var extrasState = {
+            deco: { selected: false, price: 50 },
+            brunch: { selected: false, price: 54 },
+            planche: { selected: false, price: 64 },
+            massage: { selected: false, price: 180 }
+        };
+
+        function toggleExtraNew(key, price, title) {
+            var card = document.getElementById('card-' + key);
+            if (!card) return;
+            
+            extrasState[key].selected = !extrasState[key].selected;
+            
+            if (extrasState[key].selected) {
+                card.classList.add('selected');
+                showToast(title + " ajoutée (" + price + " €)");
+            } else {
+                card.classList.remove('selected');
+                showToast(title + " retirée");
+            }
+
+            calculatePrice();
+        }
+
+        function choisirSuite(nom, prix) {
+            var select = document.getElementById('booking-suite');
+            if (select) {
+                for (var i = 0; i < select.options.length; i++) {
+                    if (select.options[i].getAttribute('data-name') === nom) {
+                        select.value = select.options[i].value;
+                        break;
+                    }
+                }
+            }
+            calculatePrice();
+            var resSection = document.getElementById('reservation');
+            if (resSection) resSection.scrollIntoView({ behavior: 'smooth' });
+            showToast("Suite choisie : " + nom);
+        }
+
+        function syncSuiteSelection(val) {
+            if (!val) return;
+            var select = document.getElementById('booking-suite');
+            if (select) select.value = val;
+            calculatePrice();
+        }
+
+        function calculatePrice() {
+            var select = document.getElementById('booking-suite');
+            if (!select) return;
+
+            var selectedOption = select.options[select.selectedIndex];
+            var pricePerNight = parseFloat(select.value) || 0;
+            var suiteName = selectedOption.getAttribute('data-name') || '—';
+
+            var checkInVal = new Date(document.getElementById('booking-in').value);
+            var checkOutVal = new Date(document.getElementById('booking-out').value);
+
+            if (checkOutVal <= checkInVal) {
+                checkOutVal = new Date(checkInVal);
+                checkOutVal.setDate(checkOutVal.getDate() + 1);
+                document.getElementById('booking-out').value = formatDate(checkOutVal);
+            }
+
+            var diffTime = Math.abs(checkOutVal - checkInVal);
+            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) || 1;
+
+            var extrasTotal = 0;
+            for (var k in extrasState) {
+                if (extrasState[k].selected) {
+                    extrasTotal += extrasState[k].price;
+                }
+            }
+
+            var roomPrice = diffDays * pricePerNight;
+            var finalTotal = roomPrice + extrasTotal;
+
+            var sName = document.getElementById('summary-suite-name');
+            var sNights = document.getElementById('summary-nights');
+            var sRoom = document.getElementById('summary-room-price');
+            var sExtras = document.getElementById('summary-extras');
+            var sTotal = document.getElementById('summary-total-price');
+
+            if (sName) sName.textContent = suiteName;
+            if (sNights) sNights.textContent = diffDays + (diffDays > 1 ? " nuits" : " nuit");
+            if (sRoom) sRoom.textContent = roomPrice + " €";
+            if (sExtras) sExtras.textContent = extrasTotal + " €";
+            if (sTotal) sTotal.textContent = finalTotal + " €";
+        }
+
+        function handleBooking(e) {
+            e.preventDefault();
+            var total = document.getElementById('summary-total-price').textContent;
+            var suite = document.getElementById('summary-suite-name').textContent;
+            if (suite === '—' || total === '0 €') {
+                alert("Veuillez sélectionner une suite avant de valider votre réservation.");
+                return;
+            }
+            alert("Félicitations !\nVotre demande pour la " + suite + " d'un montant total de " + total + " a bien été prise en compte.\nUn récapitulatif détaillé vous a été adressé.");
+        }
+
+        calculatePrice();
+    </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
