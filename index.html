@@ -1261,7 +1261,7 @@
         }
 
         /* ==============================================================
-           RESPONSIVE — ADAPTATION AUTOMATIQUE
+           RESPONSIVE
         ============================================================== */
 
         /* Tablette large / petit laptop */
@@ -1280,9 +1280,9 @@
             .header-cta { padding: 12px 18px; font-size: 0.75rem; }
         }
 
-        /* Tablette (iPad, etc.) */
+        /* Tablette (iPad, etc.) — centrage parfait du titre */
         @media (max-width: 992px) {
-            :root { --header-h: 110px; }
+            :root { --header-h: 100px; }
             body { padding-top: var(--header-h); }
 
             header { height: var(--header-h); padding: 0; }
@@ -1290,31 +1290,91 @@
             .header-content {
                 height: 100%;
                 padding: 0 16px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                position: relative;
+            }
+
+            /* Logo collé à gauche */
+            .logo-box {
+                position: static;
+                left: auto;
+                top: auto;
+                transform: none;
+                flex-shrink: 0;
+                z-index: 10;
             }
 
             .logo-img-wrapper {
-                width: 120px;
-                height: 120px;
-                padding: 4px;
-                margin-bottom: -40px;
+                width: 80px;
+                height: 80px;
+                padding: 3px;
+                margin-bottom: 0;
+                margin-top: 0;
             }
 
-            .logo-box { left: 10px; }
+            /* Titre centré entre logo et burger */
+            .logo-text {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                padding: 0;
+                max-width: calc(100% - 180px);
+                text-align: center;
+                pointer-events: none;
+                z-index: 5;
+            }
 
-            .logo-text { padding-left: 120px; }
-            .header-bottom { padding-left: 120px; }
+            .logo-title { 
+                font-size: 1rem; 
+                letter-spacing: 0.03em; 
+                white-space: normal;
+                line-height: 1.2;
+                display: block;
+            }
+            .logo-city { 
+                font-size: 0.62rem; 
+                letter-spacing: 0.1em; 
+                gap: 5px; 
+                white-space: normal;
+                justify-content: center;
+                display: flex;
+                margin-top: 2px;
+            }
+            .logo-city::after { width: 14px; height: 1.5px; }
 
-            .logo-title { font-size: 1.05rem; letter-spacing: 0.03em; }
-            .logo-city { font-size: 0.68rem; letter-spacing: 0.12em; }
-            .logo-city::after { width: 16px; }
+            .header-bottom {
+                display: none !important;
+            }
 
             .nav-links, .header-cta { display: none; }
+
+            /* Burger collé à droite */
             .burger-btn {
-                display: block;
-                position: absolute;
-                top: 50%;
-                right: 16px;
-                transform: translateY(-50%);
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                position: static !important;
+                transform: none !important;
+                top: auto !important;
+                right: auto !important;
+                margin-left: auto;
+                flex-shrink: 0;
+                z-index: 20;
+                font-size: 1.5rem;
+                padding: 10px 14px;
+                background: rgba(156, 88, 56, 0.12);
+                border-radius: 10px;
+                color: var(--primary);
+                transition: background 0.2s ease, transform 0.2s ease;
+            }
+
+            .burger-btn:active {
+                background: rgba(156, 88, 56, 0.3);
+                transform: scale(0.95) !important;
             }
 
             .hero {
@@ -1347,28 +1407,97 @@
             .suites-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
         }
 
-        /* Mobile */
+        /* Mobile — centrage parfait du titre */
         @media (max-width: 640px) {
-            :root { --header-h: 100px; }
+            :root { --header-h: 85px; }
             body { padding-top: var(--header-h); }
 
             header { height: var(--header-h); }
 
-            .logo-img-wrapper {
-                width: 85px;
-                height: 85px;
-                padding: 3px;
-                margin-bottom: -30px;
+            .header-content {
+                padding: 0 12px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                position: relative;
             }
 
-            .logo-box { left: 8px; }
+            /* Logo à gauche */
+            .logo-box {
+                position: static;
+                left: auto;
+                top: auto;
+                transform: none;
+                flex-shrink: 0;
+                z-index: 10;
+            }
 
-            .logo-text { padding-left: 85px; padding-right: 8px; }
-            .header-bottom { padding-left: 85px; padding-right: 8px; }
+            .logo-img-wrapper {
+                width: 60px;
+                height: 60px;
+                padding: 2px;
+                margin-bottom: 0;
+                margin-top: 0;
+            }
 
-            .logo-title { font-size: 0.82rem; letter-spacing: 0.02em; white-space: normal; }
-            .logo-city { font-size: 0.55rem; letter-spacing: 0.08em; gap: 4px; white-space: normal; }
-            .logo-city::after { width: 12px; height: 1.5px; }
+            /* Titre centré entre logo et burger */
+            .logo-text {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                padding: 0;
+                max-width: calc(100% - 150px);
+                text-align: center;
+                pointer-events: none;
+                z-index: 5;
+            }
+
+            .logo-title { 
+                font-size: 0.78rem; 
+                letter-spacing: 0.02em; 
+                white-space: normal;
+                line-height: 1.15;
+                display: block;
+            }
+            .logo-city { 
+                font-size: 0.52rem; 
+                letter-spacing: 0.08em; 
+                gap: 4px; 
+                white-space: normal;
+                justify-content: center;
+                display: flex;
+                margin-top: 1px;
+            }
+            .logo-city::after { width: 10px; height: 1.5px; }
+
+            .header-bottom { display: none !important; }
+
+            /* Burger à droite */
+            .burger-btn {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.4rem;
+                padding: 9px 12px;
+                background: rgba(156, 88, 56, 0.12);
+                border-radius: 10px;
+                color: var(--primary);
+                position: static !important;
+                transform: none !important;
+                top: auto !important;
+                right: auto !important;
+                margin-left: auto;
+                flex-shrink: 0;
+                z-index: 20;
+                transition: background 0.2s ease, transform 0.2s ease;
+            }
+
+            .burger-btn:active {
+                background: rgba(156, 88, 56, 0.3);
+                transform: scale(0.95) !important;
+            }
 
             .hero { padding: 40px 0 60px; }
             .hero-tag { font-size: 0.7rem; padding: 6px 14px; letter-spacing: 0.1em; }
@@ -1423,15 +1552,21 @@
 
         /* Très petits écrans */
         @media (max-width: 380px) {
-            .logo-title { font-size: 0.72rem; }
-            .logo-city { font-size: 0.48rem; letter-spacing: 0.06em; }
+            .logo-title { font-size: 0.68rem; }
+            .logo-city { font-size: 0.46rem; letter-spacing: 0.06em; }
+            .logo-city::after { display: none; }
             .logo-img-wrapper {
-                width: 70px;
-                height: 70px;
-                margin-bottom: -25px;
+                width: 52px;
+                height: 52px;
+                padding: 2px;
             }
-            .logo-text { padding-left: 70px; }
-            .header-bottom { padding-left: 70px; }
+            .logo-text {
+                max-width: calc(100% - 130px);
+            }
+            .burger-btn {
+                font-size: 1.25rem;
+                padding: 8px 10px;
+            }
             .hero h1 { font-size: 1.5rem; }
             .btn { padding: 12px 20px; font-size: 0.78rem; }
             .amenities-grid { grid-template-columns: 1fr; }
