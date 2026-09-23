@@ -69,7 +69,7 @@
         }
 
         /* ============================================
-           HEADER — STRUCTURE SIMPLE, 1 SEULE LIGNE
+           HEADER — FOND D'ORIGINE (BEIGE CLAIR)
            ============================================ */
         header {
             position: fixed;
@@ -151,6 +151,7 @@
             min-width: 0;
         }
 
+        /* Titre dans le header : couleur d'origine foncée */
         .logo-title {
             font-family: var(--font-serif);
             font-size: 1.35rem;
@@ -161,6 +162,7 @@
             white-space: nowrap;
         }
 
+        /* Ville dans le header : couleur primaire d'origine */
         .logo-city {
             font-size: 0.72rem;
             text-transform: uppercase;
@@ -185,6 +187,7 @@
             list-style: none;
         }
 
+        /* Liens de nav : couleur foncée d'origine */
         .nav-links a {
             font-size: 0.72rem;
             font-weight: 600;
@@ -235,6 +238,7 @@
             text-align: center;
         }
 
+        /* Bouton principal : marron (couleur d'origine) */
         .btn-primary {
             background-color: var(--primary);
             color: #FFFFFF;
@@ -246,6 +250,7 @@
             transform: translateY(-2px);
         }
 
+        /* Bouton doré : conservé */
         .btn-gold {
             background: var(--gold-gradient);
             color: var(--dark);
@@ -283,16 +288,16 @@
             background: rgba(156, 88, 56, 0.3);
         }
 
-        /* ===== DRAWER MOBILE ===== */
+        /* ===== DRAWER MOBILE — FOND MARRON ===== */
         .mobile-drawer {
             position: fixed;
             top: 0; right: -100%;
             width: min(85vw, 320px);
             height: 100vh;
-            background: #FFFFFF;
+            background: var(--primary);
             z-index: 1000001;
             padding: 30px 24px;
-            box-shadow: -10px 0 35px rgba(0,0,0,0.25);
+            box-shadow: -10px 0 35px rgba(0,0,0,0.35);
             display: flex;
             flex-direction: column;
             transition: right 0.35s ease;
@@ -304,7 +309,7 @@
         .drawer-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.55);
+            background: rgba(0,0,0,0.6);
             z-index: 1000000;
             opacity: 0;
             visibility: hidden;
@@ -321,24 +326,51 @@
             margin-top: 40px;
         }
 
+        /* Liens du burger : texte blanc sur fond marron */
         .drawer-links a {
             font-size: 1.1rem;
             font-weight: 600;
             text-transform: uppercase;
-            color: var(--dark);
+            color: #FFFFFF;
             display: flex;
             align-items: center;
             gap: 12px;
+            transition: color 0.2s ease;
         }
 
-        .drawer-links a i { color: var(--primary); width: 24px; }
+        .drawer-links a:hover {
+            color: var(--gold-light);
+        }
 
-        /* Bouton dans le drawer */
+        /* Icônes du burger : dorées */
+        .drawer-links a i {
+            color: var(--gold);
+            width: 24px;
+        }
+
+        /* Bouton "Réserver en Direct" dans le burger : BIEN CENTRÉ + DORÉ */
         .drawer-links .btn {
             font-size: 0.85rem;
             padding: 14px 20px;
             text-transform: uppercase;
             letter-spacing: 0.08em;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px;
+            width: 100%;
+            text-align: center;
+            color: var(--dark) !important;
+            background: var(--gold-gradient) !important;
+            font-weight: 800 !important;
+            border-radius: 50px !important;
+            border: none;
+        }
+
+        .drawer-links .btn i {
+            color: var(--dark) !important;
+            width: auto !important;
+            margin: 0;
         }
 
         /* ===== HERO ===== */
@@ -1048,104 +1080,40 @@
            RESPONSIVE
            ============================================ */
 
-        /* Tablette paysage / petit laptop (<= 1100px) */
         @media (max-width: 1100px) {
-            .nav-links a {
-                font-size: 0.65rem;
-            }
-            .nav-links {
-                gap: 12px;
-            }
-            .btn {
-                padding: 10px 18px;
-                font-size: 0.72rem;
-            }
+            .nav-links a { font-size: 0.65rem; }
+            .nav-links { gap: 12px; }
+            .btn { padding: 10px 18px; font-size: 0.72rem; }
             .logo-title { font-size: 1.15rem; }
             .logo-city { font-size: 0.65rem; }
             .logo-img-wrapper { width: 70px; height: 70px; }
         }
 
-        /* Tablette (<= 992px) : on cache la nav + bouton, on montre le burger */
         @media (max-width: 992px) {
             :root { --header-h: 100px; }
-
-            .header-content {
-                padding: 0 16px;
-                gap: 12px;
-            }
-
-            .logo-img-wrapper {
-                width: 70px;
-                height: 70px;
-            }
-
+            .header-content { padding: 0 16px; gap: 12px; }
+            .logo-img-wrapper { width: 70px; height: 70px; }
             .logo-title { font-size: 1.2rem; }
             .logo-city { font-size: 0.68rem; letter-spacing: 0.14em; }
-
-            .nav-links,
-            .header-right .btn {
-                display: none;
-            }
-
-            .burger-btn {
-                display: flex;
-            }
-
-            .header-right {
-                gap: 0;
-            }
-
-            .hero {
-                min-height: auto;
-                padding: 50px 0 70px;
-            }
+            .nav-links, .header-right .btn { display: none; }
+            .burger-btn { display: flex; }
+            .header-right { gap: 0; }
+            .hero { min-height: auto; padding: 50px 0 70px; }
             .hero h1 { font-size: clamp(2rem, 6vw, 3rem); }
             .hero-subtitle-quote { font-size: 1.3rem; }
-
-            .strip-card {
-                grid-template-columns: 1fr;
-                padding: 22px;
-            }
-
-            .plan-grid,
-            .location-grid,
-            .booking-layout,
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
+            .strip-card { grid-template-columns: 1fr; padding: 22px; }
+            .plan-grid, .location-grid, .booking-layout, .footer-grid { grid-template-columns: 1fr; }
             .booking-summary { position: static; }
             .form-row { grid-template-columns: 1fr; }
             section { padding: 70px 0; }
         }
 
-        /* Mobile (<= 640px) */
         @media (max-width: 640px) {
             :root { --header-h: 90px; }
-
-            .header-content {
-                padding: 0 12px;
-                gap: 8px;
-            }
-
-            .brand-cluster {
-                gap: 10px;
-                min-width: 0;
-                flex: 1 1 auto;
-            }
-
-            .logo-img-wrapper {
-                width: 60px;
-                height: 60px;
-                padding: 2px;
-            }
-
-            .logo-text {
-                min-width: 0;
-                overflow: hidden;
-            }
-
-            /* ✅ TITRE PLUS GRAND SUR MOBILE */
+            .header-content { padding: 0 12px; gap: 8px; }
+            .brand-cluster { gap: 10px; min-width: 0; flex: 1 1 auto; }
+            .logo-img-wrapper { width: 60px; height: 60px; padding: 2px; }
+            .logo-text { min-width: 0; overflow: hidden; }
             .logo-title {
                 font-size: 1.15rem;
                 font-weight: 700;
@@ -1154,19 +1122,13 @@
                 line-height: 1.1;
                 word-break: break-word;
             }
-
             .logo-city {
                 font-size: 0.62rem;
                 letter-spacing: 0.08em;
                 white-space: normal;
                 margin-top: 3px;
             }
-
-            .burger-btn {
-                font-size: 1.2rem;
-                padding: 9px 12px;
-            }
-
+            .burger-btn { font-size: 1.2rem; padding: 9px 12px; }
             .hero { padding: 40px 0 60px; }
             .hero-tag { font-size: 0.7rem; padding: 6px 14px; }
             .hero h1 { font-size: 1.8rem; }
@@ -1174,57 +1136,25 @@
             .hero-description { font-size: 0.92rem; }
             .hero-badges { gap: 12px; }
             .badge-item { font-size: 0.78rem; }
-
             .section-title { font-size: 1.7rem; }
             section { padding: 55px 0; }
-
             .suite-img-container { height: 280px; }
             .extra-img-wrap { height: 240px; }
-
             .suite-price-bar { flex-direction: column; align-items: flex-start; }
             .suite-price-bar .btn { width: 100%; justify-content: center; }
-
-            .extra-check-badge {
-                width: 48px; height: 48px;
-                font-size: 1.3rem;
-            }
-
-            .booking-form,
-            .booking-summary {
-                padding: 24px 20px;
-            }
-
+            .extra-check-badge { width: 48px; height: 48px; font-size: 1.3rem; }
+            .booking-form, .booking-summary { padding: 24px 20px; }
             .summary-total { font-size: 1.3rem; }
             .container { padding: 0 16px; }
-
-            #toast {
-                right: 16px; left: 16px; bottom: 16px;
-                justify-content: center;
-                max-width: none;
-            }
-
+            #toast { right: 16px; left: 16px; bottom: 16px; justify-content: center; max-width: none; }
             .amenities-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* Très petit écran (<= 400px) */
         @media (max-width: 400px) {
-            .logo-img-wrapper {
-                width: 50px;
-                height: 50px;
-                padding: 2px;
-            }
-            /* ✅ Titre encore bien visible sur petit mobile */
-            .logo-title {
-                font-size: 1rem;
-            }
-            .logo-city {
-                font-size: 0.55rem;
-                letter-spacing: 0.05em;
-            }
-            .burger-btn {
-                font-size: 1.05rem;
-                padding: 7px 9px;
-            }
+            .logo-img-wrapper { width: 50px; height: 50px; padding: 2px; }
+            .logo-title { font-size: 1rem; }
+            .logo-city { font-size: 0.55rem; letter-spacing: 0.05em; }
+            .burger-btn { font-size: 1.05rem; padding: 7px 9px; }
             .hero h1 { font-size: 1.5rem; }
             .amenities-grid { grid-template-columns: 1fr; }
         }
@@ -1280,12 +1210,12 @@
         </div>
     </header>
 
-    <!-- ================= DRAWER MOBILE ================= -->
+    <!-- ================= DRAWER MOBILE — FOND MARRON ================= -->
     <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
     <div class="mobile-drawer" id="mobile-drawer">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
-            <span style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700;">Domaine de la Rêverie</span>
-            <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; padding: 8px;"><i class="fa-solid fa-xmark"></i></button>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(197, 160, 89, 0.4); padding-bottom: 16px;">
+            <span style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; color: var(--gold-light);">Domaine de la Rêverie</span>
+            <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; padding: 8px; color: var(--gold-light);"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
         <ul class="drawer-links">
@@ -1295,7 +1225,7 @@
             <li><a href="#extras" onclick="toggleDrawer()"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Soins</a></li>
             <li><a href="#acces" onclick="toggleDrawer()"><i class="fa-solid fa-compass"></i> Accès &amp; Contact</a></li>
             <li style="margin-top: 14px; list-style: none;">
-                <a href="#reservation" onclick="toggleDrawer()" class="btn btn-primary" style="width: 100%; justify-content: center; color: #FFFFFF;">
+                <a href="#reservation" onclick="toggleDrawer()" class="btn">
                     <i class="fa-solid fa-calendar-check"></i> Réserver en Direct
                 </a>
             </li>
@@ -1563,7 +1493,7 @@
         </div>
     </section>
 
-    <section id="acces" style="background: #FFFFFF;">
+    <section id="acces" style="background: #F5EFEB;">
         <div class="container">
             <div class="section-header">
                 <span class="section-subtitle">Localisation</span>
@@ -1572,7 +1502,7 @@
             <div class="location-grid">
                 <ul class="location-items">
                     <li><div class="location-icon-box"><i class="fa-solid fa-location-dot"></i></div><div><strong>Adresse :</strong><p style="color: var(--text-muted); margin: 0;">39 Rue de la Crémaillère, 44710 Saint-Léger-les-Vignes</p></div></li>
-                    <li><div class="location-icon-box"><i class="fa-solid fa-envelope"></i></div><div><strong>Email :</strong><p style="color: var(--text-muted); margin: 0;"><a href="mailto:contact@domaine-reverie.fr" style="color: var(--primary); font-weight: 600;">contact@domaine-reverie.fr</a></p></div></li>
+                    <li><div class="location-icon-box"><i class="fa-solid fa-envelope"></i></div><div><strong>Email :</strong><p style="color: var(--text-muted); margin: 0;"><a href="mailto:reverie44710@outlook.com" style="color: var(--primary); font-weight: 600;">reverie44710@outlook.com</a></p></div></li>
                     <li><div class="location-icon-box"><i class="fa-solid fa-plane-departure"></i></div><div><strong>Aéroport :</strong><p style="color: var(--text-muted); margin: 0;">9 km (10 min)</p></div></li>
                     <li><div class="location-icon-box"><i class="fa-solid fa-umbrella-beach"></i></div><div><strong>Plages :</strong><p style="color: var(--text-muted); margin: 0;">Pornic à 25-30 min</p></div></li>
                 </ul>
@@ -1591,8 +1521,8 @@
                     <p style="margin-bottom: 16px; line-height: 1.7;">L'adresse romantique à Saint-Léger-les-Vignes. Quatre suites avec balnéothérapie privative.</p>
                     <p style="font-size: 0.85rem; color: var(--gold-light);"><i class="fa-solid fa-check"></i> Non-fumeur • Couples</p>
                     <div style="margin-top: 18px; display: flex; gap: 14px; font-size: 1.3rem;">
-                        <a href="https://instagram.com" target="_blank" style="color: var(--gold-light);"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://facebook.com" target="_blank" style="color: var(--gold-light);"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/domainedelareverie/" target="_blank" rel="noopener" style="color: var(--gold-light);"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61574307839562" target="_blank" rel="noopener" style="color: var(--gold-light);"><i class="fa-brands fa-facebook"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -1609,7 +1539,7 @@
                     <ul>
                         <li><strong>Arrivée :</strong> 17h – 23h</li>
                         <li><strong>Départ :</strong> Jusqu'à 11h</li>
-                        <li><strong>Email :</strong> contact@domaine-reverie.fr</li>
+                        <li><strong>Email :</strong> reverie44710@outlook.com</li>
                         <li><strong>Lieu :</strong> 44710</li>
                     </ul>
                 </div>
