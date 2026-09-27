@@ -1645,6 +1645,92 @@
             .amenities-grid { grid-template-columns: 1fr; }
         }
 
+                /* ============================================
+           CARTE MASSAGE — MODE INFO + DEMANDE
+           ============================================ */
+        .extra-info-only {
+            cursor: default;
+        }
+        .extra-info-only:hover {
+            transform: none;
+            border-color: var(--border);
+        }
+        .extra-info-only .extra-info-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(26, 22, 19, 0.85);
+            color: var(--gold-light);
+            border: 1px solid rgba(197, 160, 89, 0.6);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+        }
+        .extra-info-only .extra-info-badge i {
+            color: var(--gold);
+            font-size: 0.85rem;
+        }
+
+        .massage-request {
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px dashed var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .massage-request-note {
+            font-size: 0.82rem;
+            color: var(--primary);
+            background: rgba(197, 160, 89, 0.12);
+            border-left: 3px solid var(--gold);
+            padding: 10px 12px;
+            border-radius: 6px;
+            line-height: 1.5;
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+        .massage-request-note i {
+            color: var(--gold);
+            margin-right: 4px;
+        }
+        .massage-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--dark);
+            margin-top: 4px;
+        }
+        .massage-input {
+            width: 100%;
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            background: #FFFFFF;
+            outline: none;
+            transition: var(--transition);
+        }
+        .massage-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.18);
+        }
+        .massage-submit {
+            margin-top: 10px;
+            width: 100%;
+            padding: 12px;
+            font-size: 0.82rem;
+        }
+
         @media print {
             header, #scroll-progress, .mobile-drawer, .drawer-overlay,
             #toast, #lightbox, .burger-btn {
@@ -1931,12 +2017,36 @@
                         <ul class="extra-points"><li><i class="fa-solid fa-wine-glass"></i> 1 bouteille de vin</li><li><i class="fa-solid fa-cheese"></i> Fromages affinés</li><li><i class="fa-solid fa-bowl-food"></i> Charcuterie</li></ul>
                     </div>
                 </div>
-                <div class="extra-poster-card" id="card-massage" onclick="toggleExtraNew('massage', 180, 'Massage Duo')">
-                    <div class="extra-img-wrap"><img src="extra-massage.jpg" alt="Massage"><div class="extra-check-badge"><i class="fa-solid fa-check"></i></div></div>
-                    <div class="extra-desc-body"><h3>Massage en Duo (1h)</h3><div class="extra-price-tag">180 €</div><p class="extra-detail-p">Lâcher-prise absolu avec nos expertes.</p>
-                        <ul class="extra-points"><li><i class="fa-solid fa-hands"></i> 1h massage simultané</li><li><i class="fa-solid fa-spa"></i> Huiles chaudes</li><li><i class="fa-solid fa-feather"></i> Détente profonde</li></ul>
-                    </div>
-                </div>
+              <div class="extra-poster-card extra-info-only" id="card-massage">
+    <div class="extra-img-wrap">
+        <img src="extra-massage.jpg" alt="Massage">
+        <div class="extra-info-badge"><i class="fa-solid fa-calendar-check"></i> Sur demande</div>
+    </div>
+    <div class="extra-desc-body">
+        <h3>Massage en Duo (1h)</h3>
+        <div class="extra-price-tag">180 €</div>
+        <p class="extra-detail-p">Lâcher-prise absolu avec nos praticiennes expertes. Prestation sur réservation, selon disponibilités.</p>
+        <ul class="extra-points">
+            <li><i class="fa-solid fa-hands"></i> 1h de massage simultané</li>
+            <li><i class="fa-solid fa-spa"></i> Huiles chaudes aromatiques</li>
+            <li><i class="fa-solid fa-feather"></i> Détente profonde et lâcher-prise</li>
+        </ul>
+        <div class="massage-request">
+            <p class="massage-request-note">
+                <i class="fa-solid fa-circle-info"></i> Faites votre demande ci-dessous, nous vous confirmerons le créneau selon nos disponibilités.
+            </p>
+            <label for="massage-day" class="massage-label">Jour souhaité</label>
+            <input type="date" id="massage-day" class="massage-input">
+            <label for="massage-time" class="massage-label">Heure souhaitée</label>
+            <input type="time" id="massage-time" class="massage-input">
+            <label for="massage-notes" class="massage-label">Précisions (optionnel)</label>
+            <input type="text" id="massage-notes" class="massage-input" placeholder="Ex : plutôt fin de journée...">
+            <button type="button" class="btn btn-primary massage-submit" onclick="submitMassageRequest(event)">
+                <i class="fa-solid fa-paper-plane"></i> Envoyer ma demande
+            </button>
+        </div>
+    </div>
+</div>
             </div>
         </div>
     </section>
@@ -2444,8 +2554,7 @@
         var extrasState = {
             deco: { selected: false, price: 50 },
             brunch: { selected: false, price: 54 },
-            planche: { selected: false, price: 64 },
-            massage: { selected: false, price: 180 }
+            planche: { selected: false, price: 64 }
         };
 
         function toggleExtraNew(key, price, title) {
@@ -2456,7 +2565,21 @@
             else { card.classList.remove('selected'); showToast(title + " retirée"); }
             calculatePrice();
         }
-
+        /* Demande de massage (sur devis / disponibilité) */
+        function submitMassageRequest(e) {
+            if (e) e.preventDefault();
+            var day = document.getElementById('massage-day').value;
+            var time = document.getElementById('massage-time').value;
+            if (!day || !time) {
+                showToast("Merci d'indiquer le jour et l'heure souhaités.");
+                return;
+            }
+            showToast("Demande envoyée ! Nous vous confirmons rapidement le créneau.");
+            document.getElementById('massage-day').value = '';
+            document.getElementById('massage-time').value = '';
+            document.getElementById('massage-notes').value = '';
+        }
+        
         function choisirSuite(nom, prix) {
             var select = document.getElementById('booking-suite');
             if (select) {
