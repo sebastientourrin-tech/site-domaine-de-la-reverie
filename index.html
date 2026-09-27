@@ -70,9 +70,6 @@
             transition: width 0.1s linear;
         }
 
-        /* ============================================
-           HEADER
-           ============================================ */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -219,9 +216,6 @@
         .nav-links a:hover { color: var(--primary); }
         .nav-links a:hover::after { width: 100%; }
 
-        /* ============================================
-           TOUS LES BOUTONS EN GOLD
-           ============================================ */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -249,7 +243,6 @@
             box-shadow: 0 8px 25px rgba(197, 160, 89, 0.5);
         }
 
-        /* Toutes les variantes de bouton pointent vers le même style gold */
         .btn-primary,
         .btn-gold {
             background: var(--gold-gradient);
@@ -265,7 +258,6 @@
             box-shadow: 0 8px 25px rgba(197, 160, 89, 0.5);
         }
 
-        /* Le bouton outline garde son contour blanc (utilisé sur fond sombre hero) */
         .btn-outline {
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.85);
@@ -297,7 +289,6 @@
             background: rgba(156, 88, 56, 0.3);
         }
 
-        /* ===== DRAWER MOBILE — FOND MARRON ===== */
         .mobile-drawer {
             position: fixed;
             top: 0; right: -100%;
@@ -353,7 +344,6 @@
             width: 24px;
         }
 
-        /* Bouton "Réserver en Direct" dans le burger : BIEN CENTRÉ + GOLD */
         .drawer-links .btn {
             font-size: 0.85rem;
             padding: 14px 20px;
@@ -383,7 +373,6 @@
             margin: 0;
         }
 
-        /* ===== HERO ===== */
         .hero {
             position: relative;
             min-height: calc(100vh - var(--header-h));
@@ -1146,6 +1135,68 @@
 
         .info-tab-content.active { display: block; }
 
+        /* ============================================
+           SECTION RÈGLEMENT INTÉRIEUR (classes distinctes)
+           ============================================ */
+        .reglement-section {
+            background: #FFFFFF;
+            border-top: 1px solid var(--border);
+        }
+
+        .reglement-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .reglement-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--dark);
+            background: var(--cream);
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .reglement-tab-btn i { color: var(--gold); font-size: 0.9rem; }
+
+        .reglement-tab-btn:hover {
+            border-color: var(--gold);
+            background: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .reglement-tab-btn.active {
+            background: var(--gold-gradient);
+            color: var(--dark);
+            border-color: var(--gold);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+            font-weight: 800;
+        }
+
+        .reglement-tab-btn.active i { color: var(--dark); }
+
+        .reglement-tab-content {
+            display: none;
+            animation: fadeInTab 0.4s ease;
+        }
+
+        .reglement-tab-content.active { display: block; }
+
+        /* ============================================ */
+
         @keyframes fadeInTab {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1351,16 +1402,11 @@
         }
 
         @media (max-width: 640px) {
-            .info-tab-btn { font-size: 0.68rem; padding: 9px 14px; }
-            .info-tab-btn i { font-size: 0.78rem; }
+            .info-tab-btn, .reglement-tab-btn { font-size: 0.68rem; padding: 9px 14px; }
+            .info-tab-btn i, .reglement-tab-btn i { font-size: 0.78rem; }
             .info-list li { font-size: 0.88rem; }
             .info-card { padding: 22px 18px; }
         }
-
-
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
 
         @media (max-width: 1100px) {
             .nav-links a { font-size: 0.65rem; }
@@ -1457,7 +1503,6 @@
     <header id="main-header">
         <div class="header-content">
 
-            <!-- GAUCHE : Logo + Titre + Ville -->
             <div class="brand-cluster">
                 <a href="#" class="logo-box" aria-label="Domaine de la Rêverie">
                     <div class="logo-img-wrapper">
@@ -1470,7 +1515,6 @@
                 </div>
             </div>
 
-            <!-- DROITE : Nav + Bouton Réserver + Burger -->
             <div class="header-right">
                 <ul class="nav-links">
                     <li><a href="#suites"><i class="fa-solid fa-bed"></i> Nos 4 Suites</a></li>
@@ -1494,7 +1538,6 @@
         </div>
     </header>
 
-    <!-- ================= DRAWER MOBILE — FOND MARRON ================= -->
     <div class="drawer-overlay" id="drawer-overlay" onclick="toggleDrawer()"></div>
     <div class="mobile-drawer" id="mobile-drawer">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(197, 160, 89, 0.4); padding-bottom: 16px;">
@@ -1778,66 +1821,25 @@
             </div>
         </div>
     </section>
+
     <!-- ================= INFORMATIONS PRATIQUES ================= -->
     <section id="infos" class="info-section">
         <div class="container">
             <div class="section-header">
                 <span class="section-subtitle">Informations Pratiques</span>
                 <h2 class="section-title">Tout Savoir pour Votre Séjour</h2>
-                <p class="section-desc">Consignes d'arrivée et de départ, caution, annulation, règlement intérieur et idées de sorties aux alentours.</p>
+                <p class="section-desc">Caution, annulation, capacité d'accueil, sorties aux alentours et taxe de séjour.</p>
             </div>
 
             <div class="info-tabs">
-                <button class="info-tab-btn active" onclick="showInfoTab('arrivee', this)"><i class="fa-solid fa-door-open"></i> À l'Arrivée</button>
-                <button class="info-tab-btn" onclick="showInfoTab('depart', this)"><i class="fa-solid fa-broom"></i> Avant le Départ</button>
-                <button class="info-tab-btn" onclick="showInfoTab('caution', this)"><i class="fa-solid fa-shield-halved"></i> Caution</button>
+                <button class="info-tab-btn active" onclick="showInfoTab('caution', this)"><i class="fa-solid fa-shield-halved"></i> Caution</button>
                 <button class="info-tab-btn" onclick="showInfoTab('annulation', this)"><i class="fa-solid fa-calendar-xmark"></i> Annulation</button>
                 <button class="info-tab-btn" onclick="showInfoTab('personnes', this)"><i class="fa-solid fa-users"></i> Capacité</button>
-                <button class="info-tab-btn" onclick="showInfoTab('reglement', this)"><i class="fa-solid fa-book"></i> Règlement</button>
                 <button class="info-tab-btn" onclick="showInfoTab('alentours', this)"><i class="fa-solid fa-map-location-dot"></i> Aux Alentours</button>
                 <button class="info-tab-btn" onclick="showInfoTab('taxe', this)"><i class="fa-solid fa-receipt"></i> Taxe de Séjour</button>
             </div>
 
-            <div class="info-tab-content active" id="tab-arrivee">
-                <div class="info-card">
-                    <h3><i class="fa-solid fa-door-open"></i> Consignes à votre arrivée</h3>
-                    <ul class="info-list">
-                        <li><i class="fa-solid fa-check"></i> Prendre possession de votre suite à partir de l'heure indiquée lors de votre réservation.</li>
-                        <li><i class="fa-solid fa-key"></i> La clé se trouve sur la porte de votre suite.</li>
-                        <li><i class="fa-solid fa-magnifying-glass"></i> À votre arrivée, merci de vérifier rapidement que tout est conforme et de nous signaler immédiatement toute anomalie.</li>
-                        <li><i class="fa-solid fa-wand-magic-sparkles"></i> Vous pouvez profiter librement de tous les équipements présents dans votre suite.</li>
-                        <li><i class="fa-solid fa-volume-low"></i> Pour préserver votre confort et celui des autres voyageurs, merci de respecter le calme du domaine.</li>
-                        <li><i class="fa-solid fa-couch"></i> Merci de ne pas déplacer le mobilier ou les équipements.</li>
-                        <li><i class="fa-solid fa-tree"></i> La terrasse et l'extérieur privatifs sont à votre disposition. Merci de les laisser propres après utilisation.</li>
-                        <li><i class="fa-solid fa-circle-question"></i> En cas de question ou de besoin pendant votre séjour, nous restons disponibles pour vous aider.</li>
-                    </ul>
-                    <div class="info-note">
-                        <strong>Nous vous souhaitons un agréable séjour au Domaine de la Rêverie 🤎</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-tab-content" id="tab-depart">
-                <div class="info-card">
-                    <h3><i class="fa-solid fa-broom"></i> Consignes avant votre départ</h3>
-                    <ul class="info-list">
-                        <li><i class="fa-solid fa-check"></i> Laisser la suite propre et rangée</li>
-                        <li><i class="fa-solid fa-bed"></i> Retirer les draps du lit et les déposer au pied du lit</li>
-                        <li><i class="fa-solid fa-trash-can"></i> Vider les poubelles et déposer les sacs dans l'emplacement prévu</li>
-                        <li><i class="fa-solid fa-utensils"></i> Faire votre vaisselle et ranger la cuisine</li>
-                        <li><i class="fa-solid fa-triangle-exclamation"></i> Signaler toute casse ou dégradation, même accidentelle</li>
-                        <li><i class="fa-solid fa-lightbulb"></i> Éteindre les lumières et les appareils électriques</li>
-                        <li><i class="fa-solid fa-window-maximize"></i> Fermer les fenêtres et les portes</li>
-                        <li><i class="fa-solid fa-key"></i> Laisser la clé sur la porte en quittant la suite</li>
-                    </ul>
-                    <div class="info-note">
-                        <strong>Merci pour votre attention et votre coopération 🤎</strong><br>
-                        Le ménage de fin de séjour est inclus ; ces quelques gestes nous permettent simplement de faciliter la remise en état de la suite.
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-tab-content" id="tab-caution">
+            <div class="info-tab-content active" id="tab-caution">
                 <div class="info-card">
                     <h3><i class="fa-solid fa-shield-halved"></i> Caution</h3>
                     <ul class="info-list">
@@ -1874,39 +1876,13 @@
                 <div class="info-card">
                     <h3><i class="fa-solid fa-users"></i> Nombre maximum de personnes</h3>
                     <ul class="info-list">
-                        <li><i class="fa-solid fa-user-group"></i> Chaque suite est prévue pour accueillir un maximum de 2 personnes>.</li>
+                        <li><i class="fa-solid fa-user-group"></i> Chaque suite est prévue pour accueillir un maximum de 2 personnes.</li>
                         <li><i class="fa-solid fa-clipboard-list"></i> La réservation est strictement limitée aux personnes indiquées lors de la réservation.</li>
                         <li><i class="fa-solid fa-shield-halved"></i> Pour des raisons de sécurité, de tranquillité et d'assurance, aucune personne extérieure à la réservation n'est autorisée à entrer ou à séjourner au sein du Domaine de la Rêverie, même pour une courte durée.</li>
                         <li><i class="fa-solid fa-triangle-exclamation" style="color: #C5504A;"></i> Toute personne supplémentaire non déclarée pourra entraîner l'annulation du séjour, sans remboursement.</li>
                     </ul>
                     <div class="info-note info-note-warn">
                         <strong>⚠️ Important :</strong> Le Domaine est strictement réservé aux couples adultes. Aucun visiteur extérieur n'est admis.
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-tab-content" id="tab-reglement">
-                <div class="info-card">
-                    <h3><i class="fa-solid fa-book"></i> Règlement intérieur du Domaine</h3>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 22px; line-height: 1.65;">
-                        Afin de garantir le confort, la tranquillité et la sécurité de tous, nous vous remercions de respecter les règles suivantes.
-                    </p>
-                    <div class="rules-grid">
-                        <div class="rule-block"><h4><span class="rule-num">1</span> Nombre de personnes</h4><p>Chaque suite est prévue pour accueillir un maximum de 2 personnes. La réservation est strictement limitée aux personnes indiquées. Aucun visiteur extérieur n'est autorisé au sein du Domaine, même pour une courte durée.</p></div>
-                        <div class="rule-block"><h4><span class="rule-num">2</span> Calme et tranquillité</h4><p>Le Domaine est un lieu dédié au repos et à la détente. Merci de respecter le calme des lieux et de limiter les nuisances sonores, notamment en soirée et pendant la nuit. Les fêtes, soirées et événements ne sont pas autorisés.</p></div>
-                        <div class="rule-block"><h4><span class="rule-num">3</span> Tabac</h4><p>Il est strictement interdit de fumer à l'intérieur des suites. Merci de fumer uniquement dans les espaces extérieurs prévus et de ne pas jeter les mégots au sol.</p></div>
-                        <div class="rule-block"><h4><span class="rule-num">4</span> Mobilier et équipements</h4><p>Merci de prendre soin du mobilier, de la décoration et des équipements. Il est interdit de déplacer les meubles sans autorisation. Toute casse, dégradation ou perte doit être signalée rapidement.</p></div>
-                        <div class="rule-block"><h4><span class="rule-num">5</span> Balnéo</h4><p>La balnéo est à usage privé et doit être utilisée conformément aux consignes fournies dans la suite. Merci de respecter les consignes d'utilisation et de laisser l'équipement propre après utilisation.</p></div>
-                        <div class="rule-block"><h4><span class="rule-num">6</span> Cuisine</h4><p>Merci de laisser la cuisine et la vaisselle dans un état correct après utilisation. Les équipements doivent être utilisés conformément à leur usage prévu.</p></div>
-                        <div class="rule-block"><h4><span class="rule-num">7</span> Terrasse et extérieurs</h4><p>Les espaces extérieurs privatifs sont réservés aux occupants de la suite. Merci de respecter les lieux et de les laisser propres après utilisation.</p></div>
-                        <div class="rule-block"><h4><span class="rule-num">8</span> Animaux</h4><p>Les animaux ne sont pas autorisés dans les suites, sauf accord préalable du Domaine de la Rêverie.</p></div>
-                        <div class="rule-block"><h4><span class="rule-num">9</span> Sécurité</h4><p>Merci de fermer les portes et fenêtres lorsque vous quittez votre suite. Il est interdit de laisser des bougies ou tout autre dispositif présentant un risque d'incendie sans surveillance.</p></div>
-                        <div class="rule-block"><h4><span class="rule-num">10</span> Dégradations et frais</h4><p>Toute dégradation, casse, perte de matériel ou nettoyage exceptionnel pourra faire l'objet d'une facturation ou d'une retenue sur le dépôt de garantie, conformément aux conditions de réservation.</p></div>
-                        <div class="rule-block"><h4><span class="rule-num">11</span> Départ</h4><p>Avant votre départ, merci de respecter les consignes de départ communiquées dans votre suite et de laisser les lieux dans un état correct. Merci de laisser la clé sur la porte en quittant la suite.</p></div>
-                    </div>
-                    <div class="rules-signature">
-                        Merci de votre compréhension et du respect que vous porterez au Domaine de la Rêverie.<br>
-                        Nous vous souhaitons un agréable séjour 🤎
                     </div>
                 </div>
             </div>
@@ -1977,7 +1953,7 @@
             <div class="location-grid">
                 <ul class="location-items">
                     <li><div class="location-icon-box"><i class="fa-solid fa-location-dot"></i></div><div><strong>Adresse :</strong><p style="color: var(--text-muted); margin: 0;">39 Rue de la Crémaillère, 44710 Saint-Léger-les-Vignes</p></div></li>
-                     <li><div class="location-icon-box"><i class="fa-solid fa-location-dot"></i></div><div><strong>Téléphone :</strong><p style="color: var(--text-muted); margin: 0;">06 63 76 89 56</p></div></li>
+                    <li><div class="location-icon-box"><i class="fa-solid fa-phone"></i></div><div><strong>Téléphone :</strong><p style="color: var(--text-muted); margin: 0;">06 63 76 89 56</p></div></li>
                     <li><div class="location-icon-box"><i class="fa-solid fa-envelope"></i></div><div><strong>Email :</strong><p style="color: var(--text-muted); margin: 0;"><a href="mailto:reverie44710@outlook.com" style="color: var(--primary); font-weight: 600;">reverie44710@outlook.com</a></p></div></li>
                     <li><div class="location-icon-box"><i class="fa-solid fa-plane-departure"></i></div><div><strong>Aéroport de Nantes :</strong><p style="color: var(--text-muted); margin: 0;">9 km (10 min)</p></div></li>
                     <li><div class="location-icon-box"><i class="fa-solid fa-umbrella-beach"></i></div><div><strong>Plages :</strong><p style="color: var(--text-muted); margin: 0;">Pornic à 25-30 min</p></div></li>
@@ -1988,20 +1964,62 @@
             </div>
         </div>
     </section>
-  <section id="RI" class="info-section">
+
+    <!-- ================= RÈGLEMENT INTÉRIEUR ================= -->
+    <section id="RI" class="reglement-section">
         <div class="container">
             <div class="section-header">
                 <span class="section-subtitle">Règlement Intérieur</span>
                 <h2 class="section-title">A lire avant toute réservation</h2>
-                <p class="section-desc">Règlement intérieur du domaine, Consignes d'arrivée et de départ.</p>
+                <p class="section-desc">Règlement intérieur du domaine, consignes d'arrivée et de départ.</p>
             </div>
 
-<button class="info-tab-btn active" onclick="showInfoTab('arrivee', this)"><i class="fa-solid fa-door-open"></i> À l'Arrivée</button>
-<button class="info-tab-btn" onclick="showInfoTab('depart', this)"><i class="fa-solid fa-broom"></i> Avant le Départ</button>
-<button class="info-tab-btn" onclick="showInfoTab('reglement', this)"><i class="fa-solid fa-book"></i> Règlement</button>
+            <div class="reglement-tabs">
+                <button class="reglement-tab-btn active" onclick="showReglementTab('arrivee-ri', this)"><i class="fa-solid fa-door-open"></i> À l'Arrivée</button>
+                <button class="reglement-tab-btn" onclick="showReglementTab('depart-ri', this)"><i class="fa-solid fa-broom"></i> Avant le Départ</button>
+                <button class="reglement-tab-btn" onclick="showReglementTab('reglement-ri', this)"><i class="fa-solid fa-book"></i> Règlement</button>
+            </div>
 
+            <div class="reglement-tab-content active" id="tab-arrivee-ri">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-door-open"></i> Consignes à votre arrivée</h3>
+                    <ul class="info-list">
+                        <li><i class="fa-solid fa-check"></i> Prendre possession de votre suite à partir de l'heure indiquée lors de votre réservation.</li>
+                        <li><i class="fa-solid fa-key"></i> La clé se trouve sur la porte de votre suite.</li>
+                        <li><i class="fa-solid fa-magnifying-glass"></i> À votre arrivée, merci de vérifier rapidement que tout est conforme et de nous signaler immédiatement toute anomalie.</li>
+                        <li><i class="fa-solid fa-wand-magic-sparkles"></i> Vous pouvez profiter librement de tous les équipements présents dans votre suite.</li>
+                        <li><i class="fa-solid fa-volume-low"></i> Pour préserver votre confort et celui des autres voyageurs, merci de respecter le calme du domaine.</li>
+                        <li><i class="fa-solid fa-couch"></i> Merci de ne pas déplacer le mobilier ou les équipements.</li>
+                        <li><i class="fa-solid fa-tree"></i> La terrasse et l'extérieur privatifs sont à votre disposition. Merci de les laisser propres après utilisation.</li>
+                        <li><i class="fa-solid fa-circle-question"></i> En cas de question ou de besoin pendant votre séjour, nous restons disponibles pour vous aider.</li>
+                    </ul>
+                    <div class="info-note">
+                        <strong>Nous vous souhaitons un agréable séjour au Domaine de la Rêverie 🤎</strong>
+                    </div>
+                </div>
+            </div>
 
-  <div class="info-tab-content" id="tab-reglement">
+            <div class="reglement-tab-content" id="tab-depart-ri">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-broom"></i> Consignes avant votre départ</h3>
+                    <ul class="info-list">
+                        <li><i class="fa-solid fa-check"></i> Laisser la suite propre et rangée</li>
+                        <li><i class="fa-solid fa-bed"></i> Retirer les draps du lit et les déposer au pied du lit</li>
+                        <li><i class="fa-solid fa-trash-can"></i> Vider les poubelles et déposer les sacs dans l'emplacement prévu</li>
+                        <li><i class="fa-solid fa-utensils"></i> Faire votre vaisselle et ranger la cuisine</li>
+                        <li><i class="fa-solid fa-triangle-exclamation"></i> Signaler toute casse ou dégradation, même accidentelle</li>
+                        <li><i class="fa-solid fa-lightbulb"></i> Éteindre les lumières et les appareils électriques</li>
+                        <li><i class="fa-solid fa-window-maximize"></i> Fermer les fenêtres et les portes</li>
+                        <li><i class="fa-solid fa-key"></i> Laisser la clé sur la porte en quittant la suite</li>
+                    </ul>
+                    <div class="info-note">
+                        <strong>Merci pour votre attention et votre coopération 🤎</strong><br>
+                        Le ménage de fin de séjour est inclus ; ces quelques gestes nous permettent simplement de faciliter la remise en état de la suite.
+                    </div>
+                </div>
+            </div>
+
+            <div class="reglement-tab-content" id="tab-reglement-ri">
                 <div class="info-card">
                     <h3><i class="fa-solid fa-book"></i> Règlement intérieur du Domaine</h3>
                     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 22px; line-height: 1.65;">
@@ -2026,52 +2044,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-
-
-
-    <div class="info-tab-content active" id="tab-arrivee">
-                <div class="info-card">
-                    <h3><i class="fa-solid fa-door-open"></i> Consignes à votre arrivée</h3>
-                    <ul class="info-list">
-                        <li><i class="fa-solid fa-check"></i> Prendre possession de votre suite à partir de l'heure indiquée lors de votre réservation.</li>
-                        <li><i class="fa-solid fa-key"></i> La clé se trouve sur la porte de votre suite.</li>
-                        <li><i class="fa-solid fa-magnifying-glass"></i> À votre arrivée, merci de vérifier rapidement que tout est conforme et de nous signaler immédiatement toute anomalie.</li>
-                        <li><i class="fa-solid fa-wand-magic-sparkles"></i> Vous pouvez profiter librement de tous les équipements présents dans votre suite.</li>
-                        <li><i class="fa-solid fa-volume-low"></i> Pour préserver votre confort et celui des autres voyageurs, merci de respecter le calme du domaine.</li>
-                        <li><i class="fa-solid fa-couch"></i> Merci de ne pas déplacer le mobilier ou les équipements.</li>
-                        <li><i class="fa-solid fa-tree"></i> La terrasse et l'extérieur privatifs sont à votre disposition. Merci de les laisser propres après utilisation.</li>
-                        <li><i class="fa-solid fa-circle-question"></i> En cas de question ou de besoin pendant votre séjour, nous restons disponibles pour vous aider.</li>
-                    </ul>
-                    <div class="info-note">
-                        <strong>Nous vous souhaitons un agréable séjour au Domaine de la Rêverie 🤎</strong>
-                    </div>
-                </div>
-            </div>
-
-          <div class="info-tab-content" id="tab-depart">
-                <div class="info-card">
-                    <h3><i class="fa-solid fa-broom"></i> Consignes avant votre départ</h3>
-                    <ul class="info-list">
-                        <li><i class="fa-solid fa-check"></i> Laisser la suite propre et rangée</li>
-                        <li><i class="fa-solid fa-bed"></i> Retirer les draps du lit et les déposer au pied du lit</li>
-                        <li><i class="fa-solid fa-trash-can"></i> Vider les poubelles et déposer les sacs dans l'emplacement prévu</li>
-                        <li><i class="fa-solid fa-utensils"></i> Faire votre vaisselle et ranger la cuisine</li>
-                        <li><i class="fa-solid fa-triangle-exclamation"></i> Signaler toute casse ou dégradation, même accidentelle</li>
-                        <li><i class="fa-solid fa-lightbulb"></i> Éteindre les lumières et les appareils électriques</li>
-                        <li><i class="fa-solid fa-window-maximize"></i> Fermer les fenêtres et les portes</li>
-                        <li><i class="fa-solid fa-key"></i> Laisser la clé sur la porte en quittant la suite</li>
-                    </ul>
-                    <div class="info-note">
-                        <strong>Merci pour votre attention et votre coopération 🤎</strong><br>
-                        Le ménage de fin de séjour est inclus ; ces quelques gestes nous permettent simplement de faciliter la remise en état de la suite.
-                    </div>
-                </div>
-            </div>
-
-  </section>
-
-    
     <footer>
         <div class="container">
             <div class="footer-grid">
@@ -2250,13 +2225,26 @@
             alert("Félicitations !\n" + suite + " — " + total);
         }
 
-   /* Onglets Informations Pratiques */
+        /* Onglets Informations Pratiques */
         function showInfoTab(tabId, btn) {
             var allBtns = document.querySelectorAll('.info-tab-btn');
             allBtns.forEach(function(b) { b.classList.remove('active'); });
             if (btn) btn.classList.add('active');
 
             var allContents = document.querySelectorAll('.info-tab-content');
+            allContents.forEach(function(c) { c.classList.remove('active'); });
+
+            var target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.add('active');
+        }
+
+        /* Onglets Règlement Intérieur */
+        function showReglementTab(tabId, btn) {
+            var allBtns = document.querySelectorAll('.reglement-tab-btn');
+            allBtns.forEach(function(b) { b.classList.remove('active'); });
+            if (btn) btn.classList.add('active');
+
+            var allContents = document.querySelectorAll('.reglement-tab-content');
             allContents.forEach(function(c) { c.classList.remove('active'); });
 
             var target = document.getElementById('tab-' + tabId);
