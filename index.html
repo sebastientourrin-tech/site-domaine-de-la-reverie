@@ -1087,6 +1087,278 @@
         #toast.show { transform: translateY(0); opacity: 1; }
 
         /* ============================================
+           SECTION INFORMATIONS PRATIQUES
+           ============================================ */
+        .info-section {
+            background: #FFFFFF;
+            border-top: 1px solid var(--border);
+        }
+
+        .info-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .info-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--dark);
+            background: var(--cream);
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .info-tab-btn i { color: var(--gold); font-size: 0.9rem; }
+
+        .info-tab-btn:hover {
+            border-color: var(--gold);
+            background: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .info-tab-btn.active {
+            background: var(--gold-gradient);
+            color: var(--dark);
+            border-color: var(--gold);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+            font-weight: 800;
+        }
+
+        .info-tab-btn.active i { color: var(--dark); }
+
+        .info-tab-content {
+            display: none;
+            animation: fadeInTab 0.4s ease;
+        }
+
+        .info-tab-content.active { display: block; }
+
+        @keyframes fadeInTab {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-card {
+            background: var(--cream);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: clamp(24px, 4vw, 40px);
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(26, 22, 19, 0.05);
+        }
+
+        .info-card h3 {
+            font-family: var(--font-serif);
+            font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+            color: var(--dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .info-card h3 i { color: var(--gold); font-size: 1.4rem; }
+
+        .info-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .info-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.96rem;
+            color: var(--text-main);
+            line-height: 1.65;
+        }
+
+        .info-list li i {
+            color: var(--primary);
+            font-size: 0.95rem;
+            margin-top: 5px;
+            flex-shrink: 0;
+            width: 18px;
+        }
+
+        .info-list li strong { color: var(--dark); }
+
+        .info-note {
+            margin-top: 24px;
+            padding: 16px 20px;
+            background: rgba(197, 160, 89, 0.12);
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+            font-size: 0.92rem;
+            color: var(--text-main);
+            font-style: italic;
+        }
+
+        .info-note strong { color: var(--primary); font-style: normal; }
+
+        .info-note-warn {
+            background: rgba(220, 100, 80, 0.08);
+            border-left-color: #C5504A;
+        }
+
+        .info-note-warn strong { color: #C5504A; }
+
+        .nearby-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+            gap: 22px;
+            margin-top: 10px;
+        }
+
+        .nearby-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 22px;
+            transition: var(--transition);
+        }
+
+        .nearby-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 25px rgba(26, 22, 19, 0.08);
+        }
+
+        .nearby-card .nearby-icon {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+        }
+
+        .nearby-card h4 {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .nearby-card .nearby-tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .nearby-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .nearby-link {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nearby-link:hover { color: var(--gold); }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+            gap: 18px;
+        }
+
+        .rule-block {
+            background: #FFFFFF;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            padding: 18px 20px;
+            transition: var(--transition);
+        }
+
+        .rule-block:hover {
+            border-left-color: var(--gold);
+            transform: translateX(4px);
+        }
+
+        .rule-block h4 {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            color: var(--dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .rule-block h4 .rule-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            color: var(--dark);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .rule-block p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .rules-signature {
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--primary);
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 640px) {
+            .info-tab-btn { font-size: 0.68rem; padding: 9px 14px; }
+            .info-tab-btn i { font-size: 0.78rem; }
+            .info-list li { font-size: 0.88rem; }
+            .info-card { padding: 22px 18px; }
+        }
+
+
+        /* ============================================
            RESPONSIVE
            ============================================ */
 
@@ -1205,6 +1477,7 @@
                     <li><a href="#prestations"><i class="fa-solid fa-gem"></i> Équipements</a></li>
                     <li><a href="#plan"><i class="fa-solid fa-map-location-dot"></i> Plan</a></li>
                     <li><a href="#extras"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras</a></li>
+                    <li><a href="#infos"><i class="fa-solid fa-circle-info"></i> Infos</a></li>
                     <li><a href="#acces"><i class="fa-solid fa-compass"></i> Accès</a></li>
                 </ul>
 
@@ -1233,6 +1506,7 @@
             <li><a href="#prestations" onclick="toggleDrawer()"><i class="fa-solid fa-gem"></i> Équipements</a></li>
             <li><a href="#plan" onclick="toggleDrawer()"><i class="fa-solid fa-map-location-dot"></i> Plan du Domaine</a></li>
             <li><a href="#extras" onclick="toggleDrawer()"><i class="fa-solid fa-wand-magic-sparkles"></i> Extras &amp; Soins</a></li>
+            <li><a href="#infos" onclick="toggleDrawer()"><i class="fa-solid fa-circle-info"></i> Infos Pratiques</a></li>
             <li><a href="#acces" onclick="toggleDrawer()"><i class="fa-solid fa-compass"></i> Accès &amp; Contact</a></li>
             <li style="margin-top: 14px; list-style: none;">
                 <a href="#reservation" onclick="toggleDrawer()" class="btn">
@@ -1502,6 +1776,195 @@
             </div>
         </div>
     </section>
+    <!-- ================= INFORMATIONS PRATIQUES ================= -->
+    <section id="infos" class="info-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Informations Pratiques</span>
+                <h2 class="section-title">Tout Savoir pour Votre Séjour</h2>
+                <p class="section-desc">Consignes d'arrivée et de départ, caution, annulation, règlement intérieur et idées de sorties aux alentours.</p>
+            </div>
+
+            <div class="info-tabs">
+                <button class="info-tab-btn active" onclick="showInfoTab('arrivee', this)"><i class="fa-solid fa-door-open"></i> À l'Arrivée</button>
+                <button class="info-tab-btn" onclick="showInfoTab('depart', this)"><i class="fa-solid fa-broom"></i> Avant le Départ</button>
+                <button class="info-tab-btn" onclick="showInfoTab('caution', this)"><i class="fa-solid fa-shield-halved"></i> Caution</button>
+                <button class="info-tab-btn" onclick="showInfoTab('annulation', this)"><i class="fa-solid fa-calendar-xmark"></i> Annulation</button>
+                <button class="info-tab-btn" onclick="showInfoTab('personnes', this)"><i class="fa-solid fa-users"></i> Capacité</button>
+                <button class="info-tab-btn" onclick="showInfoTab('reglement', this)"><i class="fa-solid fa-book"></i> Règlement</button>
+                <button class="info-tab-btn" onclick="showInfoTab('alentours', this)"><i class="fa-solid fa-map-location-dot"></i> Aux Alentours</button>
+                <button class="info-tab-btn" onclick="showInfoTab('taxe', this)"><i class="fa-solid fa-receipt"></i> Taxe de Séjour</button>
+            </div>
+
+            <div class="info-tab-content active" id="tab-arrivee">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-door-open"></i> Consignes à votre arrivée</h3>
+                    <ul class="info-list">
+                        <li><i class="fa-solid fa-check"></i> Prendre possession de votre suite à partir de l'heure indiquée lors de votre réservation.</li>
+                        <li><i class="fa-solid fa-key"></i> La clé se trouve sur la porte de votre suite.</li>
+                        <li><i class="fa-solid fa-magnifying-glass"></i> À votre arrivée, merci de vérifier rapidement que tout est conforme et de nous signaler immédiatement toute anomalie.</li>
+                        <li><i class="fa-solid fa-wand-magic-sparkles"></i> Vous pouvez profiter librement de tous les équipements présents dans votre suite.</li>
+                        <li><i class="fa-solid fa-volume-low"></i> Pour préserver votre confort et celui des autres voyageurs, merci de respecter le calme du domaine.</li>
+                        <li><i class="fa-solid fa-couch"></i> Merci de ne pas déplacer le mobilier ou les équipements.</li>
+                        <li><i class="fa-solid fa-tree"></i> La terrasse et l'extérieur privatifs sont à votre disposition. Merci de les laisser propres après utilisation.</li>
+                        <li><i class="fa-solid fa-circle-question"></i> En cas de question ou de besoin pendant votre séjour, nous restons disponibles pour vous aider.</li>
+                    </ul>
+                    <div class="info-note">
+                        <strong>Nous vous souhaitons un agréable séjour au Domaine de la Rêverie 🤎</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-tab-content" id="tab-depart">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-broom"></i> Consignes avant votre départ</h3>
+                    <ul class="info-list">
+                        <li><i class="fa-solid fa-check"></i> Laisser la suite propre et rangée</li>
+                        <li><i class="fa-solid fa-bed"></i> Retirer les draps du lit et les déposer au pied du lit</li>
+                        <li><i class="fa-solid fa-trash-can"></i> Vider les poubelles et déposer les sacs dans l'emplacement prévu</li>
+                        <li><i class="fa-solid fa-utensils"></i> Faire votre vaisselle et ranger la cuisine</li>
+                        <li><i class="fa-solid fa-triangle-exclamation"></i> Signaler toute casse ou dégradation, même accidentelle</li>
+                        <li><i class="fa-solid fa-lightbulb"></i> Éteindre les lumières et les appareils électriques</li>
+                        <li><i class="fa-solid fa-window-maximize"></i> Fermer les fenêtres et les portes</li>
+                        <li><i class="fa-solid fa-key"></i> Laisser la clé sur la porte en quittant la suite</li>
+                    </ul>
+                    <div class="info-note">
+                        <strong>Merci pour votre attention et votre coopération 🤎</strong><br>
+                        Le ménage de fin de séjour est inclus ; ces quelques gestes nous permettent simplement de faciliter la remise en état de la suite.
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-tab-content" id="tab-caution">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Caution</h3>
+                    <ul class="info-list">
+                        <li><i class="fa-solid fa-circle-info"></i> Une caution peut être demandée avant ou à l'arrivée dans la suite.</li>
+                        <li><i class="fa-solid fa-triangle-exclamation"></i> Elle couvre notamment les éventuelles dégradations, la casse, la perte de matériel ou d'équipements.</li>
+                        <li><i class="fa-solid fa-broom"></i> Ainsi que tout nettoyage supplémentaire rendu nécessaire par un état de propreté anormal du logement après le départ.</li>
+                        <li><i class="fa-solid fa-check"></i> Le ménage de fin de séjour est inclus dans le prix.</li>
+                        <li><i class="fa-solid fa-hand-holding-dollar"></i> Si la suite est laissée dans un état nécessitant un nettoyage exceptionnel, des frais pourront être retenus sur la caution.</li>
+                        <li><i class="fa-solid fa-circle-check" style="color: #6BAF4E;"></i> La caution <strong>n'est pas débitée</strong> si aucun dommage ou nettoyage supplémentaire n'est nécessaire.</li>
+                        <li><i class="fa-solid fa-bullhorn"></i> Merci de nous signaler toute casse ou dégradation, même accidentelle.</li>
+                    </ul>
+                    <div class="info-note">
+                        <strong>Merci pour votre compréhension 🤎</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-tab-content" id="tab-annulation">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-calendar-xmark"></i> Conditions d'annulation</h3>
+                    <ul class="info-list">
+                        <li><i class="fa-solid fa-circle-check" style="color: #6BAF4E;"></i> Toute annulation effectuée <strong>plus de 14 jours</strong> avant la date d'arrivée peut être remboursée selon les conditions prévues lors de la réservation.</li>
+                        <li><i class="fa-solid fa-circle-xmark" style="color: #C5504A;"></i> Toute annulation effectuée <strong>dans les 14 jours</strong> précédant la date d'arrivée ne donne droit à <strong>aucun remboursement</strong>.</li>
+                        <li><i class="fa-solid fa-ban" style="color: #C5504A;"></i> En cas de non-présentation ou de départ anticipé, aucun remboursement ne sera effectué.</li>
+                        <li><i class="fa-solid fa-magnifying-glass"></i> Nous vous recommandons de vérifier les conditions d'annulation avant de finaliser votre réservation.</li>
+                    </ul>
+                    <div class="info-note info-note-warn">
+                        <strong>⚠️ Attention :</strong> Passé le délai de 14 jours, la réservation est considérée comme ferme et définitive.
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-tab-content" id="tab-personnes">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-users"></i> Nombre maximum de personnes</h3>
+                    <ul class="info-list">
+                        <li><i class="fa-solid fa-user-group"></i> Chaque suite est prévue pour accueillir un <strong>maximum de 2 personnes</strong>.</li>
+                        <li><i class="fa-solid fa-clipboard-list"></i> La réservation est strictement limitée aux personnes indiquées lors de la réservation.</li>
+                        <li><i class="fa-solid fa-shield-halved"></i> Pour des raisons de <strong>sécurité, de tranquillité et d'assurance</strong>, aucune personne extérieure à la réservation n'est autorisée à entrer ou à séjourner au sein du Domaine de la Rêverie, même pour une courte durée.</li>
+                        <li><i class="fa-solid fa-triangle-exclamation" style="color: #C5504A;"></i> Toute personne supplémentaire non déclarée pourra entraîner <strong>l'annulation du séjour, sans remboursement</strong>.</li>
+                    </ul>
+                    <div class="info-note info-note-warn">
+                        <strong>⚠️ Important :</strong> Le Domaine est strictement réservé aux couples adultes. Aucun visiteur extérieur n'est admis.
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-tab-content" id="tab-reglement">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-book"></i> Règlement intérieur du Domaine</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 22px; line-height: 1.65;">
+                        Afin de garantir le confort, la tranquillité et la sécurité de tous, nous vous remercions de respecter les règles suivantes.
+                    </p>
+                    <div class="rules-grid">
+                        <div class="rule-block"><h4><span class="rule-num">1</span> Nombre de personnes</h4><p>Chaque suite est prévue pour accueillir un maximum de 2 personnes. La réservation est strictement limitée aux personnes indiquées. Aucun visiteur extérieur n'est autorisé au sein du Domaine, même pour une courte durée.</p></div>
+                        <div class="rule-block"><h4><span class="rule-num">2</span> Calme et tranquillité</h4><p>Le Domaine est un lieu dédié au repos et à la détente. Merci de respecter le calme des lieux et de limiter les nuisances sonores, notamment en soirée et pendant la nuit. Les fêtes, soirées et événements ne sont pas autorisés.</p></div>
+                        <div class="rule-block"><h4><span class="rule-num">3</span> Tabac</h4><p>Il est strictement interdit de fumer à l'intérieur des suites. Merci de fumer uniquement dans les espaces extérieurs prévus et de ne pas jeter les mégots au sol.</p></div>
+                        <div class="rule-block"><h4><span class="rule-num">4</span> Mobilier et équipements</h4><p>Merci de prendre soin du mobilier, de la décoration et des équipements. Il est interdit de déplacer les meubles sans autorisation. Toute casse, dégradation ou perte doit être signalée rapidement.</p></div>
+                        <div class="rule-block"><h4><span class="rule-num">5</span> Balnéo</h4><p>La balnéo est à usage privé et doit être utilisée conformément aux consignes fournies dans la suite. Merci de respecter les consignes d'utilisation et de laisser l'équipement propre après utilisation.</p></div>
+                        <div class="rule-block"><h4><span class="rule-num">6</span> Cuisine</h4><p>Merci de laisser la cuisine et la vaisselle dans un état correct après utilisation. Les équipements doivent être utilisés conformément à leur usage prévu.</p></div>
+                        <div class="rule-block"><h4><span class="rule-num">7</span> Terrasse et extérieurs</h4><p>Les espaces extérieurs privatifs sont réservés aux occupants de la suite. Merci de respecter les lieux et de les laisser propres après utilisation.</p></div>
+                        <div class="rule-block"><h4><span class="rule-num">8</span> Animaux</h4><p>Les animaux ne sont pas autorisés dans les suites, sauf accord préalable du Domaine de la Rêverie.</p></div>
+                        <div class="rule-block"><h4><span class="rule-num">9</span> Sécurité</h4><p>Merci de fermer les portes et fenêtres lorsque vous quittez votre suite. Il est interdit de laisser des bougies ou tout autre dispositif présentant un risque d'incendie sans surveillance.</p></div>
+                        <div class="rule-block"><h4><span class="rule-num">10</span> Dégradations et frais</h4><p>Toute dégradation, casse, perte de matériel ou nettoyage exceptionnel pourra faire l'objet d'une facturation ou d'une retenue sur le dépôt de garantie, conformément aux conditions de réservation.</p></div>
+                        <div class="rule-block"><h4><span class="rule-num">11</span> Départ</h4><p>Avant votre départ, merci de respecter les consignes de départ communiquées dans votre suite et de laisser les lieux dans un état correct. Merci de laisser la clé sur la porte en quittant la suite.</p></div>
+                    </div>
+                    <div class="rules-signature">
+                        Merci de votre compréhension et du respect que vous porterez au Domaine de la Rêverie.<br>
+                        Nous vous souhaitons un agréable séjour 🤎
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-tab-content" id="tab-alentours">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-map-location-dot"></i> À découvrir aux alentours</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 22px; line-height: 1.65;">
+                        Profitez de votre séjour au Domaine de la Rêverie pour découvrir les trésors de la Loire-Atlantique. Entre nature, patrimoine, vignobles et escapades en bord de mer, de nombreuses découvertes vous attendent à proximité.
+                    </p>
+                    <div class="nearby-grid">
+                        <div class="nearby-card">
+                            <div class="nearby-icon"><i class="fa-solid fa-water"></i></div>
+                            <div class="nearby-tag">Nature</div>
+                            <h4>Le Lac de Grand-Lieu</h4>
+                            <p>Une parenthèse nature à quelques minutes du Domaine. Espace naturel remarquable connu pour sa biodiversité exceptionnelle. À observer depuis la Maison du Lac à Bouaye ou le site de Pierre Aiguës à Saint-Aignan-de-Grand-Lieu.</p>
+                            <a href="https://lacdegrandlieu.com/tour-du-lac-de-grand-lieu/" target="_blank" rel="noopener" class="nearby-link">En savoir plus <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                        <div class="nearby-card">
+                            <div class="nearby-icon"><i class="fa-solid fa-landmark"></i></div>
+                            <div class="nearby-tag">Culture &amp; Patrimoine</div>
+                            <h4>Nantes</h4>
+                            <p>Culture, patrimoine &amp; escapade urbaine. À proximité, Nantes offre une belle journée de découverte : Château des ducs de Bretagne, centre historique, Machines de l'île, restaurants et boutiques.</p>
+                        </div>
+                        <div class="nearby-card">
+                            <div class="nearby-icon"><i class="fa-solid fa-wine-glass"></i></div>
+                            <div class="nearby-tag">Vignoble</div>
+                            <h4>Le Vignoble de Grand-Lieu</h4>
+                            <p>Une escapade au cœur des vignes. Le Domaine se trouve au cœur du vignoble de Grand-Lieu. La Route des Vins permet de découvrir les paysages viticoles et de partir à la rencontre des producteurs de Muscadet Côtes de Grandlieu.</p>
+                        </div>
+                        <div class="nearby-card">
+                            <div class="nearby-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+                            <div class="nearby-tag">Bord de Mer</div>
+                            <h4>Pornic &amp; la Côte</h4>
+                            <p>Une escapade iodée à deux. Direction Pornic : vieux port, château, sentier côtier, plages et restaurants. Le vieux port et le sentier côtier offrent de jolies promenades.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-tab-content" id="tab-taxe">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-receipt"></i> Taxe de séjour</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 22px; line-height: 1.65;">
+                        Conformément à la délibération du Conseil Métropolitain de Nantes Métropole, une taxe de séjour est appliquée par personne et par nuitée. Elle est collectée pour le compte de Nantes Métropole et reversée intégralement.
+                    </p>
+                    <ul class="info-list">
+                        <li><i class="fa-solid fa-circle-info"></i> La taxe de séjour est due par <strong>personne et par nuitée</strong>.</li>
+                        <li><i class="fa-solid fa-percent"></i> Le taux appliqué pour un hébergement en attente de classement ou sans classement est de <strong>5 %</strong> du prix de la nuitée hors taxes.</li>
+                        <li><i class="fa-solid fa-building-columns"></i> À ce taux s'ajoute une <strong>taxe additionnelle départementale de 0,50 %</strong>.</li>
+                        <li><i class="fa-solid fa-calculator"></i> Soit une <strong>taxe de séjour globale de 5,50 %</strong> pour notre établissement.</li>
+                        <li><i class="fa-solid fa-circle-check" style="color: #6BAF4E;"></i> Le montant est calculé automatiquement lors de votre réservation et ajouté au total.</li>
+                    </ul>
+                    <div class="info-note">
+                        <strong>Bon à savoir :</strong> Cette taxe est obligatoire et ne peut être ni négociée ni remboursée. Elle est reversée à Nantes Métropole pour financer le développement touristique local.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="acces" style="background: #F5EFEB;">
         <div class="container">
@@ -1699,6 +2162,19 @@
             var suite = document.getElementById('summary-suite-name').textContent;
             if (suite === '—' || total === '0 €') { alert("Veuillez sélectionner une suite."); return; }
             alert("Félicitations !\n" + suite + " — " + total);
+        }
+
+   /* Onglets Informations Pratiques */
+        function showInfoTab(tabId, btn) {
+            var allBtns = document.querySelectorAll('.info-tab-btn');
+            allBtns.forEach(function(b) { b.classList.remove('active'); });
+            if (btn) btn.classList.add('active');
+
+            var allContents = document.querySelectorAll('.info-tab-content');
+            allContents.forEach(function(c) { c.classList.remove('active'); });
+
+            var target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.add('active');
         }
 
         calculatePrice();
