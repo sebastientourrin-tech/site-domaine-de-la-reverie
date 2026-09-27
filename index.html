@@ -1731,7 +1731,33 @@
             padding: 12px;
             font-size: 0.82rem;
         }
-
+        /* Planche Apéro - menu déroulant */
+        #card-planche {
+            cursor: default;
+        }
+        #card-planche:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+        }
+        #card-planche.selected {
+            border-color: var(--primary) !important;
+            background: #FFFAF7;
+            box-shadow: 0 0 0 3px rgba(156, 88, 56, 0.3);
+        }
+        #card-planche .massage-label {
+            display: block;
+            margin-bottom: 6px;
+        }
+        #planche-option {
+            cursor: pointer;
+        }
+        #planche-option:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.18);
+        }
+        #card-planche.selected #planche-option {
+            border-color: var(--primary);
+        }
         @media print {
             header, #scroll-progress, .mobile-drawer, .drawer-overlay,
             #toast, #lightbox, .burger-btn {
@@ -2014,12 +2040,31 @@
                         <ul class="extra-points"><li><i class="fa-solid fa-bread-slice"></i> Viennoiseries</li><li><i class="fa-solid fa-apple-whole"></i> Fruits &amp; jus</li><li><i class="fa-solid fa-mug-hot"></i> Cafés &amp; douceurs</li></ul>
                     </div>
                 </div>
-                <div class="extra-poster-card" id="card-planche" onclick="toggleExtraNew('planche', 64, 'Planche Apéro')">
-                    <div class="extra-img-wrap"><img src="extra-planche.jpg" alt="Planche"><div class="extra-check-badge"><i class="fa-solid fa-check"></i></div></div>
-                    <div class="extra-desc-body"><h3>Planche Apéro</h3><div class="extra-price-tag">43 €</div><p class="extra-detail-p">Charcuteries, fromages et vin.</p>
-                        <ul class="extra-points"><li><i class="fa-solid fa-wine-glass"></i> 1 bouteille de vin</li><li><i class="fa-solid fa-cheese"></i> Fromages affinés</li><li><i class="fa-solid fa-bowl-food"></i> Charcuterie</li></ul>
-                    </div>
-                </div>
+                <div class="extra-poster-card" id="card-planche">
+    <div class="extra-img-wrap">
+        <img src="extra-planche.jpg" alt="Planche">
+        <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
+    </div>
+    <div class="extra-desc-body">
+        <h3>Planche Apéro</h3>
+        <div class="extra-price-tag" id="planche-price-display">à partir de 25 €</div>
+        <p class="extra-detail-p">Charcuteries, fromages et vin.</p>
+        <ul class="extra-points">
+            <li><i class="fa-solid fa-wine-glass"></i> Produits locaux &amp; sélectionnés</li>
+            <li><i class="fa-solid fa-cheese"></i> Fromages affinés &amp; charcuteries fines</li>
+            <li><i class="fa-solid fa-bowl-food"></i> Formules adaptées à votre envie</li>
+        </ul>
+
+        <label for="planche-option" class="massage-label" style="margin-top: 12px;">Choisir ma formule</label>
+        <select id="planche-option" class="massage-input" onchange="updatePlancheChoice()">
+            <option value="0" data-price="0" selected>— Choisissez une formule —</option>
+            <option value="25" data-price="25">Petite planche — 25 €</option>
+            <option value="43" data-price="43">Planche classique — 43 €</option>
+            <option value="64" data-price="64">Grande planche avec vin — 64 €</option>
+            <option value="85" data-price="85">Planche prestige — 85 €</option>
+        </select>
+    </div>
+</div>
               <div class="extra-poster-card extra-info-only" id="card-massage">
     <div class="extra-img-wrap">
         <img src="extra-massage.jpg" alt="Massage">
@@ -2554,10 +2599,10 @@
         if (sInEl) sInEl.value = formatDate(today);
         if (sOutEl) sOutEl.value = formatDate(tomorrow);
 
-        var extrasState = {
+       var extrasState = {
             deco: { selected: false, price: 50 },
             brunch: { selected: false, price: 54 },
-            planche: { selected: false, price: 64 }
+            planche: { selected: false, price: 0 }
         };
 
         function toggleExtraNew(key, price, title) {
@@ -2568,6 +2613,32 @@
             else { card.classList.remove('selected'); showToast(title + " retirée"); }
             calculatePrice();
         }
+        /* Planche Apéro - choix dynamique de la formule */
+        function updatePlancheChoice() {
+            var select = document.getElementById('planche-option');
+            var card = document.getElementById('card-planche');
+            var priceDisplay = document.getElementById('planche-price-display');
+            if (!select || !card || !priceDisplay) return;
+
+            var selectedOption = select.options[select.selectedIndex];
+            var price = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+
+            if (price > 0) {
+                card.classList.add('selected');
+                extrasState.planche.selected = true;
+                extrasState.planche.price = price;
+                priceDisplay.textContent = price + " €";
+                showToast("Planche Apéro ajoutée (" + price + " €)");
+            } else {
+                card.classList.remove('selected');
+                extrasState.planche.selected = false;
+                extrasState.planche.price = 0;
+                priceDisplay.textContent = "à partir de 25 €";
+            }
+
+            calculatePrice();
+        }
+        
         /* Demande de massage (sur devis / disponibilité) */
         function submitMassageRequest(e) {
             if (e) e.preventDefault();
