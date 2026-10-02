@@ -23,8 +23,8 @@
             --gold-gradient-hover: linear-gradient(135deg, #B88E44 0%, #C5A059 50%, #9C7830 100%);
             --dark: #1A1613;
             --dark-card: #25201B;
-            --cream: #FAF7F2;
-            --cream-card: #FFFFFF;
+            --cream: rgba(250, 247, 242, 0.85);
+            --cream-card: rgba(255, 255, 255, 0.92);
             --border: #E5DDD2;
             --text-main: #2C2621;
             --text-muted: #6E665F;
@@ -41,11 +41,28 @@
 
         body {
             font-family: var(--font-sans);
-            background-color: var(--cream);
+            background-image: url('body.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #FAF7F2;
             color: var(--text-main);
             line-height: 1.7;
             overflow-x: hidden;
             padding-top: var(--header-h);
+            position: relative;
+            z-index: 0;
+        }
+
+        /* Voile crème léger par-dessus l'image pour la lisibilité */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(250, 247, 242, 0.55);
+            z-index: -1;
+            pointer-events: none;
         }
 
         h1, h2, h3, h4, .font-serif {
@@ -74,7 +91,9 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             height: var(--header-h);
-            background: #F0E9DE;
+            background: rgba(240, 233, 222, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 4px 25px rgba(26, 22, 19, 0.08);
             z-index: 999999;
             overflow: hidden;
@@ -452,6 +471,8 @@
 
         .strip-card {
             background: var(--cream-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: var(--radius);
             box-shadow: 0 20px 50px rgba(26, 22, 19, 0.12);
             padding: 26px 34px;
@@ -479,7 +500,7 @@
             border-radius: 10px;
             font-family: var(--font-sans);
             font-size: 0.92rem;
-            background: var(--cream);
+            background: rgba(250, 247, 242, 0.85);
             outline: none;
         }
 
@@ -490,7 +511,9 @@
         }
 
         .amenities-bar {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
             padding: 38px 0;
@@ -582,6 +605,8 @@
 
         .suite-card {
             background: var(--cream-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: var(--radius);
             overflow: hidden;
             border: 1px solid var(--border);
@@ -689,7 +714,9 @@
         }
 
         .plan-section {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
         }
@@ -713,7 +740,7 @@
         .plan-legend { display: flex; flex-direction: column; gap: 16px; }
 
         .legend-card {
-            background: var(--cream);
+            background: rgba(250, 247, 242, 0.9);
             padding: 18px 22px;
             border-radius: 12px;
             border-left: 5px solid var(--primary);
@@ -742,9 +769,9 @@
             line-height: 1.55;
         }
 
-        .extras-section { background-color: #F5EFEB; }
+        .extras-section { background-color: rgba(245, 239, 235, 0.82); }
 
-     .extras-showcase-grid {
+        .extras-showcase-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
             gap: 28px;
@@ -752,14 +779,16 @@
         }
 
         .extra-poster-card {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: var(--radius);
             overflow: hidden;
             border: 2px solid var(--border);
             display: flex;
             flex-direction: column;
             transition: var(--transition);
-            cursor: pointer;
+            cursor: default;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -779,12 +808,18 @@
             height: 330px;
             overflow: hidden;
             background: #1F1B18;
+            cursor: zoom-in;
         }
 
         .extra-img-wrap img {
             width: 100%; height: 100%;
             object-fit: cover;
             object-position: top center;
+            transition: transform 0.4s ease;
+        }
+
+        .extra-img-wrap:hover img {
+            transform: scale(1.04);
         }
 
         .extra-check-badge {
@@ -801,6 +836,15 @@
             font-size: 1.8rem;
             transition: all 0.3s ease;
             z-index: 10;
+            cursor: pointer;
+        }
+
+        .extra-check-badge:hover {
+            transform: scale(1.1);
+            background: #FFFAF7;
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
         }
 
         .extra-poster-card.selected .extra-check-badge {
@@ -808,6 +852,10 @@
             border-color: #FFFFFF;
             color: #FFFFFF;
             transform: scale(1.15);
+        }
+
+        .extra-poster-card.selected .extra-check-badge:hover {
+            transform: scale(1.25);
         }
 
         .extra-desc-body {
@@ -853,7 +901,9 @@
         .extra-points li i { color: var(--primary); font-size: 0.8rem; }
 
         .booking-section {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
         }
@@ -866,7 +916,9 @@
         }
 
         .booking-form {
-            background: var(--cream);
+            background: rgba(250, 247, 242, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             padding: 38px;
             border-radius: var(--radius);
             border: 1px solid var(--border);
@@ -1026,7 +1078,7 @@
             font-size: 0.85rem;
         }
 
-              #lightbox {
+        #lightbox {
             position: fixed; inset: 0;
             background: rgba(15, 12, 10, 0.96);
             backdrop-filter: blur(8px);
@@ -1234,11 +1286,10 @@
 
         #toast.show { transform: translateY(0); opacity: 1; }
 
-        /* ============================================
-           SECTION INFORMATIONS PRATIQUES
-           ============================================ */
         .info-section {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-top: 1px solid var(--border);
         }
 
@@ -1261,7 +1312,7 @@
             text-transform: uppercase;
             letter-spacing: 0.06em;
             color: var(--dark);
-            background: var(--cream);
+            background: rgba(250, 247, 242, 0.9);
             border: 2px solid var(--border);
             border-radius: 50px;
             cursor: pointer;
@@ -1294,11 +1345,10 @@
 
         .info-tab-content.active { display: block; }
 
-        /* ============================================
-           SECTION RÈGLEMENT INTÉRIEUR (classes distinctes)
-           ============================================ */
         .reglement-section {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-top: 1px solid var(--border);
         }
 
@@ -1321,7 +1371,7 @@
             text-transform: uppercase;
             letter-spacing: 0.06em;
             color: var(--dark);
-            background: var(--cream);
+            background: rgba(250, 247, 242, 0.9);
             border: 2px solid var(--border);
             border-radius: 50px;
             cursor: pointer;
@@ -1354,15 +1404,15 @@
 
         .reglement-tab-content.active { display: block; }
 
-        /* ============================================ */
-
         @keyframes fadeInTab {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .info-card {
-            background: var(--cream);
+            background: rgba(250, 247, 242, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: var(--radius);
             border: 1px solid var(--border);
             padding: clamp(24px, 4vw, 40px);
@@ -1439,7 +1489,7 @@
         }
 
         .nearby-card {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.92);
             border-radius: 12px;
             border: 1px solid var(--border);
             padding: 22px;
@@ -1506,7 +1556,7 @@
         }
 
         .rule-block {
-            background: #FFFFFF;
+            background: rgba(255, 255, 255, 0.92);
             border-radius: 12px;
             border-left: 4px solid var(--primary);
             padding: 18px 20px;
@@ -1646,9 +1696,6 @@
             .amenities-grid { grid-template-columns: 1fr; }
         }
 
-                /* ============================================
-           CARTE MASSAGE — MODE INFO + DEMANDE
-           ============================================ */
         .extra-info-only {
             cursor: default;
         }
@@ -1731,7 +1778,6 @@
             padding: 12px;
             font-size: 0.82rem;
         }
-        /* Planche Apéro - menu déroulant */
         #card-planche {
             cursor: default;
         }
@@ -2028,75 +2074,110 @@
             <div class="section-header">
                 <span class="section-subtitle">Prestations Sur-Mesure</span>
                 <h2 class="section-title">Sublimez Votre Séjour</h2>
-                <p class="section-desc">Cliquez sur une formule pour l'ajouter à votre réservation.</p>
+                <p class="section-desc">Cliquez sur l'encoche pour ajouter une formule, ou sur l'image pour voir le détail.</p>
             </div>
             <div class="extras-showcase-grid">
-                <div class="extra-poster-card" id="card-deco" onclick="toggleExtraNew('deco', 50, 'Déco Romantique')">
-                    <div class="extra-img-wrap"><img src="extra-deco-romantique.jpg" alt="Déco"><div class="extra-check-badge"><i class="fa-solid fa-check"></i></div></div>
-                    <div class="extra-desc-body"><h3>Déco Romantique</h3><div class="extra-price-tag">50 €</div><p class="extra-detail-p">Ambiance féerique préparée avant votre arrivée.</p>
-                        <ul class="extra-points"><li><i class="fa-solid fa-heart"></i> Ballons cœur rouges</li><li><i class="fa-solid fa-fire"></i> Bougies LED</li><li><i class="fa-solid fa-spa"></i> Pétales de roses</li></ul>
-                    </div>
-                </div>
-                <div class="extra-poster-card" id="card-brunch" onclick="toggleExtraNew('brunch', 54, 'Brunch')">
-                    <div class="extra-img-wrap"><img src="extra-brunch.jpg" alt="Brunch"><div class="extra-check-badge"><i class="fa-solid fa-check"></i></div></div>
-                    <div class="extra-desc-body"><h3>Brunch pour Deux</h3><div class="extra-price-tag">54 €</div><p class="extra-detail-p">Moment gourmand livré en chambre.</p>
-                        <ul class="extra-points"><li><i class="fa-solid fa-bread-slice"></i> Viennoiseries</li><li><i class="fa-solid fa-apple-whole"></i> Fruits &amp; jus</li><li><i class="fa-solid fa-mug-hot"></i> Cafés &amp; douceurs</li></ul>
-                    </div>
-                </div>
-                <div class="extra-poster-card" id="card-planche">
-    <div class="extra-img-wrap">
-        <img src="extra-planche.jpg" alt="Planche">
-        <div class="extra-check-badge"><i class="fa-solid fa-check"></i></div>
-    </div>
-    <div class="extra-desc-body">
-        <h3>Planche Apéro</h3>
-        <div class="extra-price-tag" id="planche-price-display">à partir de 43 € </div>
-        <p class="extra-detail-p">Charcuteries, fromages et vin.</p>
-        <ul class="extra-points">
-            <li><i class="fa-solid fa-wine-glass"></i> Produits locaux &amp; sélectionnés</li>
-            <li><i class="fa-solid fa-cheese"></i> Fromages affinés &amp; charcuteries fines</li>
-            <li><i class="fa-solid fa-bowl-food"></i> Formules adaptées à votre envie</li>
-        </ul>
 
-        <label for="planche-option" class="massage-label" style="margin-top: 12px;">Choisir ma formule</label>
-        <select id="planche-option" class="massage-input" onchange="updatePlancheChoice()">
-            <option value="0" data-price="0" selected>— Choisissez une formule —</option>
-            <option value="25" data-price="43">Planche Seule — 43 €</option>
-            <option value="43" data-price="64">Planche Seule + Bouteille de Vin — 64 €</option>
-            <option value="64" data-price="89">Planche Seule + Bouteille de Champagne — 89 €</option>
-         </select>
-    </div>
-</div>
-              <div class="extra-poster-card extra-info-only" id="card-massage">
-    <div class="extra-img-wrap">
-        <img src="extra-massage.jpg" alt="Massage">
-        <div class="extra-info-badge"><i class="fa-solid fa-calendar-check"></i> Sur demande</div>
-    </div>
-    <div class="extra-desc-body">
-        <h3>Massage en Duo (1h)</h3>
-        <div class="extra-price-tag">180 €</div>
-        <p class="extra-detail-p">Lâcher-prise absolu avec nos praticiennes expertes. Prestation sur réservation, selon disponibilités.</p>
-        <ul class="extra-points">
-            <li><i class="fa-solid fa-hands"></i> 1h de massage simultané</li>
-            <li><i class="fa-solid fa-spa"></i> Huiles chaudes aromatiques</li>
-            <li><i class="fa-solid fa-feather"></i> Détente profonde et lâcher-prise</li>
-        </ul>
-        <div class="massage-request">
-            <p class="massage-request-note">
-                <i class="fa-solid fa-circle-info"></i> Faites votre demande ci-dessous, nous vous confirmerons le créneau selon nos disponibilités.
-            </p>
-            <label for="massage-day" class="massage-label">Jour souhaité</label>
-            <input type="date" id="massage-day" class="massage-input">
-            <label for="massage-time" class="massage-label">Heure souhaitée</label>
-            <input type="time" id="massage-time" class="massage-input">
-            <label for="massage-notes" class="massage-label">Précisions (optionnel)</label>
-            <input type="text" id="massage-notes" class="massage-input" placeholder="Ex : plutôt fin de journée...">
-            <button type="button" class="btn btn-primary massage-submit" onclick="submitMassageRequest(event)">
-                <i class="fa-solid fa-paper-plane"></i> Envoyer ma demande
-            </button>
-        </div>
-    </div>
-</div>
+                <!-- Déco Romantique -->
+                <div class="extra-poster-card" id="card-deco">
+                    <div class="extra-img-wrap" onclick="openGallery(['extra-deco-romantique.jpg'], 0)">
+                        <img src="extra-deco-romantique.jpg" alt="Déco Romantique">
+                        <div class="extra-check-badge" onclick="toggleExtraNew('deco', 50, 'Déco Romantique', event)" title="Ajouter la Déco Romantique">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="extra-desc-body">
+                        <h3>Déco Romantique</h3>
+                        <div class="extra-price-tag">50 €</div>
+                        <p class="extra-detail-p">Ambiance féerique préparée avant votre arrivée.</p>
+                        <ul class="extra-points">
+                            <li><i class="fa-solid fa-heart"></i> Ballons cœur rouges</li>
+                            <li><i class="fa-solid fa-fire"></i> Bougies LED</li>
+                            <li><i class="fa-solid fa-spa"></i> Pétales de roses</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Brunch -->
+                <div class="extra-poster-card" id="card-brunch">
+                    <div class="extra-img-wrap" onclick="openGallery(['extra-brunch.jpg'], 0)">
+                        <img src="extra-brunch.jpg" alt="Brunch">
+                        <div class="extra-check-badge" onclick="toggleExtraNew('brunch', 54, 'Brunch', event)" title="Ajouter le Brunch">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="extra-desc-body">
+                        <h3>Brunch pour Deux</h3>
+                        <div class="extra-price-tag">54 €</div>
+                        <p class="extra-detail-p">Moment gourmand livré en chambre.</p>
+                        <ul class="extra-points">
+                            <li><i class="fa-solid fa-bread-slice"></i> Viennoiseries</li>
+                            <li><i class="fa-solid fa-apple-whole"></i> Fruits &amp; jus</li>
+                            <li><i class="fa-solid fa-mug-hot"></i> Cafés &amp; douceurs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Planche Apéro -->
+                <div class="extra-poster-card" id="card-planche">
+                    <div class="extra-img-wrap" onclick="openGallery(['extra-planche.jpg'], 0)">
+                        <img src="extra-planche.jpg" alt="Planche">
+                        <div class="extra-check-badge" onclick="togglePlancheFromBadge(event)" title="Ajouter la Planche Apéro">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="extra-desc-body">
+                        <h3>Planche Apéro</h3>
+                        <div class="extra-price-tag" id="planche-price-display">à partir de 43 €</div>
+                        <p class="extra-detail-p">Charcuteries, fromages et vin.</p>
+                        <ul class="extra-points">
+                            <li><i class="fa-solid fa-wine-glass"></i> Produits locaux &amp; sélectionnés</li>
+                            <li><i class="fa-solid fa-cheese"></i> Fromages affinés &amp; charcuteries fines</li>
+                            <li><i class="fa-solid fa-bowl-food"></i> Formules adaptées à votre envie</li>
+                        </ul>
+
+                        <label for="planche-option" class="massage-label" style="margin-top: 12px;">Choisir ma formule</label>
+                        <select id="planche-option" class="massage-input" onchange="updatePlancheChoice()">
+                            <option value="0" data-price="0" selected>— Choisissez une formule —</option>
+                            <option value="25" data-price="43">Planche Seule — 43 €</option>
+                            <option value="43" data-price="64">Planche Seule + Bouteille de Vin — 64 €</option>
+                            <option value="64" data-price="89">Planche Seule + Bouteille de Champagne — 89 €</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Massage (info + demande) -->
+                <div class="extra-poster-card extra-info-only" id="card-massage">
+                    <div class="extra-img-wrap" onclick="openGallery(['extra-massage.jpg'], 0)">
+                        <img src="extra-massage.jpg" alt="Massage">
+                        <div class="extra-info-badge"><i class="fa-solid fa-calendar-check"></i> Sur demande</div>
+                    </div>
+                    <div class="extra-desc-body">
+                        <h3>Massage en Duo (1h)</h3>
+                        <div class="extra-price-tag">180 €</div>
+                        <p class="extra-detail-p">Lâcher-prise absolu avec nos praticiennes expertes. Prestation sur réservation, selon disponibilités.</p>
+                        <ul class="extra-points">
+                            <li><i class="fa-solid fa-hands"></i> 1h de massage simultané</li>
+                            <li><i class="fa-solid fa-spa"></i> Huiles chaudes aromatiques</li>
+                            <li><i class="fa-solid fa-feather"></i> Détente profonde et lâcher-prise</li>
+                        </ul>
+                        <div class="massage-request">
+                            <p class="massage-request-note">
+                                <i class="fa-solid fa-circle-info"></i> Faites votre demande ci-dessous, nous vous confirmerons le créneau selon nos disponibilités.
+                            </p>
+                            <label for="massage-day" class="massage-label">Jour souhaité</label>
+                            <input type="date" id="massage-day" class="massage-input">
+                            <label for="massage-time" class="massage-label">Heure souhaitée</label>
+                            <input type="time" id="massage-time" class="massage-input">
+                            <label for="massage-notes" class="massage-label">Précisions (optionnel)</label>
+                            <input type="text" id="massage-notes" class="massage-input" placeholder="Ex : plutôt fin de journée...">
+                            <button type="button" class="btn btn-primary massage-submit" onclick="submitMassageRequest(event)">
+                                <i class="fa-solid fa-paper-plane"></i> Envoyer ma demande
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -2280,7 +2361,7 @@
         </div>
     </section>
 
-    <section id="acces" style="background: #F5EFEB;">
+    <section id="acces" style="background: rgba(245, 239, 235, 0.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
         <div class="container">
             <div class="section-header">
                 <span class="section-subtitle">Localisation</span>
@@ -2619,14 +2700,50 @@
             planche: { selected: false, price: 0 }
         };
 
-        function toggleExtraNew(key, price, title) {
+        function toggleExtraNew(key, price, title, event) {
+            if (event) event.stopPropagation();
             var card = document.getElementById('card-' + key);
             if (!card) return;
             extrasState[key].selected = !extrasState[key].selected;
-            if (extrasState[key].selected) { card.classList.add('selected'); showToast(title + " ajoutée (" + price + " €)"); }
-            else { card.classList.remove('selected'); showToast(title + " retirée"); }
+            if (extrasState[key].selected) {
+                card.classList.add('selected');
+                showToast(title + " ajoutée (" + price + " €)");
+            } else {
+                card.classList.remove('selected');
+                showToast(title + " retirée");
+            }
             calculatePrice();
         }
+
+        /* Encoche de la Planche Apéro : gère la sélection selon la formule choisie */
+        function togglePlancheFromBadge(event) {
+            if (event) event.stopPropagation();
+            var select = document.getElementById('planche-option');
+            var card = document.getElementById('card-planche');
+            var priceDisplay = document.getElementById('planche-price-display');
+            if (!select || !card || !priceDisplay) return;
+
+            // Si déjà sélectionné → on désélectionne
+            if (extrasState.planche.selected) {
+                select.value = "0";
+                card.classList.remove('selected');
+                extrasState.planche.selected = false;
+                extrasState.planche.price = 0;
+                priceDisplay.textContent = "à partir de 43 €";
+                showToast("Planche Apéro retirée");
+                calculatePrice();
+                return;
+            }
+
+            // Sinon → inviter à choisir une formule
+            showToast("Choisissez d'abord une formule dans le menu déroulant");
+            select.focus();
+            // Ouvrir le select si possible (bonus UX)
+            if (typeof select.showPicker === 'function') {
+                try { select.showPicker(); } catch(e) {}
+            }
+        }
+
         /* Planche Apéro - choix dynamique de la formule */
         function updatePlancheChoice() {
             var select = document.getElementById('planche-option');
@@ -2647,7 +2764,7 @@
                 card.classList.remove('selected');
                 extrasState.planche.selected = false;
                 extrasState.planche.price = 0;
-                priceDisplay.textContent = "à partir de 25 €";
+                priceDisplay.textContent = "à partir de 43 €";
             }
 
             calculatePrice();
