@@ -40,29 +40,15 @@
         html { -webkit-text-size-adjust: 100%; }
 
         body {
-            font-family: var(--font-sans);
-            background-image: url('body.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: #FAF7F2;
-            color: var(--text-main);
-            line-height: 1.7;
-            overflow-x: hidden;
-            padding-top: var(--header-h);
-            position: relative;
-            z-index: 0;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: rgba(250, 247, 242, 0.55);
-            z-index: -1;
-            pointer-events: none;
-        }
+    font-family: var(--font-sans);
+    background-color: #FAF7F2;
+    color: var(--text-main);
+    line-height: 1.7;
+    overflow-x: hidden;
+    padding-top: var(--header-h);
+    position: relative;
+    z-index: 0;
+}
 
         h1, h2, h3, h4, .font-serif {
             font-family: var(--font-serif);
