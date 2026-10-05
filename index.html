@@ -87,6 +87,7 @@
             transition: width 0.1s linear;
         }
 
+        /* Header : overflow:hidden retiré + isolation:isolate pour éviter les artefacts */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -96,7 +97,7 @@
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 4px 25px rgba(26, 22, 19, 0.08);
             z-index: 999999;
-            overflow: hidden;
+            isolation: isolate;
         }
 
         header::after {
@@ -106,6 +107,7 @@
             height: 4px;
             background: var(--gold-gradient);
             z-index: 1;
+            pointer-events: none;
         }
 
         header.scrolled {
@@ -140,24 +142,30 @@
             flex-shrink: 0;
         }
 
-        /* Logo agrandi - sans ellipse dorée */
-     /* Logo agrandi - sans ellipse dorée */
+        /* Logo agrandi - sans ellipse dorée + anti-artefacts GPU */
         .logo-img-wrapper {
             width: 130px;
             height: 130px;
             flex-shrink: 0;
-            transition: transform 0.3s ease;
+            will-change: filter;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
-     .logo-box:hover .logo-img-wrapper {
-    filter: brightness(1.08);
-}
+        /* Effet de survol : brightness au lieu de scale (pas d'artefacts) */
+        .logo-box:hover .logo-img-wrapper {
+            filter: brightness(1.08);
+        }
 
         .logo-img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             display: block;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: translateZ(0);
         }
 
         .logo-text {
@@ -2117,7 +2125,45 @@
                         </ul>
                     </div>
                 </div>
+<!-- Bouquet de Fleurs -->
+<div class="extra-poster-card" id="card-fleur">
+    <div class="extra-img-wrap" onclick="openGallery(['extra-fleur.jpg'], 0)">
+        <img src="extra-fleur.jpg" alt="Bouquet de Fleurs">
+        <div class="extra-check-badge" onclick="toggleExtraNew('fleur', 65, 'Bouquet de Fleurs', event)" title="Ajouter le Bouquet de Fleurs">
+            <i class="fa-solid fa-check"></i>
+        </div>
+    </div>
+    <div class="extra-desc-body">
+        <h3>Bouquet de Fleurs</h3>
+        <div class="extra-price-tag">65 €</div>
+        <p class="extra-detail-p">Une attention toute en douceur pour un moment inoubliable.</p>
+        <ul class="extra-points">
+            <li><i class="fa-solid fa-spa"></i> Fleurs fraîches sélectionnées</li>
+            <li><i class="fa-solid fa-leaf"></i> Composition élégante</li>
+            <li><i class="fa-solid fa-bell-concierge"></i> Livraison discrète en chambre</li>
+        </ul>
+    </div>
+</div>
 
+<!-- Petit Déjeuner Gourmand -->
+<div class="extra-poster-card" id="card-petitdej">
+    <div class="extra-img-wrap" onclick="openGallery(['extra-petitdej.jpg'], 0)">
+        <img src="extra-petitdej.jpg" alt="Petit Déjeuner Gourmand">
+        <div class="extra-check-badge" onclick="toggleExtraNew('petitdej', 54, 'Petit Déjeuner Gourmand', event)" title="Ajouter le Petit Déjeuner Gourmand">
+            <i class="fa-solid fa-check"></i>
+        </div>
+    </div>
+    <div class="extra-desc-body">
+        <h3>Petit Déjeuner Gourmand</h3>
+        <div class="extra-price-tag">54 €</div>
+        <p class="extra-detail-p">Un moment à deux, tout en douceur, livré dans votre chambre.</p>
+        <ul class="extra-points">
+            <li><i class="fa-solid fa-bread-slice"></i> Brioche, pain de mie, beurre</li>
+            <li><i class="fa-solid fa-jar"></i> Confitures &amp; Nutella</li>
+            <li><i class="fa-solid fa-mug-hot"></i> Jus, café &amp; thé</li>
+        </ul>
+    </div>
+</div>
                 <!-- Planche Apéro -->
                 <div class="extra-poster-card" id="card-planche">
                     <div class="extra-img-wrap" onclick="openGallery(['extra-planche.jpg'], 0)">
@@ -2694,11 +2740,13 @@
         if (sInEl) sInEl.value = formatDate(today);
         if (sOutEl) sOutEl.value = formatDate(tomorrow);
 
-       var extrasState = {
-            deco: { selected: false, price: 50 },
-            brunch: { selected: false, price: 54 },
-            planche: { selected: false, price: 0 }
-        };
+ var extrasState = {
+    deco: { selected: false, price: 50 },
+    brunch: { selected: false, price: 54 },
+    fleur: { selected: false, price: 50 },
+    petitdej: { selected: false, price: 32 },
+    planche: { selected: false, price: 0 }
+};
 
         function toggleExtraNew(key, price, title, event) {
             if (event) event.stopPropagation();
