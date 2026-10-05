@@ -141,15 +141,15 @@
         }
 
         /* Logo agrandi - sans ellipse dorée */
-        .logo-img-wrapper {
-            width: 130px;
-            height: 130px;
-            flex-shrink: 0;
-            transition: transform 0.3s ease;
-        }
+      .logo-img-wrapper {
+    width: 130px;
+    height: 130px;
+    flex-shrink: 0;
+    transition: filter 0.4s ease, drop-shadow 0.4s ease;
+}
 
-        .logo-box:hover .logo-img-wrapper {
-    filter: brightness(1.08);
+.logo-box:hover .logo-img-wrapper {
+    filter: brightness(1.08) drop-shadow(0 0 12px rgba(197, 160, 89, 0.35));
 }
 
         .logo-img {
