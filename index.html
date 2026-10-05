@@ -55,7 +55,6 @@
             z-index: 0;
         }
 
-        /* Voile crème léger par-dessus l'image pour la lisibilité */
         body::before {
             content: '';
             position: fixed;
@@ -87,7 +86,6 @@
             transition: width 0.1s linear;
         }
 
-        /* Header : overflow:hidden retiré + isolation:isolate pour éviter les artefacts */
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -142,7 +140,6 @@
             flex-shrink: 0;
         }
 
-        /* Logo agrandi - sans ellipse dorée + anti-artefacts GPU */
         .logo-img-wrapper {
             width: 130px;
             height: 130px;
@@ -153,7 +150,6 @@
             -webkit-backface-visibility: hidden;
         }
 
-        /* Effet de survol : brightness au lieu de scale (pas d'artefacts) */
         .logo-box:hover .logo-img-wrapper {
             filter: brightness(1.08);
         }
@@ -1812,9 +1808,70 @@
         #card-planche.selected #planche-option {
             border-color: var(--primary);
         }
+
+        /* ============================================
+           SÉPARATEURS DORÉS ENTRE SECTIONS
+           ============================================ */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            padding: 0 24px;
+            margin: 0 auto;
+            max-width: 600px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #C5A059 40%, #E3C588 50%, #C5A059 60%, transparent 100%);
+            border-radius: 2px;
+        }
+
+        .section-divider .divider-diamond {
+            width: 14px;
+            height: 14px;
+            background: var(--gold-gradient);
+            transform: rotate(45deg);
+            box-shadow: 
+                0 0 8px rgba(197, 160, 89, 0.6),
+                inset 0 0 4px rgba(255, 255, 255, 0.4);
+            flex-shrink: 0;
+            position: relative;
+            border: 1px solid rgba(184, 142, 68, 0.6);
+        }
+
+        .section-divider .divider-diamond::before {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: #FAF7F2;
+            border-radius: 1px;
+        }
+
+        @media (max-width: 640px) {
+            .section-divider {
+                gap: 12px;
+                max-width: 80%;
+            }
+            .section-divider .divider-diamond {
+                width: 10px;
+                height: 10px;
+            }
+            .section-divider::before,
+            .section-divider::after {
+                height: 1.5px;
+            }
+        }
+
         @media print {
             header, #scroll-progress, .mobile-drawer, .drawer-overlay,
-            #toast, #lightbox, .burger-btn {
+            #toast, #lightbox, .burger-btn, .section-divider {
                 display: none !important;
             }
             body { padding-top: 0; background: #fff; }
@@ -1938,6 +1995,9 @@
         </form>
     </div>
 
+    <!-- ✦ SÉPARATEUR DORÉ ✦ -->
+    <div class="section-divider"><span class="divider-diamond"></span></div>
+
     <div id="prestations" class="amenities-bar">
         <div class="container">
             <div class="amenities-grid">
@@ -1949,6 +2009,9 @@
                 </div>
         </div>
     </div>
+
+    <!-- ✦ SÉPARATEUR DORÉ ✦ -->
+    <div class="section-divider"><span class="divider-diamond"></span></div>
 
     <section id="suites">
         <div class="container">
@@ -2054,6 +2117,9 @@
         </div>
     </section>
 
+    <!-- ✦ SÉPARATEUR DORÉ ✦ -->
+    <div class="section-divider"><span class="divider-diamond"></span></div>
+
     <section id="plan" class="plan-section">
         <div class="container">
             <div class="section-header">
@@ -2076,6 +2142,9 @@
             </div>
         </div>
     </section>
+
+    <!-- ✦ SÉPARATEUR DORÉ ✦ -->
+    <div class="section-divider"><span class="divider-diamond"></span></div>
 
     <section id="extras" class="extras-section">
         <div class="container">
@@ -2125,45 +2194,47 @@
                         </ul>
                     </div>
                 </div>
-<!-- Bouquet de Fleurs -->
-<div class="extra-poster-card" id="card-fleur">
-    <div class="extra-img-wrap" onclick="openGallery(['extra-fleur.jpeg'], 0)">
-        <img src="extra-fleur.jpeg" alt="Bouquet de Fleurs">
-        <div class="extra-check-badge" onclick="toggleExtraNew('fleur', 50, 'Bouquet de Fleurs', event)" title="Ajouter le Bouquet de Fleurs">
-            <i class="fa-solid fa-check"></i>
-        </div>
-    </div>
-    <div class="extra-desc-body">
-        <h3>Bouquet de Fleurs</h3>
-        <div class="extra-price-tag">50 €</div>
-        <p class="extra-detail-p">Une attention toute en douceur pour un moment inoubliable.</p>
-        <ul class="extra-points">
-            <li><i class="fa-solid fa-spa"></i> Fleurs fraîches sélectionnées</li>
-            <li><i class="fa-solid fa-leaf"></i> Composition élégante</li>
-            <li><i class="fa-solid fa-bell-concierge"></i> Livraison discrète en chambre</li>
-        </ul>
-    </div>
-</div>
 
-<!-- Petit Déjeuner -->
-<div class="extra-poster-card" id="card-petitdej">
-    <div class="extra-img-wrap" onclick="openGallery(['extra-petitdej.jpg'], 0)">
-        <img src="extra-petitdej.jpg" alt="Petit Déjeuner">
-        <div class="extra-check-badge" onclick="toggleExtraNew('petitdej', 32, 'Petit Déjeuner', event)" title="Ajouter le Petit Déjeuner">
-            <i class="fa-solid fa-check"></i>
-        </div>
-    </div>
-    <div class="extra-desc-body">
-        <h3>Petit Déjeuner</h3>
-        <div class="extra-price-tag">32 €</div>
-        <p class="extra-detail-p">Un moment à deux, tout en douceur, livré dans votre chambre.</p>
-        <ul class="extra-points">
-            <li><i class="fa-solid fa-bread-slice"></i> Brioche, pain de mie, beurre</li>
-            <li><i class="fa-solid fa-jar"></i> Confitures &amp; Nutella</li>
-            <li><i class="fa-solid fa-mug-hot"></i> Jus, café &amp; thé</li>
-        </ul>
-    </div>
-</div>
+                <!-- Bouquet de Fleurs -->
+                <div class="extra-poster-card" id="card-fleur">
+                    <div class="extra-img-wrap" onclick="openGallery(['extra-fleur.jpeg'], 0)">
+                        <img src="extra-fleur.jpeg" alt="Bouquet de Fleurs">
+                        <div class="extra-check-badge" onclick="toggleExtraNew('fleur', 50, 'Bouquet de Fleurs', event)" title="Ajouter le Bouquet de Fleurs">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="extra-desc-body">
+                        <h3>Bouquet de Fleurs</h3>
+                        <div class="extra-price-tag">50 €</div>
+                        <p class="extra-detail-p">Une attention toute en douceur pour un moment inoubliable.</p>
+                        <ul class="extra-points">
+                            <li><i class="fa-solid fa-spa"></i> Fleurs fraîches sélectionnées</li>
+                            <li><i class="fa-solid fa-leaf"></i> Composition élégante</li>
+                            <li><i class="fa-solid fa-bell-concierge"></i> Livraison discrète en chambre</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Petit Déjeuner -->
+                <div class="extra-poster-card" id="card-petitdej">
+                    <div class="extra-img-wrap" onclick="openGallery(['extra-petitdej.jpg'], 0)">
+                        <img src="extra-petitdej.jpg" alt="Petit Déjeuner">
+                        <div class="extra-check-badge" onclick="toggleExtraNew('petitdej', 32, 'Petit Déjeuner', event)" title="Ajouter le Petit Déjeuner">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="extra-desc-body">
+                        <h3>Petit Déjeuner</h3>
+                        <div class="extra-price-tag">32 €</div>
+                        <p class="extra-detail-p">Un moment à deux, tout en douceur, livré dans votre chambre.</p>
+                        <ul class="extra-points">
+                            <li><i class="fa-solid fa-bread-slice"></i> Brioche, pain de mie, beurre</li>
+                            <li><i class="fa-solid fa-jar"></i> Confitures &amp; Nutella</li>
+                            <li><i class="fa-solid fa-mug-hot"></i> Jus, café &amp; thé</li>
+                        </ul>
+                    </div>
+                </div>
+
                 <!-- Planche Apéro -->
                 <div class="extra-poster-card" id="card-planche">
                     <div class="extra-img-wrap" onclick="openGallery(['extra-planche.jpg'], 0)">
@@ -2228,6 +2299,9 @@
         </div>
     </section>
 
+    <!-- ✦ SÉPARATEUR DORÉ ✦ -->
+    <div class="section-divider"><span class="divider-diamond"></span></div>
+
     <section id="reservation" class="booking-section">
         <div class="container">
             <div class="section-header">
@@ -2272,6 +2346,9 @@
             </div>
         </div>
     </section>
+
+    <!-- ✦ SÉPARATEUR DORÉ ✦ -->
+    <div class="section-divider"><span class="divider-diamond"></span></div>
 
     <!-- ================= INFORMATIONS PRATIQUES ================= -->
     <section id="infos" class="info-section">
@@ -2378,8 +2455,6 @@
                 </div>
             </div>
 
-   
-            
             <div class="info-tab-content" id="tab-taxe">
                 <div class="info-card">
                     <h3><i class="fa-solid fa-receipt"></i> Taxe de séjour</h3>
@@ -2407,6 +2482,9 @@
         </div>
     </section>
 
+    <!-- ✦ SÉPARATEUR DORÉ ✦ -->
+    <div class="section-divider"><span class="divider-diamond"></span></div>
+
     <section id="acces" style="background: rgba(245, 239, 235, 0.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);">
         <div class="container">
             <div class="section-header">
@@ -2427,6 +2505,9 @@
             </div>
         </div>
     </section>
+
+    <!-- ✦ SÉPARATEUR DORÉ ✦ -->
+    <div class="section-divider"><span class="divider-diamond"></span></div>
 
     <!-- ================= RÈGLEMENT INTÉRIEUR ================= -->
     <section id="RI" class="reglement-section">
@@ -2512,6 +2593,9 @@
 
             
     </section>
+
+    <!-- ✦ SÉPARATEUR DORÉ ✦ -->
+    <div class="section-divider"><span class="divider-diamond"></span></div>
 
     <footer>
         <div class="container">
