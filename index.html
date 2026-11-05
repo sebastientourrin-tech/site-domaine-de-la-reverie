@@ -1959,7 +1959,7 @@
         <form class="strip-card" action="#reservation" method="GET">
             <div class="strip-col">
                 <label><i class="fa-solid fa-bed"></i> Choisir une Suite</label>
-                <select id="strip-suite" onchange="syncSuiteSelection(this.value)">
+                <select id="strip-suite" onchange="syncSuiteSelection(this.value, this.options[this.selectedIndex].getAttribute('data-name'))">
                     <option value="" data-name="" disabled selected>— Choisissez une suite —</option>
                     <option value="210" data-name="Suite Signature">Suite Signature (dès 210 € / nuit)</option>
                     <option value="210" data-name="Suite Volupté">Suite Volupté (dès 210 € / nuit)</option>
@@ -2481,7 +2481,7 @@
                 <ul class="location-items">
                     <li><div class="location-icon-box"><i class="fa-solid fa-location-dot"></i></div><div><strong>Adresse :</strong><p style="color: var(--text-muted); margin: 0;">39 Rue de la Crémaillère, 44710 Saint-Léger-les-Vignes</p></div></li>
                     <li><div class="location-icon-box"><i class="fa-solid fa-phone"></i></div><div><strong>Téléphone :</strong><p style="color: var(--text-muted); margin: 0;">06 63 76 89 56</p></div></li>
-                    <li><div class="location-icon-box"><i class="fa-solid fa-envelope"></i></div><div><strong>Email :</strong><p style="color: var(--text-muted); margin: 0;"><a href="mailto:reverie44710@outlook.com" style="color: var(--primary); font-weight: 600;">reverie44710@outlook.com</a></p></div></li>
+                    <li><div class="location-icon-box"><i class="fa-solid fa-envelope"></i></div><div><strong>Email :</strong><p style="color: var(--text-muted); margin: 0;"><a href="/cdn-cgi/l/email-protection#5725322132253e326363606667173822233b38383c7934383a" style="color: var(--primary); font-weight: 600;"><span class="__cf_email__" data-cfemail="c0b2a5b6a5b2a9a5f4f4f7f1f080afb5b4acafafabeea3afad">[email&#160;protected]</span></a></p></div></li>
                     <li><div class="location-icon-box"><i class="fa-solid fa-plane-departure"></i></div><div><strong>Aéroport de Nantes :</strong><p style="color: var(--text-muted); margin: 0;">9 km (10 min)</p></div></li>
                     <li><div class="location-icon-box"><i class="fa-solid fa-umbrella-beach"></i></div><div><strong>Plages :</strong><p style="color: var(--text-muted); margin: 0;">Pornic à 25-30 min</p></div></li>
                 </ul>
@@ -2609,7 +2609,7 @@
                     <ul>
                         <li><strong>Arrivée :</strong> 17h – 23h</li>
                         <li><strong>Départ :</strong> Jusqu'à 11h</li>
-                        <li><strong>Email :</strong> reverie44710@outlook.com</li>
+                        <li><strong>Email :</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a687f6c7f68737f2e2e2d2b2a5a756f6e7675757134797577">[email&#160;protected]</a></li>
                         <li><strong>Lieu :</strong> 39 rue de la crémaillère 44710 Saint Leger Les Vignes</li>
                     </ul>
                 </div>
@@ -2636,7 +2636,7 @@
         <span id="toast-text">Mise à jour</span>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         window.addEventListener('scroll', function() {
             var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
             var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -2907,7 +2907,7 @@
             var select = document.getElementById('booking-suite');
             if (select) {
                 for (var i = 0; i < select.options.length; i++) {
-                    if (select.options[i].getAttribute('data-name') === nom) { select.value = select.options[i].value; break; }
+                    if (select.options[i].getAttribute('data-name') === nom) { select.selectedIndex = i; break; }
                 }
             }
             calculatePrice();
@@ -2916,10 +2916,18 @@
             showToast("Suite choisie : " + nom);
         }
 
-        function syncSuiteSelection(val) {
+        function syncSuiteSelection(val, nom) {
             if (!val) return;
             var select = document.getElementById('booking-suite');
-            if (select) select.value = val;
+            if (select) {
+                if (nom) {
+                    for (var i = 0; i < select.options.length; i++) {
+                        if (select.options[i].getAttribute('data-name') === nom) { select.selectedIndex = i; break; }
+                    }
+                } else {
+                    select.value = val;
+                }
+            }
             calculatePrice();
         }
 
@@ -2985,5 +2993,6 @@
 
         calculatePrice();
     </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
